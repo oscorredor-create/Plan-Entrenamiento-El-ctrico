@@ -791,6 +791,10 @@
       text-align: center;
     }
   </style>
+
+  <!-- ── FIREBASE SDK ──────────────────────────────────────────────────── -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 </head>
 <body>
 
@@ -834,6 +838,7 @@
       <div class="meta-chip">🎯 Mentor: <span>Director de Mantenimiento</span></div>
       <div class="meta-chip">🤝 Soporte: <span>Talento Humano / RRHH</span></div>
       <div class="meta-chip">📅 Inicio: <span id="startDisplay">—</span></div>
+      <div class="meta-chip">🔄 <span id="syncBadge" style="color:#f59e0b;">Conectando...</span></div>
     </div>
 
     <!-- Global progress inside header -->
@@ -1503,6 +1508,43 @@
   // APP LOGIC — only runs after successful login
   // ═══════════════════════════════════════════════════════════════════════
   function initApp() {
+
+    // ══ FIREBASE CONFIG — PEGA TU CONFIGURACIÓN AQUÍ ══════════════════════
+    // Sigue los pasos de guia_firebase.md para obtener estos valores.
+    // Reemplaza CADA valor entre comillas con el de tu proyecto Firebase.
+    const firebaseConfig = {
+      apiKey:            "AIzaSyCljlR2yYw9MVJrz_AFNfYmyPFAzpE-Pnc",
+      authDomain:        "plan-entrenamiento-mantto.firebaseapp.com",
+      databaseURL:       "https://plan-entrenamiento-mantto-default-rtdb.firebaseio.com",
+      projectId:         "plan-entrenamiento-mantto",
+      storageBucket:     "plan-entrenamiento-mantto.firebasestorage.app",
+      messagingSenderId: "784085884242",
+      appId:             "1:784085884242:web:761cd762d274e46491ee8b"
+    };
+    // ══════════════════════════════════════════════════════════════════════
+
+    // ── FIREBASE INIT ─────────────────────────────────────────────────────
+    const USE_FIREBASE = !firebaseConfig.apiKey.startsWith('PEGA');
+    let planRef = null;
+
+    if (USE_FIREBASE) {
+      if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+      planRef = firebase.database().ref('tequendama_plan_90');
+      // Monitor conexión
+      firebase.database().ref('.info/connected').on('value', snap => {
+        const badge = document.getElementById('syncBadge');
+        if (badge) {
+          badge.textContent = snap.val() ? '🟢 Sincronizado' : '🔴 Sin conexión';
+          badge.style.color = snap.val() ? '#22c55e' : '#ef4444';
+        }
+      });
+    } else {
+      // Modo local: Firebase no configurado, aviso en consola
+      console.warn('[Plan] Firebase no configurado. Usando localStorage como respaldo.');
+      const badge = document.getElementById('syncBadge');
+      if (badge) { badge.textContent = '💾 Local (sin Firebase)'; badge.style.color = '#f59e0b'; }
+    }
+
     // ── DATA ──────────────────────────────────────────────────────────────
     const PHASES = {
       phase1: ['act1-1','act1-2','act1-3','act1-4','act1-5'],
@@ -1510,42 +1552,64 @@
       phase3: ['act3-1','act3-2','act3-3','act3-4','act3-5','act3-6'],
       phase4: ['act4-1','act4-2','act4-3','act4-4'],
     };
-    const STORAGE_KEY = 'tequendama_plan_90';
+    const LOCAL_KEY = 'tequendama_plan_90';
 
-    // ── LOAD STATE ────────────────────────────────────────────────────────
-    function loadState() {
-      try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; }
-      catch { return {}; }
-    }
-    function saveState(s) {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(s));
-      showToast();
-    }
-
-    let state = loadState();
-
-    Object.keys(PHASES).forEach(phaseId => {
-      PHASES[phaseId].forEach(actId => {
-        if (state[actId]) document.getElementById(actId)?.classList.add('done');
+    // ── STATE HELPERS ─────────────────────────────────────────────────────
+    function applyStateToUI(state) {
+      Object.keys(PHASES).forEach(phaseId => {
+        PHASES[phaseId].forEach(actId => {
+          const el = document.getElementById(actId);
+          if (!el) return;
+          el.classList.toggle('done', !!state[actId]);
+        });
       });
-    });
-    if (state.__notes__) document.getElementById('notesArea').value = state.__notes__;
+      const notes = document.getElementById('notesArea');
+      if (notes && state.__notes__ !== undefined) notes.value = state.__notes__ || '';
+      updateAllProgress();
+    }
+
+    function localSave(key, val) {
+      try {
+        const s = JSON.parse(localStorage.getItem(LOCAL_KEY)) || {};
+        s[key] = val;
+        localStorage.setItem(LOCAL_KEY, JSON.stringify(s));
+      } catch {}
+    }
+
+    // ── LOAD INITIAL STATE ────────────────────────────────────────────────
+    if (USE_FIREBASE) {
+      // Real-time listener: aplica cualquier cambio de Firebase a la UI
+      planRef.on('value', snap => {
+        const data = snap.val() || {};
+        applyStateToUI(data);
+      });
+    } else {
+      // Modo local: cargar desde localStorage
+      try {
+        const local = JSON.parse(localStorage.getItem(LOCAL_KEY)) || {};
+        applyStateToUI(local);
+      } catch {}
+    }
 
     // ── TOGGLE ACTIVITY ───────────────────────────────────────────────────
     window.toggleActivity = function(actId) {
       const el = document.getElementById(actId);
       if (!el) return;
-      el.classList.toggle('done');
-      state[actId] = el.classList.contains('done');
-      saveState(state);
-      updateAllProgress();
+      const newVal = !el.classList.contains('done');
+      if (USE_FIREBASE) {
+        planRef.child(actId).set(newVal);   // Firebase → listener lo refleja en UI
+      } else {
+        el.classList.toggle('done');
+        localSave(actId, newVal);
+        updateAllProgress();
+      }
+      showToast();
     };
 
     // ── TOGGLE PHASE ──────────────────────────────────────────────────────
     window.togglePhase = function(phaseId) {
       document.getElementById(phaseId)?.classList.toggle('open');
     };
-
     document.getElementById('phase1')?.classList.add('open');
 
     // ── PROGRESS ──────────────────────────────────────────────────────────
@@ -1574,7 +1638,6 @@
       document.getElementById('donutFill').style.strokeDashoffset =
         circumference - (globalPct / 100) * circumference;
     }
-    updateAllProgress();
 
     // ── TAB NAVIGATION ────────────────────────────────────────────────────
     document.querySelectorAll('.tab-btn').forEach(btn => {
@@ -1591,18 +1654,28 @@
     let noteTimer;
     document.getElementById('notesArea').addEventListener('input', e => {
       clearTimeout(noteTimer);
-      noteTimer = setTimeout(() => { state.__notes__ = e.target.value; saveState(state); }, 800);
+      noteTimer = setTimeout(() => {
+        if (USE_FIREBASE) {
+          planRef.child('__notes__').set(e.target.value);
+        } else {
+          localSave('__notes__', e.target.value);
+        }
+        showToast();
+      }, 800);
     });
 
     // ── RESET ─────────────────────────────────────────────────────────────
     document.getElementById('resetBtn').addEventListener('click', () => {
-      if (!confirm('¿Deseas reiniciar todo el progreso del plan? Esta acción no se puede deshacer.')) return;
-      localStorage.removeItem(STORAGE_KEY);
-      state = {};
-      document.querySelectorAll('.activity.done').forEach(el => el.classList.remove('done'));
-      document.querySelectorAll('.phase-card.all-done').forEach(el => el.classList.remove('all-done'));
-      document.getElementById('notesArea').value = '';
-      updateAllProgress();
+      if (!confirm('¿Deseas reiniciar TODO el progreso? Esta acción afecta a todos los usuarios y no se puede deshacer.')) return;
+      if (USE_FIREBASE) {
+        planRef.set({ __startDate__: 'miércoles, 17 de junio de 2026' });
+      } else {
+        localStorage.removeItem(LOCAL_KEY);
+        document.querySelectorAll('.activity.done').forEach(el => el.classList.remove('done'));
+        document.querySelectorAll('.phase-card.all-done').forEach(el => el.classList.remove('all-done'));
+        document.getElementById('notesArea').value = '';
+        updateAllProgress();
+      }
     });
 
     // ── TOAST ─────────────────────────────────────────────────────────────
@@ -1613,8 +1686,9 @@
     }
 
     // ── START DATE ────────────────────────────────────────────────────────
-    state.__startDate__ = 'miércoles, 17 de junio de 2026';
-    document.getElementById('startDisplay').textContent = state.__startDate__;
+    document.getElementById('startDisplay').textContent = 'miércoles, 17 de junio de 2026';
+    if (USE_FIREBASE) planRef.child('__startDate__').set('miércoles, 17 de junio de 2026');
+
   } // end initApp
 </script>
 </body>
