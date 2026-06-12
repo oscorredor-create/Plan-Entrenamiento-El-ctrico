@@ -3,2276 +3,1619 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Plan de Mantenimiento Eléctrico · Cementos Tequendama</title>
-  <meta name="description" content="Sistema integral de gestión del Plan Estratégico de Mantenimiento Eléctrico – Planta Cementera Tequendama. Subestaciones, motores MT/BT, parque solar, generadores y más." />
+  <title>Plan de Entrenamiento 90 Días | Coordinador de Planeación Eléctrica</title>
+  <meta name="description" content="Seguimiento del plan de entrenamiento y desarrollo del Coordinador de Planeación Eléctrica — Cementos Tequendama." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:          #0d0f14;
+      --surface:     #13161e;
+      --surface2:    #1a1e29;
+      --border:      #252a38;
+      --text:        #e8eaf0;
+      --muted:       #6b7280;
+      --accent:      #3b82f6;
+      --accent2:     #60a5fa;
+      --success:     #22c55e;
+      --warning:     #f59e0b;
+      --danger:      #ef4444;
+      --p1:          #6366f1; /* Indigo – Fase 1 */
+      --p2:          #3b82f6; /* Blue  – Fase 2 */
+      --p3:          #0ea5e9; /* Sky   – Fase 3 */
+      --p4:          #22c55e; /* Green – Fase 4 */
+      --gold:        #f59e0b;
+      --radius:      14px;
+      --radius-sm:   8px;
+      --shadow:      0 8px 32px rgba(0,0,0,.45);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      line-height: 1.65;
+      min-height: 100vh;
+    }
+
+    /* ── BACKGROUND MESH ─────────────────────────────────────────────── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background:
+        radial-gradient(ellipse 80% 50% at 10% 20%, rgba(99,102,241,.12) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 90% 80%, rgba(34,197,94,.07) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── HEADER ──────────────────────────────────────────────────────── */
+    header {
+      position: relative;
+      z-index: 10;
+      background: linear-gradient(135deg, #0d0f14 0%, #141824 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 0 clamp(1rem, 4vw, 3rem);
+    }
+
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 0 1.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .header-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .badge-company {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      background: rgba(239,68,68,.12);
+      border: 1px solid rgba(239,68,68,.3);
+      color: #f87171;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      padding: .3rem .75rem;
+      border-radius: 99px;
+    }
+
+    .badge-company::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: .4; transform: scale(.75); }
+    }
+
+    h1 {
+      font-size: clamp(1.5rem, 3.5vw, 2.4rem);
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: -.02em;
+      background: linear-gradient(135deg, #e8eaf0 30%, #93c5fd 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: .9rem;
+      font-weight: 400;
+      margin-top: .3rem;
+    }
+
+    .header-meta {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      flex-wrap: wrap;
+    }
+
+    .meta-chip {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 99px;
+      padding: .3rem .85rem;
+      font-size: .78rem;
+      font-weight: 500;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+    }
+
+    .meta-chip span { color: var(--text); }
+
+    .reset-btn {
+      margin-left: auto;
+      background: rgba(239,68,68,.1);
+      border: 1px solid rgba(239,68,68,.3);
+      color: #f87171;
+      font-size: .78rem;
+      font-weight: 600;
+      padding: .35rem .9rem;
+      border-radius: 99px;
+      cursor: pointer;
+      transition: background .2s, transform .15s;
+    }
+
+    .reset-btn:hover { background: rgba(239,68,68,.2); transform: scale(1.04); }
+
+    /* ── GLOBAL PROGRESS ─────────────────────────────────────────────── */
+    .global-progress {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem 2rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 1.5rem;
+      position: relative;
+      z-index: 10;
+      max-width: 1200px;
+      margin: 1.5rem auto 0;
+    }
+
+    .global-stats {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .stat {
+      display: flex;
+      flex-direction: column;
+      gap: .15rem;
+    }
+
+    .stat-label {
+      font-size: .72rem;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .stat-value {
+      font-size: 2rem;
+      font-weight: 800;
+      line-height: 1;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .stat-value.accent  { color: var(--accent2); }
+    .stat-value.success { color: var(--success); }
+    .stat-value.gold    { color: var(--gold); }
+
+    .donut-wrap {
+      position: relative;
+      width: 100px; height: 100px;
+      flex-shrink: 0;
+    }
+
+    .donut-wrap svg { transform: rotate(-90deg); }
+
+    .donut-bg   { stroke: var(--border); stroke-width: 8; fill: none; }
+    .donut-fill { stroke: url(#donutGrad); stroke-width: 8; fill: none;
+                  stroke-linecap: round;
+                  stroke-dasharray: 251.2;
+                  stroke-dashoffset: 251.2;
+                  transition: stroke-dashoffset .8s cubic-bezier(.4,0,.2,1); }
+
+    .donut-label {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      pointer-events: none;
+    }
+
+    .donut-pct {
+      font-size: 1.5rem;
+      font-weight: 800;
+      font-family: 'JetBrains Mono', monospace;
+      line-height: 1;
+      background: linear-gradient(135deg, var(--accent2), var(--success));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .donut-sub { font-size: .6rem; color: var(--muted); font-weight: 600; letter-spacing: .05em; }
+
+    /* ── LAYOUT ──────────────────────────────────────────────────────── */
+    main {
+      position: relative;
+      z-index: 5;
+      max-width: 1200px;
+      margin: 2rem auto 5rem;
+      padding: 0 clamp(1rem, 4vw, 3rem);
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+    }
+
+    /* ── NAV TABS ────────────────────────────────────────────────────── */
+    .nav-tabs {
+      display: flex;
+      gap: .5rem;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 99px;
+      color: var(--muted);
+      font-size: .82rem;
+      font-weight: 600;
+      padding: .45rem 1.1rem;
+      cursor: pointer;
+      transition: all .2s;
+      display: flex;
+      align-items: center;
+      gap: .45rem;
+    }
+
+    .tab-btn:hover { border-color: var(--accent); color: var(--accent2); }
+    .tab-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .tab-btn .tab-dot { width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+
+    /* ── SECTION ─────────────────────────────────────────────────────── */
+    .section { display: flex; flex-direction: column; gap: 1.5rem; }
+    .section.hidden { display: none; }
+
+    /* ── PHASE CARD ──────────────────────────────────────────────────── */
+    .phase-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: border-color .25s;
+    }
+
+    .phase-card:hover { border-color: rgba(59,130,246,.35); }
+
+    .phase-header {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.25rem 1.5rem;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .phase-icon {
+      width: 42px; height: 42px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+
+    .phase-meta { display: flex; flex-direction: column; gap: .15rem; }
+    .phase-name { font-weight: 700; font-size: 1.05rem; }
+    .phase-days { font-size: .78rem; font-weight: 500; color: var(--muted); }
+
+    .phase-progress-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: .4rem;
+      min-width: 120px;
+    }
+
+    .phase-pct-label {
+      font-size: .8rem;
+      font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 5px;
+      background: var(--border);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      border-radius: 99px;
+      transition: width .6s cubic-bezier(.4,0,.2,1);
+    }
+
+    .chevron {
+      color: var(--muted);
+      transition: transform .3s;
+      flex-shrink: 0;
+    }
+
+    .phase-card.open .chevron { transform: rotate(180deg); }
+
+    .phase-body {
+      display: none;
+      padding: 0 1.5rem 1.5rem;
+      flex-direction: column;
+      gap: .5rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .phase-card.open .phase-body { display: flex; }
+
+    .phase-objective {
+      background: var(--surface2);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      padding: .65rem 1rem;
+      font-size: .82rem;
+      color: var(--muted);
+      font-style: italic;
+      margin: 1rem 0 .5rem;
+    }
+
+    /* ── ACTIVITY ITEM ───────────────────────────────────────────────── */
+    .activity {
+      display: flex;
+      align-items: flex-start;
+      gap: .85rem;
+      padding: .75rem 1rem;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: background .18s;
+      position: relative;
+      border: 1px solid transparent;
+    }
+
+    .activity:hover { background: var(--surface2); border-color: var(--border); }
+    .activity.done { background: rgba(34,197,94,.06); border-color: rgba(34,197,94,.15); }
+
+    .check-box {
+      width: 22px; height: 22px;
+      border-radius: 6px;
+      border: 2px solid var(--border);
+      flex-shrink: 0;
+      margin-top: .1rem;
+      display: flex; align-items: center; justify-content: center;
+      transition: all .2s;
+      background: transparent;
+    }
+
+    .activity.done .check-box {
+      background: var(--success);
+      border-color: var(--success);
+    }
+
+    .check-icon { display: none; color: #fff; font-size: .8rem; font-weight: 700; }
+    .activity.done .check-icon { display: block; }
+
+    .activity-content { flex: 1; }
+    .activity-title { font-weight: 600; font-size: .9rem; line-height: 1.4; }
+    .activity.done .activity-title { text-decoration: line-through; color: var(--muted); }
+
+    .activity-detail {
+      font-size: .8rem;
+      color: var(--muted);
+      margin-top: .2rem;
+      line-height: 1.5;
+    }
+
+    .activity-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: .3rem;
+      font-size: .7rem;
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: .18rem .55rem;
+      border-radius: 99px;
+      margin-top: .4rem;
+      flex-shrink: 0;
+    }
+
+    .tag-mentor { background: rgba(99,102,241,.15); color: #a5b4fc; border: 1px solid rgba(99,102,241,.3); }
+    .tag-rrhh   { background: rgba(236,72,153,.15); color: #f9a8d4; border: 1px solid rgba(236,72,153,.3); }
+    .tag-sap    { background: rgba(245,158,11,.15);  color: #fcd34d; border: 1px solid rgba(245,158,11,.3); }
+    .tag-shadow { background: rgba(14,165,233,.15);  color: #7dd3fc; border: 1px solid rgba(14,165,233,.3); }
+    .tag-eval   { background: rgba(34,197,94,.15);   color: #86efac; border: 1px solid rgba(34,197,94,.3); }
+    .tag-acta   { background: rgba(239,68,68,.15);   color: #fca5a5; border: 1px solid rgba(239,68,68,.3); }
+
+    .complete-banner {
+      display: none;
+      align-items: center;
+      gap: .6rem;
+      background: rgba(34,197,94,.1);
+      border: 1px solid rgba(34,197,94,.3);
+      border-radius: var(--radius-sm);
+      padding: .6rem 1rem;
+      font-size: .82rem;
+      font-weight: 600;
+      color: var(--success);
+      margin-top: .5rem;
+    }
+
+    .phase-card.all-done .complete-banner { display: flex; }
+
+    /* ── ROUTINE SECTION ─────────────────────────────────────────────── */
+    .info-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem 2rem;
+    }
+
+    .info-card h2 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+    }
+
+    .info-card h3 {
+      font-size: .88rem;
+      font-weight: 700;
+      color: var(--accent2);
+      margin: 1.25rem 0 .6rem;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+    }
+
+    .routine-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+
+    .routine-block {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 1rem 1.25rem;
+    }
+
+    .routine-block h4 {
+      font-size: .78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--muted);
+      margin-bottom: .75rem;
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+    }
+
+    .routine-row {
+      display: flex;
+      gap: .75rem;
+      align-items: flex-start;
+      padding: .45rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .routine-row:last-child { border-bottom: none; }
+
+    .routine-time {
+      font-size: .72rem;
+      font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--accent2);
+      min-width: 70px;
+      flex-shrink: 0;
+      padding-top: .1rem;
+    }
+
+    .routine-desc { font-size: .82rem; color: var(--text); line-height: 1.45; }
+
+    /* ── RACI TABLE ──────────────────────────────────────────────────── */
+    .table-wrap { overflow-x: auto; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .84rem;
+    }
+
+    thead th {
+      background: var(--surface2);
+      color: var(--muted);
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      padding: .75rem 1rem;
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+    }
+
+    tbody tr { border-bottom: 1px solid var(--border); }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: var(--surface2); }
+
+    tbody td {
+      padding: .75rem 1rem;
+      vertical-align: middle;
+    }
+
+    .raci-r { color: #60a5fa; font-weight: 700; }
+    .raci-c { color: #fcd34d; font-weight: 600; }
+    .raci-i { color: var(--muted); }
+
+    .raci-badge {
+      display: inline-block;
+      padding: .2rem .6rem;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: .75rem;
+    }
+
+    .raci-badge.R { background: rgba(59,130,246,.2); color: #60a5fa; }
+    .raci-badge.C { background: rgba(245,158,11,.15); color: #fcd34d; }
+    .raci-badge.I { background: var(--surface2); color: var(--muted); }
+
+    /* ── ALERT BOX ───────────────────────────────────────────────────── */
+    .alert {
+      display: flex;
+      gap: .75rem;
+      padding: .9rem 1.1rem;
+      border-radius: var(--radius-sm);
+      font-size: .84rem;
+      line-height: 1.5;
+      margin: 1rem 0;
+    }
+
+    .alert-icon { flex-shrink: 0; font-size: 1.1rem; }
+    .alert-warning { background: rgba(245,158,11,.1); border: 1px solid rgba(245,158,11,.3); color: #fcd34d; }
+    .alert-danger   { background: rgba(239,68,68,.1); border: 1px solid rgba(239,68,68,.3); color: #fca5a5; }
+    .alert-tip      { background: rgba(34,197,94,.08); border: 1px solid rgba(34,197,94,.25); color: #86efac; }
+
+    /* ── KPI CARDS ───────────────────────────────────────────────────── */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1rem;
+      margin-top: .75rem;
+    }
+
+    .kpi-card {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 1.1rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: .35rem;
+    }
+
+    .kpi-card .icon { font-size: 1.5rem; }
+    .kpi-card .kpi-name { font-size: .78rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+    .kpi-card .kpi-value { font-size: 1.05rem; font-weight: 700; }
+    .kpi-card .kpi-desc  { font-size: .75rem; color: var(--muted); }
+
+    /* ── NOTES ───────────────────────────────────────────────────────── */
+    .notes-area {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 1rem 1.25rem;
+      width: 100%;
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: .85rem;
+      resize: vertical;
+      min-height: 120px;
+      outline: none;
+      transition: border-color .2s;
+    }
+
+    .notes-area:focus { border-color: var(--accent); }
+    .notes-label { font-size: .78rem; font-weight: 600; color: var(--muted); margin-bottom: .4rem; text-transform: uppercase; letter-spacing: .07em; }
+
+    /* ── FLOATING SAVE TOAST ─────────────────────────────────────────── */
+    .toast {
+      position: fixed;
+      bottom: 2rem; right: 2rem;
+      background: var(--success);
+      color: #fff;
+      font-size: .82rem;
+      font-weight: 600;
+      padding: .6rem 1.2rem;
+      border-radius: 99px;
+      box-shadow: 0 4px 24px rgba(34,197,94,.4);
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all .3s;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    .toast.show { opacity: 1; transform: translateY(0); }
+
+    /* ── FOOTER ──────────────────────────────────────────────────────── */
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: .75rem;
+      padding: 2rem;
+      border-top: 1px solid var(--border);
+      position: relative;
+      z-index: 5;
+    }
+
+    /* ── RESPONSIVE ──────────────────────────────────────────────────── */
+    @media (max-width: 600px) {
+      .global-progress { grid-template-columns: 1fr; }
+      .donut-wrap { display: none; }
+      .phase-progress-wrap { min-width: 80px; }
+    }
+
+    /* ── LOGIN OVERLAY ───────────────────────────────────────────────── */
+    #loginOverlay {
+      position: fixed; inset: 0; z-index: 9999;
+      background: radial-gradient(ellipse 100% 100% at 50% 0%, #1a1e2e 0%, #0d0f14 100%);
+      display: flex; align-items: center; justify-content: center;
+      padding: 1.5rem;
+    }
+    #loginOverlay.hidden { display: none; }
+
+    .login-box {
+      background: #13161e;
+      border: 1px solid #252a38;
+      border-radius: 20px;
+      padding: 3rem 2.5rem 2.5rem;
+      width: 100%; max-width: 420px;
+      box-shadow: 0 24px 80px rgba(0,0,0,.6);
+      display: flex; flex-direction: column; align-items: center; gap: 1.5rem;
+      animation: loginIn .4s cubic-bezier(.34,1.56,.64,1);
+    }
+    @keyframes loginIn {
+      from { opacity:0; transform: scale(.88) translateY(20px); }
+      to   { opacity:1; transform: scale(1)  translateY(0); }
+    }
+
+    .login-logo {
+      width: 64px; height: 64px; border-radius: 16px;
+      background: linear-gradient(135deg, #6366f1 0%, #3b82f6 100%);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem;
+      box-shadow: 0 8px 32px rgba(99,102,241,.4);
+    }
+
+    .login-box h2 {
+      font-size: 1.25rem; font-weight: 800;
+      text-align: center; line-height: 1.3;
+      background: linear-gradient(135deg,#e8eaf0 30%,#93c5fd 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+
+    .login-box p {
+      color: #6b7280; font-size: .83rem; text-align: center; margin-top: -.75rem;
+    }
+
+    .login-field {
+      width: 100%; position: relative;
+    }
+    .login-field input {
+      width: 100%;
+      background: #1a1e29;
+      border: 1.5px solid #252a38;
+      border-radius: 10px;
+      padding: .9rem 3rem .9rem 1.1rem;
+      color: #e8eaf0;
+      font-size: 1rem;
+      font-family: 'Inter', sans-serif;
+      outline: none;
+      transition: border-color .2s, box-shadow .2s;
+      letter-spacing: .05em;
+    }
+    .login-field input:focus {
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 3px rgba(59,130,246,.2);
+    }
+    .login-field input.error {
+      border-color: #ef4444;
+      box-shadow: 0 0 0 3px rgba(239,68,68,.15);
+      animation: shake .35s ease;
+    }
+    @keyframes shake {
+      0%,100%{transform:translateX(0)}
+      20%{transform:translateX(-8px)}
+      40%{transform:translateX(8px)}
+      60%{transform:translateX(-5px)}
+      80%{transform:translateX(5px)}
+    }
+    .toggle-pass {
+      position: absolute; right: .9rem; top: 50%;
+      transform: translateY(-50%);
+      background: none; border: none;
+      color: #6b7280; cursor: pointer; font-size: 1.1rem;
+      line-height: 1; padding: 0;
+      transition: color .2s;
+    }
+    .toggle-pass:hover { color: #93c5fd; }
+
+    .login-btn {
+      width: 100%;
+      background: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
+      border: none; border-radius: 10px;
+      color: #fff; font-size: 1rem; font-weight: 700;
+      padding: .9rem; cursor: pointer;
+      transition: opacity .2s, transform .15s;
+      box-shadow: 0 4px 20px rgba(59,130,246,.4);
+    }
+    .login-btn:hover { opacity: .9; transform: translateY(-1px); }
+    .login-btn:active { transform: translateY(0); }
+    .login-btn:disabled { opacity: .5; cursor: not-allowed; }
+
+    .login-error {
+      display: none;
+      align-items: center; gap: .5rem;
+      background: rgba(239,68,68,.1);
+      border: 1px solid rgba(239,68,68,.3);
+      border-radius: 8px;
+      padding: .55rem .9rem;
+      color: #fca5a5; font-size: .82rem; font-weight: 500;
+      width: 100%;
+    }
+    .login-error.show { display: flex; }
+
+    .login-footer {
+      font-size: .72rem; color: #4b5563;
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
 
-  <!-- ======= SIDEBAR ======= -->
-  <aside class="sidebar" id="sidebar">
-    <div class="sidebar-brand">
-      <div class="brand-icon">⚡</div>
-      <div class="brand-text">
-        <span class="brand-name">TEQUENDAMA</span>
-        <span class="brand-sub">Plan Eléctrico</span>
+<!-- ── LOGIN OVERLAY ───────────────────────────────────────────────────── -->
+<div id="loginOverlay">
+  <div class="login-box">
+    <div class="login-logo">⚡</div>
+    <h2>Plan de Entrenamiento<br/>Coordinador de Planeación Eléctrica</h2>
+    <p>Cementos Tequendama S.A.S. &nbsp;·&nbsp; Acceso restringido</p>
+
+    <div class="login-field">
+      <input type="password" id="passInput" placeholder="Ingresa la clave de acceso"
+             autocomplete="current-password" />
+      <button class="toggle-pass" id="togglePass" type="button" title="Mostrar / ocultar">👁</button>
+    </div>
+
+    <div class="login-error" id="loginError">
+      <span>🔒</span> Clave incorrecta. Inténtalo de nuevo.
+    </div>
+
+    <button class="login-btn" id="loginBtn">Ingresar →</button>
+
+    <div class="login-footer">Acceso protegido · Solo personal autorizado</div>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <div class="header-top">
+      <div>
+        <div class="badge-company">🏭 Cementos Tequendama S.A.S.</div>
+        <h1 style="margin-top:.65rem;">Plan de Entrenamiento y Desarrollo<br/>a 90 Días</h1>
+        <p class="subtitle">Coordinador de Planeación Eléctrica · Vicepresidencia de Operaciones</p>
+      </div>
+      <button class="reset-btn" id="resetBtn" title="Reiniciar todo el progreso">↺ Reiniciar</button>
+    </div>
+
+    <div class="header-meta">
+      <div class="meta-chip">👤 Colaborador: <span id="nameDisplay">Carlos Manuel Rodríguez</span></div>
+      <div class="meta-chip">🎯 Mentor: <span>Director de Mantenimiento</span></div>
+      <div class="meta-chip">🤝 Soporte: <span>Talento Humano / RRHH</span></div>
+      <div class="meta-chip">📅 Inicio: <span id="startDisplay">—</span></div>
+    </div>
+
+    <!-- Global progress inside header -->
+    <div class="global-progress">
+      <div class="global-stats">
+        <div class="stat">
+          <span class="stat-label">Completado</span>
+          <span class="stat-value success" id="doneCount">0</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Pendiente</span>
+          <span class="stat-value accent" id="pendingCount">0</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Total</span>
+          <span class="stat-value" id="totalCount">0</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Avance</span>
+          <span class="stat-value gold" id="globalPct">0%</span>
+        </div>
+      </div>
+
+      <div class="donut-wrap">
+        <svg width="100" height="100" viewBox="0 0 100 100">
+          <defs>
+            <linearGradient id="donutGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#3b82f6"/>
+              <stop offset="100%" stop-color="#22c55e"/>
+            </linearGradient>
+          </defs>
+          <circle class="donut-bg" cx="50" cy="50" r="40" />
+          <circle class="donut-fill" id="donutFill" cx="50" cy="50" r="40" />
+        </svg>
+        <div class="donut-label">
+          <span class="donut-pct" id="donutPct">0%</span>
+          <span class="donut-sub">AVANCE</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- NAV TABS -->
+<main>
+  <nav class="nav-tabs" id="navTabs">
+    <button class="tab-btn active" data-target="plan" id="tabPlan">
+      <span class="tab-dot" style="background:#3b82f6"></span> Plan de Entrenamiento
+    </button>
+    <button class="tab-btn" data-target="routine" id="tabRoutine">
+      <span class="tab-dot" style="background:#0ea5e9"></span> Día / Semana en la Vida
+    </button>
+    <button class="tab-btn" data-target="raci" id="tabRaci">
+      <span class="tab-dot" style="background:#f59e0b"></span> Matriz RACI
+    </button>
+    <button class="tab-btn" data-target="tools" id="tabTools">
+      <span class="tab-dot" style="background:#22c55e"></span> Herramientas & KPIs
+    </button>
+  </nav>
+
+  <!-- ═══════════════════════════════════════════════════ PLAN TAB -->
+  <section class="section" id="sectionPlan">
+
+    <!-- FASE 1 -->
+    <div class="phase-card" id="phase1" data-phase="1">
+      <div class="phase-header" onclick="togglePhase('phase1')">
+        <div class="phase-icon" style="background:rgba(99,102,241,.15); color:#818cf8;">🧭</div>
+        <div class="phase-meta">
+          <span class="phase-name" style="color:#818cf8;">Fase 1: Descompresión y Entrega</span>
+          <span class="phase-days">Días 1 – 15 &nbsp;·&nbsp; Cierre del rol anterior, entrega formal y alineación</span>
+        </div>
+        <div class="phase-progress-wrap">
+          <span class="phase-pct-label" id="pct-phase1" style="color:#818cf8;">0%</span>
+          <div class="progress-bar" style="width:120px"><div class="progress-fill" id="bar-phase1" style="background:#6366f1; width:0%"></div></div>
+        </div>
+        <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="phase-body">
+        <div class="phase-objective">🎯 Objetivo: Cerrar su rol anterior, entregar formalmente a su sucesor y alinear expectativas con el Director de Mantenimiento.</div>
+
+        <div class="activity" id="act1-1" onclick="toggleActivity('act1-1')">
+          <div class="check-box"><span class="check-icon">✓</span></div>
+          <div class="activity-content">
+            <div class="activity-title">Reunión de alineación formal con el Director de Mantenimiento (Mentor)</div>
+            <div class="activity-detail">Días 1-3. Definir objetivos, acordar expectativas y métricas de éxito para el nuevo rol de Coordinador de Planeación Eléctrica.</div>
+            <span class="activity-tag tag-mentor">👤 Mentor</span>
+          </div>
+        </div>
+
+        <div class="activity" id="act1-2" onclick="toggleActivity('act1-2')">
+          <div class="check-box"><span class="check-icon">✓</span></div>
+          <div class="activity-content">
+            <div class="activity-title">Entrega oficial del cargo de Supervisor Eléctrico</div>
+            <div class="activity-detail">Días 4-10. Incluye: bitácoras, estado de herramientas, matriz de personal y trabajos pendientes.</div>
+            <span class="activity-tag tag-acta">📄 Acta Formal</span>
+          </div>
+        </div>
+
+        <div class="activity" id="act1-3" onclick="toggleActivity('act1-3')">
+          <div class="check-box"><span class="check-icon">✓</span></div>
+          <div class="activity-content">
+            <div class="activity-title">Firma del Acta de Entrega</div>
+            <div class="activity-detail">Cierre psicológico y formal del rol operativo. Documento firmado por el coordinador saliente, el Director de Mantenimiento y RRHH.</div>
+            <span class="activity-tag tag-acta">📄 Acta Formal</span>
+          </div>
+        </div>
+
+        <div class="activity" id="act1-4" onclick="toggleActivity('act1-4')">
+          <div class="check-box"><span class="check-icon">✓</span></div>
+          <div class="activity-content">
+            <div class="activity-title">Revisión documental del nuevo cargo</div>
+            <div class="activity-detail">Días 11-15. Perfil del cargo, Carta Descriptiva, Manuales de procedimiento, Matriz SG-SST y Políticas de la compañía. Apoyo de RRHH con la matriz de inducción corporativa.</div>
+            <span class="activity-tag tag-rrhh">💼 RRHH</span>
+          </div>
+        </div>
+
+        <div class="activity" id="act1-5" onclick="toggleActivity('act1-5')">
+          <div class="check-box"><span class="check-icon">✓</span></div>
+          <div class="activity-content">
+            <div class="activity-title">Inducción a áreas interactuantes (Ciclo corporativo)</div>
+            <div class="activity-detail">Reuniones con: Producción, Control de Calidad, Gestión Ambiental, Compras, Almacén, SIG, Nómina, Selección y Desarrollo.</div>
+            <span class="activity-tag tag-rrhh">💼 RRHH</span>
+          </div>
+        </div>
+
+        <div class="complete-banner">✅ ¡Fase 1 completada! El coordinador ha cerrado su ciclo como Supervisor.</div>
       </div>
     </div>
 
-    <nav class="sidebar-nav">
-      <div class="nav-section-label">PRINCIPAL</div>
-      <a href="#dashboard" class="nav-item active" id="nav-dashboard" onclick="showSection('dashboard')">
-        <span class="nav-icon">📊</span>
-        <span>Dashboard</span>
-      </a>
-      <a href="#activos" class="nav-item" id="nav-activos" onclick="showSection('activos')">
-        <span class="nav-icon">🔌</span>
-        <span>Activos Eléctricos</span>
-      </a>
-      <a href="#motores" class="nav-item" id="nav-motores" onclick="showSection('motores')">
-        <span class="nav-icon">⚙️</span>
-        <span>Motores Eléctricos</span>
-      </a>
-      <a href="#unifilar" class="nav-item" id="nav-unifilar" onclick="showSection('unifilar')">
-        <span class="nav-icon">🗺️</span>
-        <span>Diagrama Unifilar</span>
-      </a>
+    <!-- FASE 2 -->
+    <div class="phase-card" id="phase2" data-phase="2">
+      <div class="phase-header" onclick="togglePhase('phase2')">
+        <div class="phase-icon" style="background:rgba(59,130,246,.15); color:#60a5fa;">⚡</div>
+        <div class="phase-meta">
+          <span class="phase-name" style="color:#60a5fa;">Fase 2: Inmersión, SAP y Roles Cruzados</span>
+          <span class="phase-days">Días 16 – 45 &nbsp;·&nbsp; Herramientas de gestión e impacto sistémico de la planeación</span>
+        </div>
+        <div class="phase-progress-wrap">
+          <span class="phase-pct-label" id="pct-phase2" style="color:#60a5fa;">0%</span>
+          <div class="progress-bar" style="width:120px"><div class="progress-fill" id="bar-phase2" style="background:#3b82f6; width:0%"></div></div>
+        </div>
+        <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="phase-body">
+        <div class="phase-objective">🎯 Objetivo: Dominar el ciclo SAP de planeación eléctrica y comprender el impacto del rol mediante shadowing en áreas estratégicas.</div>
 
-      <div class="nav-section-label">MANTENIMIENTO</div>
-      <a href="#preventivo" class="nav-item" id="nav-preventivo" onclick="showSection('preventivo')">
-        <span class="nav-icon">🔧</span>
-        <span>Preventivo</span>
-      </a>
-      <a href="#predictivo" class="nav-item" id="nav-predictivo" onclick="showSection('predictivo')">
-        <span class="nav-icon">🔬</span>
-        <span>Predictivo</span>
-      </a>
-      <a href="#paros" class="nav-item" id="nav-paros" onclick="showSection('paros')">
-        <span class="nav-icon">🏭</span>
-        <span>Paros Mayores</span>
-      </a>
+        <div class="activity" id="act2-1" onclick="toggleActivity('act2-1')">
+          <div class="check-box"><span class="check-icon">✓</span></div>
+          <div class="activity-content">
+            <div class="activity-title">Capacitación SAP: Ciclo completo de Avisos y Órdenes de Trabajo</div>
+            <div class="activity-detail">Semana 3. Flujo: Aviso → Orden de Trabajo → Reserva de Repuestos → SolPed → Entrada de Servicios. Manejo de módulos PM (Plant Maintenance).</div>
+            <span class="activity-tag tag-sap">🖥️ SAP</span>
+          </div>
+        </div>
 
-      <div class="nav-section-label">SISTEMAS</div>
-      <a href="#generadores" class="nav-item" id="nav-generadores" onclick="showSection('generadores')">
-        <span class="nav-icon">⚙️</span>
-        <span>Generadores</span>
-      </a>
-      <a href="#solar" class="nav-item" id="nav-solar" onclick="showSection('solar')">
-        <span class="nav-icon">☀️</span>
-        <span>Parque Solar 4 MVA</span>
-      </a>
-      <a href="#protecciones" class="nav-item" id="nav-protecciones" onclick="showSection('protecciones')">
-        <span class="nav-icon">🛡️</span>
-        <span>Protecciones</span>
-      </a>
+        <div class="activity" id="act2-2" onclick="toggleActivity('act2-2')">
+          <div class="check-box"><span class="check-icon">✓</span></div>
+          <div class="activity-content">
+            <div class="activity-title">SAP: Gestión de Solicitudes de Pedido (SolPed) y Órdenes de Compra</div>
+            <div class="activity-detail">Creación y liberación de SolPeds, cuadros comparativos de servicios, entrada de servicios ejecutados por contratistas y seguimiento de pendientes con Compras.</div>
+            <span class="activity-tag tag-sap">🖥️ SAP</span>
+          </div>
+        </div>
 
-      <div class="nav-section-label">GESTIÓN</div>
-      <a href="#kpis" class="nav-item" id="nav-kpis" onclick="showSection('kpis')">
-        <span class="nav-icon">📈</span>
-        <span>KPIs</span>
-      </a>
-      <a href="#contratos" class="nav-item" id="nav-contratos" onclick="showSection('contratos')">
-        <span class="nav-icon">📋</span>
-        <span>Contratos</span>
-      </a>
-      <a href="#sgc" class="nav-item" id="nav-sgc" onclick="showSection('sgc')">
-        <span class="nav-icon">📄</span>
-        <span>SGC – Documentos</span>
-      </a>
-      <a href="#seguridad" class="nav-item" id="nav-seguridad" onclick="showSection('seguridad')">
-        <span class="nav-icon">🦺</span>
-        <span>Seguridad RETIE</span>
-      </a>
-    </nav>
+        <div class="activity" id="act2-3" onclick="toggleActivity('act2-3')">
+          <div class="check-box"><span class="check-icon">✓</span></div>
+          <div class="activity-content">
+            <div class="activity-title">Shadowing: Coordinación de Planeación Mecánica (Cemento y Clinker) — 3 días</div>
+            <div class="activity-detail">Entender cómo sus pares coordinan paradas de planta conjuntas, agrupan órdenes, manejan el backlog y administran sus recursos. Identificar mejores prácticas aplicables al área eléctrica.</div>
+            <span class="activity-tag tag-shadow">🔭 Shadowing</span>
+          </div>
+        </div>
 
-    <div class="sidebar-footer">
-      <div class="sidebar-footer-info">
-        <div class="version-badge">v3.0</div>
-        <span>Rev. Junio 2026</span>
+        <div class="activity" id="act2-4" onclick="toggleActivity('act2-4')">
+          <div class="check-box"><span class="check-icon">✓</span></div>
+          <div class="activity-content">
+            <div class="activity-title">Shadowing: Coordinación de Confiabilidad — 3 días</div>
+            <div class="activity-detail">Entender cómo los análisis de vibraciones, termografías, inspecciones eléctricas y ACR (Análisis de Causa Raíz) se traducen en órdenes preventivas y predictivas que el Coordinador debe planear y programar.</div>
+            <span class="activity-tag tag-shadow">🔭 Shadowing</span>
+          </div>
+        </div>
+
+        <div class="activity" id="act2-5" onclick="toggleActivity('act2-5')">
+          <div class="check-box"><span class="check-icon">✓</span></div>
+          <div class="activity-content">
+            <div class="activity-title">Shadowing: Gerencia de Producción / Control de Calidad — 2 días</div>
+            <div class="activity-detail">Entender los horarios de operación (turnos), las ventanas de tiempo disponibles para mantenimientos planeados y el impacto de los paros eléctricos en la disponibilidad y calidad del producto.</div>
+            <span class="activity-tag tag-shadow">🔭 Shadowing</span>
+          </div>
+        </div>
+
+        <div class="activity" id="act2-6" onclick="toggleActivity('act2-6')">
+          <div class="check-box"><span class="check-icon">✓</span></div>
+          <div class="activity-content">
+            <div class="activity-title">Shadowing: Cadena de Abastecimiento (Compras y Almacén) — 2 días</div>
+            <div class="activity-detail">Entender los lead times de repuestos críticos, el proceso de creación de nuevos códigos de materiales, el manejo de stock de seguridad y el ciclo de compras de servicios técnicos.</div>
+            <span class="activity-tag tag-shadow">🔭 Shadowing</span>
+          </div>
+        </div>
+
+        <div class="activity" id="act2-7" onclick="toggleActivity('act2-7')">
+          <div class="check-box"><span class="check-icon">✓</span></div>
+          <div class="activity-content">
+            <div class="activity-title">Sesión de Coaching #1 con RRHH: Delegación Efectiva</div>
+            <div class="activity-detail">Taller enfocado en "Delegación Efectiva y cómo evitar la microgestión". Definición de su nueva zona de actuación vs. la del Supervisor Eléctrico. Construcción de la Matriz RACI personalizada.</div>
+            <span class="activity-tag tag-rrhh">💼 RRHH</span>
+          </div>
+        </div>
+
+        <div class="activity" id="act2-8" onclick="toggleActivity('act2-8')">
+          <div class="check-box"><span class="check-icon">✓</span></div>
+          <div class="activity-content">
+            <div class="activity-title">Shadowing: Planta Morteros Tequendama y Oficinas Bogotá — 2 días</div>
+            <div class="activity-detail">Visita a la planta de Morteros Tequendama para entender las diferencias operativas, equipos eléctricos específicos y dinámica de mantenimiento en esa sede. Día en las Oficinas de Bogotá para conocer la estructura corporativa, el área de Compras central, Planeación Financiera y Talento Humano, afianzando las relaciones con los aliados administrativos que impactan directamente su gestión como Coordinador.</div>
+            <span class="activity-tag tag-shadow">🔭 Shadowing</span>
+            <span class="activity-tag tag-rrhh" style="margin-left:.3rem;">🏢 Multisede</span>
+          </div>
+        </div>
+
+        <div class="complete-banner">✅ ¡Fase 2 completada! Herramientas y contexto sistémico asimilados.</div>
       </div>
     </div>
-  </aside>
 
-  <!-- ======= MAIN CONTENT ======= -->
-  <main class="main-content">
-
-    <!-- TOP BAR -->
-    <header class="topbar">
-      <button class="menu-toggle" id="menuToggle" onclick="toggleSidebar()">☰</button>
-      <div class="topbar-title" id="topbarTitle">Dashboard General</div>
-      <div class="topbar-actions">
-        <div class="status-pill online">
-          <span class="pulse-dot"></span>
-          Sistema Activo
+    <!-- FASE 3 -->
+    <div class="phase-card" id="phase3" data-phase="3">
+      <div class="phase-header" onclick="togglePhase('phase3')">
+        <div class="phase-icon" style="background:rgba(14,165,233,.15); color:#38bdf8;">🛠️</div>
+        <div class="phase-meta">
+          <span class="phase-name" style="color:#38bdf8;">Fase 3: Práctica Asistida</span>
+          <span class="phase-days">Días 46 – 75 &nbsp;·&nbsp; Ejecutar la planeación con supervisión y corrección en tiempo real</span>
         </div>
-        <div class="topbar-date" id="topbarDate"></div>
+        <div class="phase-progress-wrap">
+          <span class="phase-pct-label" id="pct-phase3" style="color:#38bdf8;">0%</span>
+          <div class="progress-bar" style="width:120px"><div class="progress-fill" id="bar-phase3" style="background:#0ea5e9; width:0%"></div></div>
+        </div>
+        <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
       </div>
-    </header>
+      <div class="phase-body">
+        <div class="phase-objective">🎯 Objetivo: Comenzar a ejecutar el ciclo completo de planeación eléctrica con retroalimentación activa del Director de Mantenimiento.</div>
 
-    <!-- ========== SECTIONS ========== -->
-
-    <!-- DASHBOARD -->
-    <section class="section active" id="section-dashboard">
-      <div class="section-header">
-        <div>
-          <h1 class="section-title">Dashboard Eléctrico</h1>
-          <p class="section-subtitle">Planta Cementera Tequendama · Visión general del sistema eléctrico</p>
+        <div class="activity" id="act3-1" onclick="toggleActivity('act3-1')">
+          <div class="check-box"><span class="check-icon">✓</span></div>
+          <div class="activity-content">
+            <div class="activity-title">Implementación formal de la Rutina Diaria y Semanal</div>
+            <div class="activity-detail">Instaurar el "Día en la Vida": revisión de novedades, depuración de avisos SAP, reunión de coordinación y emisión del programa semanal. (Ver pestaña "Día / Semana en la Vida").</div>
+            <span class="activity-tag tag-eval">🗓️ Rutina</span>
+          </div>
         </div>
+
+        <div class="activity" id="act3-2" onclick="toggleActivity('act3-2')">
+          <div class="check-box"><span class="check-icon">✓</span></div>
+          <div class="activity-content">
+            <div class="activity-title">Reunión Semanal de Mentoría #1 con el Director de Mantenimiento</div>
+            <div class="activity-detail">Encuentro de 45 min (cada viernes). Revisión del Backlog, calidad de las O.T. programadas, análisis de cumplimiento de la semana anterior y resolución de dudas.</div>
+            <span class="activity-tag tag-mentor">👤 Mentor</span>
+          </div>
+        </div>
+
+        <div class="activity" id="act3-3" onclick="toggleActivity('act3-3')">
+          <div class="check-box"><span class="check-icon">✓</span></div>
+          <div class="activity-content">
+            <div class="activity-title">Reunión Semanal de Mentoría #2 con el Director de Mantenimiento</div>
+            <div class="activity-detail">Segunda sesión de seguimiento. Revisión de métricas incipientes: ¿Cuántas órdenes se programaron? ¿Cuántas se ejecutaron? ¿Cuántas emergencias hubo vs. la semana anterior?</div>
+            <span class="activity-tag tag-mentor">👤 Mentor</span>
+          </div>
+        </div>
+
+        <div class="activity" id="act3-4" onclick="toggleActivity('act3-4')">
+          <div class="check-box"><span class="check-icon">✓</span></div>
+          <div class="activity-content">
+            <div class="activity-title">Primera reunión de programación con Producción liderada por el Coordinador</div>
+            <div class="activity-detail">El Coordinador lidera (con acompañamiento del Director) la reunión semanal de "congelamiento" del programa de mantenimiento eléctrico con el área de Producción.</div>
+            <span class="activity-tag tag-eval">📋 Liderazgo</span>
+          </div>
+        </div>
+
+        <div class="activity" id="act3-5" onclick="toggleActivity('act3-5')">
+          <div class="check-box"><span class="check-icon">✓</span></div>
+          <div class="activity-content">
+            <div class="activity-title">Sesión de Coaching #2 con RRHH: Comunicación Asertiva e Influencia</div>
+            <div class="activity-detail">Cómo negociar ventanas de parada con Producción, exigir resultados a proveedores y contratistas, y comunicarse eficazmente con pares de otros procesos sin autoridad formal sobre ellos.</div>
+            <span class="activity-tag tag-rrhh">💼 RRHH</span>
+          </div>
+        </div>
+
+        <div class="activity" id="act3-6" onclick="toggleActivity('act3-6')">
+          <div class="check-box"><span class="check-icon">✓</span></div>
+          <div class="activity-content">
+            <div class="activity-title">Primer cierre mensual de indicadores</div>
+            <div class="activity-detail">Análisis conjunto (Coordinador + Director) del primer mes completo de operación en el nuevo rol: MTBF, MTTR, cumplimiento del programa, % de emergencias vs. preventivo, ejecución presupuestal.</div>
+            <span class="activity-tag tag-eval">📊 KPIs</span>
+          </div>
+        </div>
+
+        <div class="complete-banner">✅ ¡Fase 3 completada! El coordinador opera con autonomía guiada.</div>
       </div>
+    </div>
 
-      <!-- KPI Cards Row -->
-      <div class="kpi-grid">
-        <div class="kpi-card kpi-green">
-          <div class="kpi-icon">⚡</div>
-          <div class="kpi-body">
-            <div class="kpi-value" data-target="98.7" data-suffix="%">0%</div>
-            <div class="kpi-label">Disponibilidad Eléctrica</div>
-            <div class="kpi-trend up">▲ +0.3% vs mes anterior</div>
-          </div>
+    <!-- FASE 4 -->
+    <div class="phase-card" id="phase4" data-phase="4">
+      <div class="phase-header" onclick="togglePhase('phase4')">
+        <div class="phase-icon" style="background:rgba(34,197,94,.15); color:#4ade80;">🚀</div>
+        <div class="phase-meta">
+          <span class="phase-name" style="color:#4ade80;">Fase 4: Vuelo Solo y Consolidación</span>
+          <span class="phase-days">Días 76 – 90 &nbsp;·&nbsp; Empoderamiento total y evaluación final</span>
         </div>
-        <div class="kpi-card kpi-blue">
-          <div class="kpi-icon">🏭</div>
-          <div class="kpi-body">
-            <div class="kpi-value" data-target="34.5" data-suffix=" kV">0</div>
-            <div class="kpi-label">Tensión Red Principal</div>
-            <div class="kpi-trend up">▲ Estable</div>
-          </div>
+        <div class="phase-progress-wrap">
+          <span class="phase-pct-label" id="pct-phase4" style="color:#4ade80;">0%</span>
+          <div class="progress-bar" style="width:120px"><div class="progress-fill" id="bar-phase4" style="background:#22c55e; width:0%"></div></div>
         </div>
-        <div class="kpi-card kpi-yellow">
-          <div class="kpi-icon">☀️</div>
-          <div class="kpi-body">
-            <div class="kpi-value" data-target="3.8" data-suffix=" MW">0</div>
-            <div class="kpi-label">Generación Solar SSFV</div>
-            <div class="kpi-trend up">▲ PR: 82.4%</div>
-          </div>
-        </div>
-        <div class="kpi-card kpi-purple">
-          <div class="kpi-icon">⏱️</div>
-          <div class="kpi-body">
-            <div class="kpi-value" data-target="99.1" data-suffix="%">0%</div>
-            <div class="kpi-label">Disponibilidad Generadores</div>
-            <div class="kpi-trend up">▲ Meta &gt;99%</div>
-          </div>
-        </div>
+        <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
       </div>
+      <div class="phase-body">
+        <div class="phase-objective">🎯 Objetivo: Empoderamiento total. El Coordinador dirige el ciclo de planeación de forma autónoma y formula propuestas de mejora.</div>
 
-      <!-- Process Flow + System Overview -->
-      <div class="grid-2col">
-        <!-- Proceso productivo -->
-        <div class="card">
-          <div class="card-header">
-            <h2 class="card-title">Proceso Productivo – Flujo Eléctrico</h2>
-            <span class="card-badge">CETESA 2026</span>
-          </div>
-          <div class="process-flow">
-            <div class="process-step ps-blue">
-              <div class="ps-icon">🏔️</div>
-              <div class="ps-content">
-                <div class="ps-name">Materias Primas</div>
-                <div class="ps-detail">Prehomogenización</div>
-              </div>
-              <div class="ps-power">K07A · 440V</div>
-            </div>
-            <div class="process-arrow">→</div>
-            <div class="process-step ps-orange">
-              <div class="ps-icon">⚙️</div>
-              <div class="ps-content">
-                <div class="ps-name">Molienda Crudo</div>
-                <div class="ps-detail">Molino Crudo + Gamma</div>
-              </div>
-              <div class="ps-power">K02A · 4.16kV</div>
-            </div>
-            <div class="process-arrow">→</div>
-            <div class="process-step ps-red">
-              <div class="ps-icon">🔥</div>
-              <div class="ps-content">
-                <div class="ps-name">Clinkerización</div>
-                <div class="ps-detail">Horno 1100 T/D · Torre</div>
-              </div>
-              <div class="ps-power">HZ03A · 34.5kV</div>
-            </div>
-            <div class="process-arrow">→</div>
-            <div class="process-step ps-green">
-              <div class="ps-icon">🏗️</div>
-              <div class="ps-content">
-                <div class="ps-name">Molienda Cemento</div>
-                <div class="ps-detail">Prensa Rodillos + Silos</div>
-              </div>
-              <div class="ps-power">K03B · 440V</div>
-            </div>
-            <div class="process-arrow">→</div>
-            <div class="process-step ps-teal">
-              <div class="ps-icon">📦</div>
-              <div class="ps-content">
-                <div class="ps-name">Empaque</div>
-                <div class="ps-detail">Líneas L1/L2 + Báscula</div>
-              </div>
-              <div class="ps-power">K010B · 440V</div>
-            </div>
+        <div class="activity" id="act4-1" onclick="toggleActivity('act4-1')">
+          <div class="check-box"><span class="check-icon">✓</span></div>
+          <div class="activity-content">
+            <div class="activity-title">Liderazgo autónomo de la reunión semanal de programación interáreas</div>
+            <div class="activity-detail">El Coordinador dirige de forma independiente (sin acompañamiento del Director) la reunión de programación con Producción, Confiabilidad y Planeación Mecánica.</div>
+            <span class="activity-tag tag-eval">📋 Liderazgo</span>
           </div>
         </div>
 
-        <!-- Alert / Estado sistema -->
-        <div class="card">
-          <div class="card-header">
-            <h2 class="card-title">Estado del Sistema Eléctrico</h2>
-            <span class="card-badge badge-green">NOMINAL</span>
-          </div>
-          <div class="system-status-list">
-            <div class="status-item">
-              <div class="status-dot green"></div>
-              <div class="status-info">
-                <div class="status-name">Línea 34.5 kV Principal</div>
-                <div class="status-detail">Alimentación EPM – Operativa</div>
-              </div>
-              <div class="status-value green-text">✓ OK</div>
-            </div>
-            <div class="status-item">
-              <div class="status-dot green"></div>
-              <div class="status-info">
-                <div class="status-name">Trafo Principal 12 MVA</div>
-                <div class="status-detail">HZ03 · Protección REF · Activo</div>
-              </div>
-              <div class="status-value green-text">✓ OK</div>
-            </div>
-            <div class="status-item">
-              <div class="status-dot green"></div>
-              <div class="status-info">
-                <div class="status-name">SSFV 3.8 MW</div>
-                <div class="status-detail">34.5 kV · Inyección a red</div>
-              </div>
-              <div class="status-value green-text">✓ OK</div>
-            </div>
-            <div class="status-item">
-              <div class="status-dot yellow"></div>
-              <div class="status-info">
-                <div class="status-name">Generador Emergencia</div>
-                <div class="status-detail">220 V · ATS · Última prueba: lunes</div>
-              </div>
-              <div class="status-value yellow-text">⚠ Prueba Pendiente</div>
-            </div>
-            <div class="status-item">
-              <div class="status-dot green"></div>
-              <div class="status-info">
-                <div class="status-name">CCM Horno 4</div>
-                <div class="status-detail">VH4 · L03A · 4.16 kV</div>
-              </div>
-              <div class="status-value green-text">✓ OK</div>
-            </div>
-            <div class="status-item">
-              <div class="status-dot green"></div>
-              <div class="status-info">
-                <div class="status-name">Básculas Camioneras</div>
-                <div class="status-detail">Calibración legal vigente</div>
-              </div>
-              <div class="status-value green-text">✓ OK</div>
-            </div>
-            <div class="status-item">
-              <div class="status-dot green"></div>
-              <div class="status-info">
-                <div class="status-name">Rel. HZ01–HZ06 (Prot.)</div>
-                <div class="status-detail">Coordinación vigente 2017</div>
-              </div>
-              <div class="status-value green-text">✓ OK</div>
-            </div>
+        <div class="activity" id="act4-2" onclick="toggleActivity('act4-2')">
+          <div class="check-box"><span class="check-icon">✓</span></div>
+          <div class="activity-content">
+            <div class="activity-title">Propuesta de mejora al Plan de Mantenimiento Preventivo</div>
+            <div class="activity-detail">Basado en los análisis de los primeros 75 días (frecuencias de falla, lead times de repuestos, resultados de Confiabilidad), el Coordinador propone ajustes a las frecuencias y alcances de las rutinas preventivas.</div>
+            <span class="activity-tag tag-eval">💡 Mejora</span>
           </div>
         </div>
+
+        <div class="activity" id="act4-3" onclick="toggleActivity('act4-3')">
+          <div class="check-box"><span class="check-icon">✓</span></div>
+          <div class="activity-content">
+            <div class="activity-title">Actualización de listas de materiales (BOM) y stock crítico</div>
+            <div class="activity-detail">Revisión y actualización en SAP de los materiales de reserva en almacén para equipos críticos, basada en la experiencia del período de entrenamiento.</div>
+            <span class="activity-tag tag-sap">🖥️ SAP</span>
+          </div>
+        </div>
+
+        <div class="activity" id="act4-4" onclick="toggleActivity('act4-4')">
+          <div class="check-box"><span class="check-icon">✓</span></div>
+          <div class="activity-content">
+            <div class="activity-title">Evaluación final del programa (Día 90)</div>
+            <div class="activity-detail">Sesión formal con el Director de Mantenimiento y RRHH. Revisión del cumplimiento de la matriz de habilidades técnicas y de liderazgo. Retroalimentación 360°. Definición de PDI (Plan de Desarrollo Individual) para el siguiente período.</div>
+            <span class="activity-tag tag-eval">🏆 Evaluación</span>
+            <span class="activity-tag tag-mentor" style="margin-left:.3rem;">👤 Mentor</span>
+            <span class="activity-tag tag-rrhh"   style="margin-left:.3rem;">💼 RRHH</span>
+          </div>
+        </div>
+
+        <div class="complete-banner">🏆 ¡Programa de 90 días completado! El coordinador está plenamente empoderado en su rol.</div>
+      </div>
+    </div>
+
+    <!-- NOTES -->
+    <div class="info-card">
+      <h2>📝 Notas y observaciones del seguimiento</h2>
+      <div class="notes-label">Ingresa comentarios del avance, acuerdos de mentoría o pendientes</div>
+      <textarea class="notes-area" id="notesArea" placeholder="Escribe aquí tus notas de seguimiento..."></textarea>
+    </div>
+
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════ ROUTINE TAB -->
+  <section class="section hidden" id="sectionRoutine">
+    <div class="info-card">
+      <h2>🕖 Rutina Diaria <small style="color:var(--muted);font-weight:400;font-size:.85rem;">(Enfoque en el Corto Plazo)</small></h2>
+
+      <div class="alert alert-tip">
+        <span class="alert-icon">💡</span>
+        <span><strong>Regla de Oro:</strong> El Coordinador <strong>NO</strong> debe atender la planta ante la primera llamada de fallo eléctrico. Ese es el rol del Supervisor y sus técnicos. El Coordinador solo va a planta para inspecciones planeadas, auditorías a contratistas o análisis post-fallo con Confiabilidad.</span>
       </div>
 
-      <!-- Organigrama eléctrico -->
-      <div class="card">
-        <div class="card-header">
-          <h2 class="card-title">Estructura Organizacional – Área Eléctrica</h2>
-          <span class="card-badge">Coordinación Eléctrica</span>
+      <div class="routine-grid">
+        <div class="routine-block">
+          <h4>📅 Rutina Diaria</h4>
+          <div class="routine-row"><div class="routine-time">07:00–07:30</div><div class="routine-desc">Revisión rápida de novedades de la noche con el Supervisor Eléctrico. ¿Qué pasó? ¿Hay equipos fuera de servicio?</div></div>
+          <div class="routine-row"><div class="routine-time">07:30–08:30</div><div class="routine-desc">Revisión, validación y depuración de nuevos Avisos de Mantenimiento en SAP ingresados por Producción.</div></div>
+          <div class="routine-row"><div class="routine-time">08:30–09:00</div><div class="routine-desc">Reunión de coordinación interáreas (Producción, Confiabilidad, Planeación Mecánica). Stand-up rápido de avance.</div></div>
+          <div class="routine-row"><div class="routine-time">09:00–17:00</div><div class="routine-desc">Conversión de avisos a O.T., seguimiento a repuestos en tránsito, revisión de inventario para órdenes de la próxima semana, gestión de SolPeds y contratos de servicio.</div></div>
         </div>
-        <div class="org-chart">
-          <div class="org-level">
-            <div class="org-box ob-top">
-              <div class="ob-icon">👤</div>
-              <div class="ob-title">Director de Mantenimiento</div>
-            </div>
-          </div>
-          <div class="org-connector-v"></div>
-          <div class="org-level org-level-row">
-            <div class="org-group">
-              <div class="org-box ob-mid">
-                <div class="ob-icon">⚡</div>
-                <div class="ob-title">Coordinador Planeación Eléctrica</div>
-              </div>
-              <div class="org-connector-v"></div>
-              <div class="org-children">
-                <div class="org-box ob-small">Supervisor Eléctrico</div>
-                <div class="org-children-row">
-                  <div class="org-box ob-tiny">Instrumentistas (2)</div>
-                  <div class="org-box ob-tiny ob-highlight">Eléctricos I (6)</div>
-                  <div class="org-box ob-tiny">Eléctricos II (2)</div>
-                </div>
-              </div>
-            </div>
-            <div class="org-group">
-              <div class="org-box ob-mid ob-reliability">
-                <div class="ob-icon">🔍</div>
-                <div class="ob-title">Coordinador de Confiabilidad</div>
-              </div>
-              <div class="org-connector-v"></div>
-              <div class="org-children">
-                <div class="org-box ob-small ob-highlight">Inspector Eléctrico</div>
-                <div class="org-box ob-small">Inspector Mecánico</div>
-                <div class="org-box ob-small">Lubricador</div>
-              </div>
-            </div>
-          </div>
+
+        <div class="routine-block">
+          <h4>📆 Rutina Semanal</h4>
+          <div class="routine-row"><div class="routine-time">Lun–Mié</div><div class="routine-desc">Ajuste de la planeación: reservas de materiales, verificación de stock en almacén, confirmación con Compras del avance de SolPeds.</div></div>
+          <div class="routine-row"><div class="routine-time">Jueves</div><div class="routine-desc"><strong>Reunión oficial de Programación.</strong> Se define y "congela" con Producción el programa de mantenimiento eléctrico de la siguiente semana. No se modifican después.</div></div>
+          <div class="routine-row"><div class="routine-time">Viernes</div><div class="routine-desc">Emisión formal del programa semanal aprobado al Supervisor Eléctrico para asignación de personal. <strong>Reunión 1:1 de Mentoría con el Director.</strong></div></div>
+        </div>
+
+        <div class="routine-block">
+          <h4>🗓️ Rutina Mensual</h4>
+          <div class="routine-row"><div class="routine-time">Cierre</div><div class="routine-desc">Análisis de KPIs de gestión: MTBF, MTTR, % Cumplimiento del Programa, % Horas en Mantenimiento de Emergencia vs. Preventivo.</div></div>
+          <div class="routine-row"><div class="routine-time">Presupuesto</div><div class="routine-desc">Revisión de la ejecución presupuestal, análisis de sobrecostos o ahorros y ajuste de proyecciones para el mes siguiente.</div></div>
+          <div class="routine-row"><div class="routine-time">Confiabilidad</div><div class="routine-desc">Reunión mensual con el Coordinador de Confiabilidad para alinear el impacto de los análisis predictivos en el plan preventivo del mes siguiente.</div></div>
         </div>
       </div>
+    </div>
 
-      <!-- Calendario de mantenimiento preview -->
-      <div class="card">
-        <div class="card-header">
-          <h2 class="card-title">Calendario de Mantenimiento – Junio 2026</h2>
-          <span class="card-badge">Mes Actual</span>
+    <div class="info-card">
+      <h2>🔑 La Regla de Oro del Mentoraje</h2>
+      <p style="color:var(--muted); font-size:.9rem; margin-bottom:1rem;">El Coordinador debe aplicar con su Supervisor la misma técnica que el Director de Mantenimiento aplica con él: <strong style="color:var(--text);">Gestión por Preguntas</strong>. Cuando el Supervisor llegue con un problema, NO dar la solución. Preguntar:</p>
+      <div class="routine-grid">
+        <div class="routine-block" style="border-left:3px solid var(--accent);">
+          <h4>🗣️ Preguntas de Delegación</h4>
+          <div class="routine-row"><div class="routine-desc">"¿Cuáles alternativas has analizado?"</div></div>
+          <div class="routine-row"><div class="routine-desc">"¿Qué dice el plano eléctrico o el manual al respecto?"</div></div>
+          <div class="routine-row"><div class="routine-desc">"Si fuera tu decisión final, ¿qué harías?"</div></div>
+          <div class="routine-row"><div class="routine-desc">"¿Ya consultaste con Confiabilidad sobre esto?"</div></div>
         </div>
-        <div class="calendar-grid" id="calendarGrid"></div>
-      </div>
-    </section>
-
-    <!-- MOTORES ELÉCTRICOS -->
-    <section class="section" id="section-motores">
-      <div class="section-header">
-        <div>
-          <h1 class="section-title">Inventario de Motores Eléctricos</h1>
-          <p class="section-subtitle">432 motores · 8 áreas · Planta Cementera Tequendama · Datos de placa completos</p>
+        <div class="routine-block" style="border-left:3px solid var(--success);">
+          <h4>✅ Qué SÍ hace el Coordinador</h4>
+          <div class="routine-row"><div class="routine-desc">Planear y programar con semanas de anticipación.</div></div>
+          <div class="routine-row"><div class="routine-desc">Gestionar repuestos, servicios y contratos.</div></div>
+          <div class="routine-row"><div class="routine-desc">Analizar fallas junto a Confiabilidad y ajustar el plan.</div></div>
+          <div class="routine-row"><div class="routine-desc">Negociar ventanas de parada con Producción.</div></div>
         </div>
-      </div>
-
-      <!-- KPI Cards motores -->
-      <div class="kpi-grid" id="motorKpiGrid">
-        <div class="kpi-card kpi-blue">
-          <div class="kpi-icon">⚙️</div>
-          <div class="kpi-body">
-            <div class="kpi-value" id="mKpiTotal">432</div>
-            <div class="kpi-label">Total Motores</div>
-            <div class="kpi-trend up">▲ 8 áreas de proceso</div>
-          </div>
-        </div>
-        <div class="kpi-card kpi-green">
-          <div class="kpi-icon">⚡</div>
-          <div class="kpi-body">
-            <div class="kpi-value" id="mKpiPotencia">0</div>
-            <div class="kpi-label">Potencia Total (kW)</div>
-            <div class="kpi-trend up">▲ Inventario completo</div>
-          </div>
-        </div>
-        <div class="kpi-card kpi-purple">
-          <div class="kpi-icon">🔄</div>
-          <div class="kpi-body">
-            <div class="kpi-value" id="mKpiVfd">0</div>
-            <div class="kpi-label">Con Variador VFD</div>
-            <div class="kpi-trend up">▲ Control velocidad</div>
-          </div>
-        </div>
-        <div class="kpi-card kpi-yellow">
-          <div class="kpi-icon">🏷️</div>
-          <div class="kpi-body">
-            <div class="kpi-value" id="mKpiMarcas">0</div>
-            <div class="kpi-label">Marcas Diferentes</div>
-            <div class="kpi-trend up">▲ WEG · Siemens · SEW</div>
-          </div>
+        <div class="routine-block" style="border-left:3px solid var(--danger);">
+          <h4>❌ Qué NO hace el Coordinador</h4>
+          <div class="routine-row"><div class="routine-desc">Correr a planta ante cada falla o alarma.</div></div>
+          <div class="routine-row"><div class="routine-desc">Asignar personalmente el técnico a cada trabajo.</div></div>
+          <div class="routine-row"><div class="routine-desc">Tomar decisiones operativas que competen al Supervisor.</div></div>
+          <div class="routine-row"><div class="routine-desc">Resolver directamente las urgencias de los técnicos.</div></div>
         </div>
       </div>
+    </div>
+  </section>
 
-      <!-- Filter + Search bar -->
-      <div class="motor-filter-bar">
-        <select class="plan-select" id="motorAreaFilter" onchange="filterMotores()">
-          <option value="">Todas las áreas</option>
-          <option value="DOMO">DOMO</option>
-          <option value="PREHOMO">PREHOMO</option>
-          <option value="CRUDO">CRUDO</option>
-          <option value="HORNO 4">HORNO 4</option>
-          <option value="CEMENTO">CEMENTO</option>
-          <option value="CARBON">CARBÓN</option>
-          <option value="EMPAQUE L1">EMPAQUE L1</option>
-          <option value="EMPAQUE L2">EMPAQUE L2</option>
-        </select>
-        <select class="plan-select" id="motorArranqueFilter" onchange="filterMotores()">
-          <option value="">Todos los arranques</option>
-          <option value="Variador">Variador VFD</option>
-          <option value="suave">Arranque Suave</option>
-          <option value="Directo">Arranque Directo</option>
-          <option value="Rampa">Rampa de tensión</option>
-        </select>
-        <select class="plan-select" id="motorPotenciaFilter" onchange="filterMotores()">
-          <option value="">Toda potencia</option>
-          <option value="alta">&gt; 100 kW (Alta)</option>
-          <option value="media">10–100 kW (Media)</option>
-          <option value="baja">&lt; 10 kW (Baja)</option>
-        </select>
-        <input type="text" class="search-input" id="motorSearch" placeholder="Buscar descripción, TAG, marca, SAP..." oninput="filterMotores()" style="flex:1;max-width:320px;height:36px" />
-        <span class="motor-count" id="motorCount">432 motores</span>
+  <!-- ═══════════════════════════════════════════════════ RACI TAB -->
+  <section class="section hidden" id="sectionRaci">
+    <div class="info-card">
+      <h2>🗂️ Matriz RACI: Definición de Responsabilidades</h2>
+      <p style="color:var(--muted); font-size:.85rem; margin-bottom:1.25rem;">Esta matriz es el instrumento más crítico para evitar la microgestión y la "delegación inversa". Define sin ambigüedad quién es <strong style="color:#60a5fa;">Responsable (R)</strong>, quién <strong style="color:#fcd34d;">Consultado (C)</strong> y quién <strong style="color:var(--muted);">Informado (I)</strong>.</p>
+
+      <div class="alert alert-danger" style="margin-bottom:1rem;">
+        <span class="alert-icon">⛔</span>
+        <span>Si el Coordinador interviene constantemente en la <strong>Ejecución</strong>, el área perderá quien asegure la disponibilidad de repuestos para la próxima semana, convirtiendo el equipo eléctrico en un departamento reactivo.</span>
       </div>
 
-      <!-- Area distribution chart -->
-      <div class="grid-2col" style="margin-bottom:20px">
-        <div class="card">
-          <div class="card-header">
-            <h2 class="card-title">📊 Distribución por Área</h2>
-            <span class="card-badge">8 Procesos</span>
-          </div>
-          <div id="motorAreaChart" style="padding:8px 0"></div>
-        </div>
-        <div class="card">
-          <div class="card-header">
-            <h2 class="card-title">🏭 Top Marcas</h2>
-            <span class="card-badge">Fabricantes</span>
-          </div>
-          <div id="motorMarcaChart" style="padding:8px 0"></div>
-        </div>
-      </div>
-
-      <!-- Main motors table -->
-      <div class="card">
-        <div class="card-header">
-          <h2 class="card-title">📋 Catálogo Completo de Motores</h2>
-          <div style="display:flex;gap:8px">
-            <button class="asset-tab active" id="mViewTableBtn" onclick="setMotorView('table',this)">Tabla</button>
-            <button class="asset-tab" id="mViewCardBtn" onclick="setMotorView('cards',this)">Tarjetas</button>
-            <button class="asset-tab" id="mViewMatrixBtn" onclick="setMotorView('matrix',this)">Matriz de Compatibilidad</button>
-          </div>
-        </div>
-
-        <!-- TABLE VIEW -->
-        <div id="motorTableView">
-          <div class="assets-table-wrapper">
-            <table class="assets-table" id="motorTable">
-              <thead>
-                <tr>
-                  <th>Área</th>
-                  <th>Descripción</th>
-                  <th>TAG / Ubicación</th>
-                  <th>Marca · Modelo</th>
-                  <th>kW</th>
-                  <th>Tensión</th>
-                  <th>A nominal</th>
-                  <th>RPM</th>
-                  <th>IP</th>
-                  <th>Arranque</th>
-                  <th>Rodamiento LA</th>
-                </tr>
-              </thead>
-              <tbody id="motorTableBody"></tbody>
-            </table>
-          </div>
-        </div>
-
-        <!-- CARD VIEW -->
-        <div id="motorCardView" style="display:none">
-          <div class="motor-card-grid" id="motorCardGrid"></div>
-        </div>
-
-        <!-- MATRIX VIEW -->
-        <div id="motorMatrixView" style="display:none">
-          <div class="motor-matrix-header">
-            <p>Grupos de motores idénticos por Potencia, Frame, Polos y Tensión.</p>
-          </div>
-          <div id="motorMatrixContainer"></div>
-        </div>
-      </div>
-
-      <!-- Motor detail modal -->
-      <div class="motor-modal-overlay" id="motorModalOverlay" onclick="closeMotorModal()" style="display:none">
-        <div class="motor-modal" onclick="event.stopPropagation()">
-          <button class="motor-modal-close" onclick="closeMotorModal()">✕</button>
-          <div id="motorModalContent"></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ACTIVOS ELÉCTRICOS -->
-    <section class="section" id="section-activos">
-      <div class="section-header">
-        <div>
-          <h1 class="section-title">Inventario de Activos Eléctricos</h1>
-          <p class="section-subtitle">Catálogo completo de equipos · Cementos Tequendama</p>
-        </div>
-        <div class="header-actions">
-          <input type="text" class="search-input" placeholder="Buscar activo..." oninput="filterAssets(this.value)" id="assetSearch" />
-        </div>
-      </div>
-
-      <div class="asset-tabs">
-        <button class="asset-tab active" onclick="filterByCategory('all', this)">Todos</button>
-        <button class="asset-tab" onclick="filterByCategory('alta', this)">Alta Tensión</button>
-        <button class="asset-tab" onclick="filterByCategory('media', this)">Media Tensión</button>
-        <button class="asset-tab" onclick="filterByCategory('baja', this)">Baja Tensión</button>
-        <button class="asset-tab" onclick="filterByCategory('generacion', this)">Generación</button>
-        <button class="asset-tab" onclick="filterByCategory('control', this)">Control / Inst.</button>
-      </div>
-
-      <div class="assets-table-wrapper">
-        <table class="assets-table" id="assetsTable">
+      <div class="table-wrap">
+        <table>
           <thead>
             <tr>
-              <th>TAG / ID</th>
-              <th>Descripción</th>
-              <th>Categoría</th>
-              <th>Tensión</th>
-              <th>Potencia</th>
-              <th>Área</th>
-              <th>Estado</th>
-              <th>Próx. Mant.</th>
+              <th style="text-align:left;">Actividad</th>
+              <th>Coordinador Planeación</th>
+              <th>Supervisor Eléctrico</th>
             </tr>
           </thead>
-          <tbody id="assetsBody">
+          <tbody>
+            <tr>
+              <td><strong>Recibir y procesar el aviso de Producción en SAP</strong></td>
+              <td style="text-align:center;"><span class="raci-badge R">R</span></td>
+              <td style="text-align:center;"><span class="raci-badge I">I</span></td>
+            </tr>
+            <tr>
+              <td><strong>Convertir Aviso en O.T. y reservar materiales</strong></td>
+              <td style="text-align:center;"><span class="raci-badge R">R</span></td>
+              <td style="text-align:center;"><span class="raci-badge I">I</span></td>
+            </tr>
+            <tr>
+              <td><strong>Crear y liberar Solicitudes de Pedido (SolPed)</strong></td>
+              <td style="text-align:center;"><span class="raci-badge R">R</span></td>
+              <td style="text-align:center;"><span class="raci-badge I">I</span></td>
+            </tr>
+            <tr>
+              <td><strong>Definir el programa semanal de mantenimiento</strong></td>
+              <td style="text-align:center;"><span class="raci-badge R">R</span></td>
+              <td style="text-align:center;"><span class="raci-badge C">C</span></td>
+            </tr>
+            <tr>
+              <td><strong>Asignar el técnico / cuadrilla a cada O.T.</strong></td>
+              <td style="text-align:center;"><span class="raci-badge C">C</span></td>
+              <td style="text-align:center;"><span class="raci-badge R">R</span></td>
+            </tr>
+            <tr>
+              <td><strong>Supervisar la ejecución del trabajo en planta</strong></td>
+              <td style="text-align:center;"><span class="raci-badge I">I</span></td>
+              <td style="text-align:center;"><span class="raci-badge R">R</span></td>
+            </tr>
+            <tr>
+              <td><strong>Autorizar permisos de trabajo (APT / LOTO)</strong></td>
+              <td style="text-align:center;"><span class="raci-badge I">I</span></td>
+              <td style="text-align:center;"><span class="raci-badge R">R</span></td>
+            </tr>
+            <tr>
+              <td><strong>Cierre técnico de la O.T. en SAP</strong></td>
+              <td style="text-align:center;"><span class="raci-badge C">C</span></td>
+              <td style="text-align:center;"><span class="raci-badge R">R</span></td>
+            </tr>
+            <tr>
+              <td><strong>Seguimiento a la compra de repuestos faltantes</strong></td>
+              <td style="text-align:center;"><span class="raci-badge R">R</span></td>
+              <td style="text-align:center;"><span class="raci-badge I">I</span></td>
+            </tr>
+            <tr>
+              <td><strong>Atención a emergencias eléctricas de turno</strong></td>
+              <td style="text-align:center;"><span class="raci-badge I">I</span></td>
+              <td style="text-align:center;"><span class="raci-badge R">R</span></td>
+            </tr>
+            <tr>
+              <td><strong>Análisis de fallas y ACR con Confiabilidad</strong></td>
+              <td style="text-align:center;"><span class="raci-badge R">R</span></td>
+              <td style="text-align:center;"><span class="raci-badge C">C</span></td>
+            </tr>
+            <tr>
+              <td><strong>Programación de vacaciones y turnos del personal</strong></td>
+              <td style="text-align:center;"><span class="raci-badge R">R</span></td>
+              <td style="text-align:center;"><span class="raci-badge C">C</span></td>
+            </tr>
+            <tr>
+              <td><strong>Interventoría de trabajos de contratistas</strong></td>
+              <td style="text-align:center;"><span class="raci-badge R">R</span></td>
+              <td style="text-align:center;"><span class="raci-badge C">C</span></td>
+            </tr>
+            <tr>
+              <td><strong>Entrega del equipo intervenido al área de Producción</strong></td>
+              <td style="text-align:center;"><span class="raci-badge I">I</span></td>
+              <td style="text-align:center;"><span class="raci-badge R">R</span></td>
+            </tr>
           </tbody>
         </table>
       </div>
-    </section>
+      <p style="color:var(--muted);font-size:.75rem;margin-top:.75rem;"><strong>R</strong> = Responsable &nbsp;|&nbsp; <strong>C</strong> = Consultado &nbsp;|&nbsp; <strong>I</strong> = Informado</p>
+    </div>
+  </section>
 
-    <!-- UNIFILAR -->
-    <section class="section" id="section-unifilar">
-      <div class="section-header">
-        <div>
-          <h1 class="section-title">Diagrama Unifilar General</h1>
-          <p class="section-subtitle">Sistema de potencia 34.5 kV · Cementos Tequendama 2025</p>
-        </div>
-      </div>
-
-      <div class="grid-2col">
-        <div class="card card-tall">
-          <div class="card-header">
-            <h2 class="card-title">Unifilar General CETESA</h2>
-            <span class="card-badge">34.5 kV</span>
-          </div>
-          <div class="unifilar-diagram" id="unifilarDiagram">
-            <!-- SVG Unifilar -->
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-header">
-            <h2 class="card-title">Niveles de Tensión</h2>
-          </div>
-          <div class="voltage-levels">
-            <div class="vl-item vl-alta">
-              <div class="vl-bar" style="width:100%"></div>
-              <div class="vl-info">
-                <span class="vl-label">Alta Tensión</span>
-                <span class="vl-value">34.5 kV</span>
-              </div>
-              <div class="vl-detail">Línea EPM + SSFV · Relés HZ01–HZ06</div>
-            </div>
-            <div class="vl-item vl-media1">
-              <div class="vl-bar" style="width:75%"></div>
-              <div class="vl-info">
-                <span class="vl-label">Media Tensión 1</span>
-                <span class="vl-value">13.2 kV</span>
-              </div>
-              <div class="vl-detail">Trafos Hornos 1-2 · Mol. Crudo · Empaque</div>
-            </div>
-            <div class="vl-item vl-media2">
-              <div class="vl-bar" style="width:60%"></div>
-              <div class="vl-info">
-                <span class="vl-label">Media Tensión 2</span>
-                <span class="vl-value">4.16 kV</span>
-              </div>
-              <div class="vl-detail">Motores MT · Horno 4 (VH4) · MC-B01</div>
-            </div>
-            <div class="vl-item vl-baja">
-              <div class="vl-bar" style="width:40%"></div>
-              <div class="vl-info">
-                <span class="vl-label">Baja Tensión</span>
-                <span class="vl-value">440 V</span>
-              </div>
-              <div class="vl-detail">CCM Horno · Molienda · Empaque · Torres</div>
-            </div>
-            <div class="vl-item vl-control">
-              <div class="vl-bar" style="width:20%"></div>
-              <div class="vl-info">
-                <span class="vl-label">Control / UPS</span>
-                <span class="vl-value">220 V</span>
-              </div>
-              <div class="vl-detail">Generador emergencia · Instrumentación</div>
-            </div>
-          </div>
-
-          <div class="card-header" style="margin-top:1.5rem">
-            <h2 class="card-title">Relés de Protección Principales</h2>
-          </div>
-          <div class="relay-table">
-            <div class="relay-row relay-header">
-              <span>TAG</span><span>Función</span><span>Nivel</span><span>Corriente Falla</span>
-            </div>
-            <div class="relay-row">
-              <span class="relay-tag">HZ01</span><span>Protección Reserva</span><span>34.5 kV</span><span>—</span>
-            </div>
-            <div class="relay-row">
-              <span class="relay-tag">HZ02</span><span>Protección Reserva</span><span>34.5 kV</span><span>—</span>
-            </div>
-            <div class="relay-row highlight-row">
-              <span class="relay-tag">HZ03</span><span>Prot. Principal · Fases/Tierra</span><span>34.5 kV</span><span>5,628 A / 8,006 A</span>
-            </div>
-            <div class="relay-row highlight-row">
-              <span class="relay-tag">HZ04</span><span>DISPARA TRANSFERIDO</span><span>34.5 kV</span><span>5,374 A</span>
-            </div>
-            <div class="relay-row">
-              <span class="relay-tag">HZ05</span><span>Reserva</span><span>34.5 kV</span><span>—</span>
-            </div>
-            <div class="relay-row">
-              <span class="relay-tag">HZ06</span><span>Líneas Empaque</span><span>13.2 kV</span><span>6,908 A</span>
-            </div>
-            <div class="relay-row">
-              <span class="relay-tag">K02A</span><span>Motor Molino Crudo</span><span>4.16 kV</span><span>2,370 A</span>
-            </div>
-            <div class="relay-row">
-              <span class="relay-tag">L03A</span><span>VH4 – Horno 4</span><span>4.16 kV</span><span>10,200 A</span>
-            </div>
-            <div class="relay-row">
-              <span class="relay-tag">K03A/B</span><span>Molino Crudo/Cemento BT</span><span>440 V</span><span>34,511 A</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- PREVENTIVO -->
-    <section class="section" id="section-preventivo">
-      <div class="section-header">
-        <div>
-          <h1 class="section-title">Plan de Mantenimiento Preventivo</h1>
-          <p class="section-subtitle">Plan Anual 2026 · V7 · Alineado por procesos · Cementos Tequendama</p>
-        </div>
-      </div>
-
-      <div class="grid-3col">
-        <div class="card">
-          <div class="card-header">
-            <h2 class="card-title">🔴 Diario</h2>
-          </div>
-          <ul class="task-list">
-            <li class="task-item task-electric">
-              <div class="task-tag">HZ01-06</div>
-              <div class="task-desc">Verificación visual relés de protección</div>
-              <div class="task-resp">Eléct. I</div>
-            </li>
-            <li class="task-item task-electric">
-              <div class="task-tag">GEN-001</div>
-              <div class="task-desc">Inspección nivel combustible generador</div>
-              <div class="task-resp">Eléct. II</div>
-            </li>
-            <li class="task-item task-instrument">
-              <div class="task-tag">SSFV</div>
-              <div class="task-desc">Lectura producción solar (kWh)</div>
-              <div class="task-resp">Instrum.</div>
-            </li>
-            <li class="task-item task-electric">
-              <div class="task-tag">BAS-01</div>
-              <div class="task-desc">Verificación básculas camioneras</div>
-              <div class="task-resp">Eléct. I</div>
-            </li>
-          </ul>
-        </div>
-
-        <div class="card">
-          <div class="card-header">
-            <h2 class="card-title">🟡 Semanal</h2>
-          </div>
-          <ul class="task-list">
-            <li class="task-item task-electric">
-              <div class="task-tag">GEN-001</div>
-              <div class="task-desc">Prueba sin carga generador (30 min)</div>
-              <div class="task-resp">Eléct. I</div>
-            </li>
-            <li class="task-item task-electric">
-              <div class="task-tag">ATS-01</div>
-              <div class="task-desc">Prueba transferencia automática ATS</div>
-              <div class="task-resp">Eléct. I</div>
-            </li>
-            <li class="task-item task-instrument">
-              <div class="task-tag">ANALI</div>
-              <div class="task-desc">Revisión analizadores de gases horno</div>
-              <div class="task-resp">Instrum.</div>
-            </li>
-            <li class="task-item task-electric">
-              <div class="task-tag">VFD</div>
-              <div class="task-desc">Lectura parámetros variadores críticos</div>
-              <div class="task-resp">Eléct. II</div>
-            </li>
-            <li class="task-item task-electric">
-              <div class="task-tag">UPS</div>
-              <div class="task-desc">Verificación baterías UPS sistemas</div>
-              <div class="task-resp">Eléct. I</div>
-            </li>
-          </ul>
-        </div>
-
-        <div class="card">
-          <div class="card-header">
-            <h2 class="card-title">🟢 Mensual</h2>
-          </div>
-          <ul class="task-list">
-            <li class="task-item task-electric">
-              <div class="task-tag">GEN-001</div>
-              <div class="task-desc">Prueba con carga 100% generador</div>
-              <div class="task-resp">Contrat.</div>
-            </li>
-            <li class="task-item task-electric">
-              <div class="task-tag">SSFV</div>
-              <div class="task-desc">Limpieza paneles fotovoltaicos</div>
-              <div class="task-resp">Contrat.</div>
-            </li>
-            <li class="task-item task-electric">
-              <div class="task-tag">CCM</div>
-              <div class="task-desc">Termografía CCM Horno 4 + Empaque</div>
-              <div class="task-resp">Insp. Elé</div>
-            </li>
-            <li class="task-item task-instrument">
-              <div class="task-tag">BAS</div>
-              <div class="task-desc">Calibración celdas de carga báscula</div>
-              <div class="task-resp">Contrat.</div>
-            </li>
-            <li class="task-item task-electric">
-              <div class="task-tag">TRAFO</div>
-              <div class="task-desc">Análisis aceite transformador 10 MVA</div>
-              <div class="task-resp">Eléct. I</div>
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- ============================================================
-           PLAN ANUAL 2026 POR PROCESOS - Directo del Excel V7
-           ============================================================ -->
-      <div class="card" style="margin-top:1.5rem">
-        <div class="card-header">
-          <h2 class="card-title">📅 Plan Anual 2026 por Procesos · V7</h2>
-          <div style="display:flex;gap:8px;align-items:center">
-            <span class="card-badge badge-green">53 Semanas</span>
-            <button class="asset-tab active" id="viewWeekBtn" onclick="setPlanView('week',this)" style="padding:4px 12px;font-size:0.72rem">Por Semana</button>
-            <button class="asset-tab" id="viewAreaBtn" onclick="setPlanView('area',this)" style="padding:4px 12px;font-size:0.72rem">Por Área</button>
-            <button class="asset-tab" id="viewMonthBtn" onclick="setPlanView('month',this)" style="padding:4px 12px;font-size:0.72rem">Resumen Mes</button>
-          </div>
-        </div>
-
-        <!-- Filter bar -->
-        <div class="plan-filters" id="planFilters">
-          <select class="plan-select" id="planMonthFilter" onchange="renderPlanView()">
-            <option value="">Todos los meses</option>
-            <option value="01">Enero</option><option value="02">Febrero</option>
-            <option value="03">Marzo</option><option value="04">Abril</option>
-            <option value="05">Mayo</option><option value="06">Junio</option>
-            <option value="07">Julio</option><option value="08">Agosto</option>
-            <option value="09">Septiembre</option><option value="10">Octubre</option>
-            <option value="11">Noviembre</option><option value="12">Diciembre</option>
-          </select>
-          <select class="plan-select" id="planRespFilter" onchange="renderPlanView()">
-            <option value="">Todos los responsables</option>
-            <option value="OCR">OCR – Óscar Corredor</option>
-            <option value="NB">NB – Nelson Buitrago</option>
-            <option value="PM">PM – Publio Muñoz</option>
-            <option value="LS">LS – Luis Silva</option>
-            <option value="LZ">LZ – Luis Zuluaga</option>
-            <option value="WA">WA – William Almanza</option>
-            <option value="HAP">HAP – Harold Prieto</option>
-            <option value="JH">JH – Juan Huertas</option>
-            <option value="JT">JT – John Torres</option>
-          </select>
-          <input type="text" class="search-input" id="planAreaSearch" placeholder="Filtrar área..." oninput="renderPlanView()" style="max-width:200px;height:34px"/>
-          <span id="planCount" style="font-size:0.72rem;color:var(--text-muted);margin-left:auto;align-self:center"></span>
-        </div>
-
-        <!-- Weekly view -->
-        <div id="planWeekView">
-          <div class="plan-week-grid" id="planWeekGrid"></div>
-        </div>
-
-        <!-- Area view -->
-        <div id="planAreaView" style="display:none">
-          <div class="plan-area-grid" id="planAreaGrid"></div>
-        </div>
-
-        <!-- Month summary view -->
-        <div id="planMonthView" style="display:none">
-          <div class="annual-matrix-wrapper">
-            <table class="annual-matrix" id="planMonthTable">
-              <thead>
-                <tr>
-                  <th>Área / Proceso</th>
-                  <th>Ene</th><th>Feb</th><th>Mar</th><th>Abr</th><th>May</th><th>Jun</th>
-                  <th>Jul</th><th>Ago</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dic</th>
-                  <th>Total Hrs</th>
-                </tr>
-              </thead>
-              <tbody id="planMonthBody"></tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-
-      <!-- Responsables legend -->
-      <div class="card" style="margin-top:1.5rem">
-        <div class="card-header">
-          <h2 class="card-title">👥 Responsables Plan 2026</h2>
-          <span class="card-badge">Disponible / Mantenimiento</span>
-        </div>
-        <div class="resp-legend-grid">
-          <div class="rl-item"><div class="rl-code rl-ocr">OCR</div><div class="rl-name">Óscar Corredor Rangel<br/><span>Director Mantenimiento</span></div></div>
-          <div class="rl-item"><div class="rl-code rl-nb">NB</div><div class="rl-name">Nelson Buitrago<br/><span>Coordinador</span></div></div>
-          <div class="rl-item"><div class="rl-code rl-pm">PM</div><div class="rl-name">Publio Muñoz<br/><span>Coord. Ejecución</span></div></div>
-          <div class="rl-item"><div class="rl-code rl-ls">LS</div><div class="rl-name">Luis Silva<br/><span>Coord. Planeación Eléctrica</span></div></div>
-          <div class="rl-item"><div class="rl-code rl-lz">LZ</div><div class="rl-name">Luis Zuluaga<br/><span>Coordinador</span></div></div>
-          <div class="rl-item"><div class="rl-code rl-wa">WA</div><div class="rl-name">William Almanza<br/><span>Coordinador</span></div></div>
-          <div class="rl-item"><div class="rl-code rl-hap">HAP</div><div class="rl-name">Harold Prieto<br/><span>Supervisor Eléctrico</span></div></div>
-          <div class="rl-item"><div class="rl-code rl-jh">JH</div><div class="rl-name">Juan Huertas<br/><span>Supervisor</span></div></div>
-          <div class="rl-item"><div class="rl-code rl-jt">JT</div><div class="rl-name">John Torres<br/><span>Supervisor</span></div></div>
-        </div>
-      </div>
-
-      <!-- Tabla anual preventivo (electricidad) -->
-      <div class="card" style="margin-top:1.5rem">
-        <div class="card-header">
-          <h2 class="card-title">Matriz Anual Eléctrica · Preventivo por Equipo</h2>
-          <span class="card-badge">2026</span>
-        </div>
-        <div class="annual-matrix-wrapper">
-          <table class="annual-matrix">
-            <thead>
-              <tr>
-                <th>Equipo / Sistema</th>
-                <th>Ene</th><th>Feb</th><th>Mar</th><th>Abr</th><th>May</th><th>Jun</th>
-                <th>Jul</th><th>Ago</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dic</th>
-              </tr>
-            </thead>
-            <tbody id="annualMatrix"></tbody>
-          </table>
-        </div>
-      </div>
-    </section>
-
-    <!-- PREDICTIVO -->
-    <section class="section" id="section-predictivo">
-      <div class="section-header">
-        <div>
-          <h1 class="section-title">Mantenimiento Predictivo</h1>
-          <p class="section-subtitle">Termografía · Análisis de vibraciones · Monitoreo continuo</p>
-        </div>
-      </div>
-
-      <div class="grid-2col">
-        <div class="card">
-          <div class="card-header">
-            <h2 class="card-title">🌡️ Programa de Termografía</h2>
-            <span class="card-badge">Infrarrojo</span>
-          </div>
-          <div class="predictive-items">
-            <div class="pred-item pred-critical">
-              <div class="pred-priority">CRÍTICO</div>
-              <div class="pred-info">
-                <div class="pred-name">Subestación 34.5 kV – Barraje Principal</div>
-                <div class="pred-detail">Relés HZ03/HZ04 · Conexiones MT · Semestral</div>
-              </div>
-              <div class="pred-next">Jul 2026</div>
-            </div>
-            <div class="pred-item pred-high">
-              <div class="pred-priority">ALTO</div>
-              <div class="pred-info">
-                <div class="pred-name">Transformador 10 MVA / 12 MVA</div>
-                <div class="pred-detail">Bornes HV/LV · Bushing · Semestral</div>
-              </div>
-              <div class="pred-next">Ago 2026</div>
-            </div>
-            <div class="pred-item pred-high">
-              <div class="pred-priority">ALTO</div>
-              <div class="pred-info">
-                <div class="pred-name">CCM Horno 4 (VH4 · 4.16 kV)</div>
-                <div class="pred-detail">Contactores · Barras · Cables · Mensual</div>
-              </div>
-              <div class="pred-next">Jun 2026</div>
-            </div>
-            <div class="pred-item pred-med">
-              <div class="pred-priority">MEDIO</div>
-              <div class="pred-info">
-                <div class="pred-name">Variadores de Frecuencia VFD</div>
-                <div class="pred-detail">Molienda Cemento · Clinker · Trimestral</div>
-              </div>
-              <div class="pred-next">Sep 2026</div>
-            </div>
-            <div class="pred-item pred-med">
-              <div class="pred-priority">MEDIO</div>
-              <div class="pred-info">
-                <div class="pred-name">SSFV – Strings y Conexiones</div>
-                <div class="pred-detail">Paneles fotovoltaicos 3.8 MW · Semestral</div>
-              </div>
-              <div class="pred-next">Jul 2026</div>
-            </div>
-            <div class="pred-item pred-low">
-              <div class="pred-priority">BAJO</div>
-              <div class="pred-info">
-                <div class="pred-name">Tableros BT – Molienda / Empaque</div>
-                <div class="pred-detail">CCM 440V · K03A · K03B · K010B · Anual</div>
-              </div>
-              <div class="pred-next">Dic 2026</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-header">
-            <h2 class="card-title">📊 Monitoreo de Condición</h2>
-          </div>
-          <div class="monitoring-items">
-            <div class="mon-item">
-              <div class="mon-icon">📡</div>
-              <div class="mon-content">
-                <div class="mon-title">Analizadores de Energía (Powerlogic)</div>
-                <div class="mon-desc">Armónicos, factor de potencia, THD – Continuo 24/7</div>
-                <div class="mon-points">• Subestación 34.5 kV&nbsp; • CCM Horno 4&nbsp; • Molinos</div>
-              </div>
-              <div class="mon-freq mon-green">24/7</div>
-            </div>
-            <div class="mon-item">
-              <div class="mon-icon">🔊</div>
-              <div class="mon-content">
-                <div class="mon-title">Análisis de Vibraciones – Motores MT</div>
-                <div class="mon-desc">Motores 4.16 kV críticos: Mol. Crudo, VH4</div>
-                <div class="mon-points">• Espectro vibración&nbsp; • Temperatura cojinetes</div>
-              </div>
-              <div class="mon-freq mon-blue">Mensual</div>
-            </div>
-            <div class="mon-item">
-              <div class="mon-icon">🧪</div>
-              <div class="mon-content">
-                <div class="mon-title">Análisis de Aceite Dieléctrico</div>
-                <div class="mon-desc">Trafo 10 MVA · Humedad, acidez, rigidez dieléctrica</div>
-                <div class="mon-points">• DGA cromato&nbsp; • IFT &nbsp;• Tensión ruptura</div>
-              </div>
-              <div class="mon-freq mon-orange">Semestral</div>
-            </div>
-            <div class="mon-item">
-              <div class="mon-icon">⚡</div>
-              <div class="mon-content">
-                <div class="mon-title">Descargas Parciales – MT</div>
-                <div class="mon-desc">Cables 13.2 kV y 4.16 kV · Aislamiento</div>
-                <div class="mon-points">• XLPE 35kV líneas principales&nbsp; • Cu 3x40</div>
-              </div>
-              <div class="mon-freq mon-purple">Anual</div>
-            </div>
-            <div class="mon-item">
-              <div class="mon-icon">☀️</div>
-              <div class="mon-content">
-                <div class="mon-title">Performance Ratio SSFV</div>
-                <div class="mon-desc">KPI Parque Solar 3.8 MW · Radiación vs generación</div>
-                <div class="mon-points">• PR objetivo ≥80%&nbsp; • Irradiancia&nbsp; • Temperatura módulos</div>
-              </div>
-              <div class="mon-freq mon-yellow">Diario</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- PAROS MAYORES -->
-    <section class="section" id="section-paros">
-      <div class="section-header">
-        <div>
-          <h1 class="section-title">Paros Mayores</h1>
-          <p class="section-subtitle">Planeación anual de paradas programadas · Pruebas eléctricas de gran envergadura</p>
-        </div>
-      </div>
-
-      <div class="grid-2col">
-        <div class="card">
-          <div class="card-header">
-            <h2 class="card-title">Paro Mayor Horno 2026</h2>
-            <span class="card-badge badge-orange">Planeado</span>
-          </div>
-          <div class="shutdown-timeline">
-            <div class="stl-item">
-              <div class="stl-day">Día 1–2</div>
-              <div class="stl-content">
-                <div class="stl-title">⚡ Pruebas Eléctricas Motores MT</div>
-                <div class="stl-detail">Resistencia aislamiento Megger · Polarización índice (PI) · Motores 4.16 kV</div>
-              </div>
-            </div>
-            <div class="stl-item">
-              <div class="stl-day">Día 2–3</div>
-              <div class="stl-content">
-                <div class="stl-title">🛡️ Pruebas y Ajuste Relés de Protección</div>
-                <div class="stl-detail">HZ03A fases/tierra · L03A · K02A · Inyección secundaria</div>
-              </div>
-            </div>
-            <div class="stl-item">
-              <div class="stl-day">Día 3–4</div>
-              <div class="stl-content">
-                <div class="stl-title">🔌 Revisión Cables y Conexiones MT</div>
-                <div class="stl-detail">XLPE 35kV · Cu 3x40 · Terminales · Inspección visual y termografía</div>
-              </div>
-            </div>
-            <div class="stl-item">
-              <div class="stl-day">Día 4–5</div>
-              <div class="stl-content">
-                <div class="stl-title">⚙️ Limpieza CCM Horno 4 (VH4)</div>
-                <div class="stl-detail">Soplado, ajuste torques, reemplazo contactores desgastados</div>
-              </div>
-            </div>
-            <div class="stl-item">
-              <div class="stl-day">Día 5–6</div>
-              <div class="stl-content">
-                <div class="stl-title">🧪 Análisis Aceite Trafo 10 MVA</div>
-                <div class="stl-detail">DGA · Humedad · Rigidez dieléctrica</div>
-              </div>
-            </div>
-            <div class="stl-item">
-              <div class="stl-day">Día 6–7</div>
-              <div class="stl-content">
-                <div class="stl-title">✅ Pruebas de Energización y Puesta en Servicio</div>
-                <div class="stl-detail">Secuencia LOTO reversa · Inspección final · Autorización operación</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-header">
-            <h2 class="card-title">Actividades Eléctricas Paro Molienda</h2>
-            <span class="card-badge badge-blue">Semestral</span>
-          </div>
-          <div class="shutdown-tasks">
-            <div class="sht-category">
-              <div class="sht-cat-title">Molino de Cemento (K03B · 440V)</div>
-              <div class="sht-items">
-                <div class="sht-item">
-                  <div class="sht-check">☐</div>
-                  <div>Megger motores BT asociados (insul. &gt;1 MΩ/kV)</div>
-                </div>
-                <div class="sht-item">
-                  <div class="sht-check">☐</div>
-                  <div>Ajuste tornillos borneras CCM K03B</div>
-                </div>
-                <div class="sht-item">
-                  <div class="sht-check">☐</div>
-                  <div>Reemplazo filtros variador VFD prensa rodillos</div>
-                </div>
-                <div class="sht-item">
-                  <div class="sht-check">☐</div>
-                  <div>Calibración encoder/encoders prensa de rodillos</div>
-                </div>
-              </div>
-            </div>
-            <div class="sht-category">
-              <div class="sht-cat-title">Molino de Crudo (K02A · 4.16 kV)</div>
-              <div class="sht-items">
-                <div class="sht-item">
-                  <div class="sht-check">☐</div>
-                  <div>Prueba de disparo relé diferencial K02A</div>
-                </div>
-                <div class="sht-item">
-                  <div class="sht-check">☐</div>
-                  <div>Inspección visual motor 4.16 kV (escobillas)</div>
-                </div>
-                <div class="sht-item">
-                  <div class="sht-check">☐</div>
-                  <div>Medición resistencia devanados (variación &lt;1%)</div>
-                </div>
-              </div>
-            </div>
-            <div class="sht-category">
-              <div class="sht-cat-title">Subestación 34.5 kV</div>
-              <div class="sht-items">
-                <div class="sht-item">
-                  <div class="sht-check">☐</div>
-                  <div>Limpieza aisladores y bushings transformadores</div>
-                </div>
-                <div class="sht-item">
-                  <div class="sht-check">☐</div>
-                  <div>Verificación pararrayos y puesta a tierra</div>
-                </div>
-                <div class="sht-item">
-                  <div class="sht-check">☐</div>
-                  <div>Actualización curvas de coordinación protecciones</div>
-                </div>
-                <div class="sht-item">
-                  <div class="sht-check">☐</div>
-                  <div>Prueba de interruptores (tiempo de disparo)</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- GENERADORES -->
-    <section class="section" id="section-generadores">
-      <div class="section-header">
-        <div>
-          <h1 class="section-title">Generadores de Emergencia</h1>
-          <p class="section-subtitle">Sistema de respaldo · 220 V · ATS automático</p>
-        </div>
-      </div>
-
-      <div class="grid-3col">
-        <div class="kpi-card kpi-green">
-          <div class="kpi-icon">⚙️</div>
-          <div class="kpi-body">
-            <div class="kpi-value" data-target="99.1" data-suffix="%">0</div>
-            <div class="kpi-label">Disponibilidad Real</div>
-            <div class="kpi-trend up">Meta: &gt;99%</div>
-          </div>
-        </div>
-        <div class="kpi-card kpi-blue">
-          <div class="kpi-icon">🕐</div>
-          <div class="kpi-body">
-            <div class="kpi-value" data-target="8" data-suffix=" seg">0</div>
-            <div class="kpi-label">Tiempo Transferencia ATS</div>
-            <div class="kpi-trend up">Límite: &lt;10 seg</div>
-          </div>
-        </div>
-        <div class="kpi-card kpi-yellow">
-          <div class="kpi-icon">⛽</div>
-          <div class="kpi-body">
-            <div class="kpi-value" data-target="85" data-suffix="%">0</div>
-            <div class="kpi-label">Nivel Combustible</div>
-            <div class="kpi-trend up">Mínimo: 70%</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="grid-2col" style="margin-top:1.5rem">
-        <div class="card">
-          <div class="card-header">
-            <h2 class="card-title">Ficha Técnica – GEN-001</h2>
-          </div>
-          <div class="tech-specs">
-            <div class="ts-row"><span class="ts-label">Marca / Modelo</span><span class="ts-value">Cummins / C500D5</span></div>
-            <div class="ts-row"><span class="ts-label">Potencia Nominal</span><span class="ts-value">500 kVA / 400 kW</span></div>
-            <div class="ts-row"><span class="ts-label">Tensión</span><span class="ts-value">220 / 440 V · 60 Hz</span></div>
-            <div class="ts-row"><span class="ts-label">Factor de Potencia</span><span class="ts-value">0.8 (fp lagging)</span></div>
-            <div class="ts-row"><span class="ts-label">Combustible</span><span class="ts-value">ACPM · Tanque 500 L</span></div>
-            <div class="ts-row"><span class="ts-label">Tiempo arranque</span><span class="ts-value">&lt; 10 segundos</span></div>
-            <div class="ts-row"><span class="ts-label">Sistema ATS</span><span class="ts-value">Automático · Bidireccional</span></div>
-            <div class="ts-row"><span class="ts-label">Ubicación</span><span class="ts-value">Casa de Máquinas</span></div>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-header">
-            <h2 class="card-title">Rutina de Mantenimiento</h2>
-          </div>
-          <div class="gen-schedule">
-            <div class="gs-freq gs-weekly">
-              <div class="gs-freq-label">SEMANAL</div>
-              <ul>
-                <li>Arranque y operación sin carga (30 min)</li>
-                <li>Prueba ATS automático</li>
-                <li>Verificación nivel aceite motor</li>
-                <li>Verificación nivel refrigerante</li>
-                <li>Inspección visual fugas</li>
-              </ul>
-            </div>
-            <div class="gs-freq gs-monthly">
-              <div class="gs-freq-label">MENSUAL</div>
-              <ul>
-                <li>Prueba con carga al 100% (60 min)</li>
-                <li>Transferencia real ATS con carga</li>
-                <li>Análisis de combustible</li>
-                <li>Verificación sistema de alarmas</li>
-              </ul>
-            </div>
-            <div class="gs-freq gs-annual">
-              <div class="gs-freq-label">ANUAL</div>
-              <ul>
-                <li>Cambio filtros aceite, aire, combustible</li>
-                <li>Overhaul válvulas y inyectores</li>
-                <li>Prueba baterías de arranque (CCA)</li>
-                <li>Termografía alternador</li>
-                <li>Calibración gobernador</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SOLAR -->
-    <section class="section" id="section-solar">
-      <div class="section-header">
-        <div>
-          <h1 class="section-title">Parque Solar Fotovoltaico</h1>
-          <p class="section-subtitle">SSFV 3.8 MW · 34.5 kV · Conexión a red Cementos Tequendama</p>
-        </div>
-      </div>
-
+  <!-- ═══════════════════════════════════════════════════ TOOLS TAB -->
+  <section class="section hidden" id="sectionTools">
+    <div class="info-card">
+      <h2>📊 KPIs de Gestión del Coordinador</h2>
+      <p style="color:var(--muted);font-size:.85rem;margin-bottom:.75rem;">Indicadores clave para medir el éxito de la transición y el desempeño del rol. La mejora de estos KPIs evidenciará la madurez como Coordinador.</p>
       <div class="kpi-grid">
-        <div class="kpi-card kpi-yellow">
-          <div class="kpi-icon">☀️</div>
-          <div class="kpi-body">
-            <div class="kpi-value" data-target="3.8" data-suffix=" MW">0</div>
-            <div class="kpi-label">Capacidad Instalada</div>
-            <div class="kpi-trend up">Conexión 34.5 kV</div>
-          </div>
+        <div class="kpi-card">
+          <span class="icon">⚙️</span>
+          <span class="kpi-name">Cumplimiento del Programa</span>
+          <span class="kpi-value">≥ 85%</span>
+          <span class="kpi-desc">Órdenes ejecutadas vs. programadas en la semana. Meta progresiva durante los 90 días.</span>
         </div>
-        <div class="kpi-card kpi-green">
-          <div class="kpi-icon">📊</div>
-          <div class="kpi-body">
-            <div class="kpi-value" data-target="82.4" data-suffix="%">0</div>
-            <div class="kpi-label">Performance Ratio (PR)</div>
-            <div class="kpi-trend up">Meta: ≥80%</div>
-          </div>
+        <div class="kpi-card">
+          <span class="icon">🚨</span>
+          <span class="kpi-name">% Emergencias vs. Preventivo</span>
+          <span class="kpi-value">≤ 20%</span>
+          <span class="kpi-desc">Horas en mantenimiento de emergencia vs. total de horas. A menor %, mayor madurez del plan.</span>
         </div>
-        <div class="kpi-card kpi-blue">
-          <div class="kpi-icon">⚡</div>
-          <div class="kpi-body">
-            <div class="kpi-value" data-target="14800" data-suffix=" kWh">0</div>
-            <div class="kpi-label">Generación Promedio Diaria</div>
-            <div class="kpi-trend up">Mes actual</div>
-          </div>
+        <div class="kpi-card">
+          <span class="icon">📈</span>
+          <span class="kpi-name">MTBF (Tiempo Medio entre Fallas)</span>
+          <span class="kpi-value">↑ Tendencia</span>
+          <span class="kpi-desc">Para activos críticos eléctricos. La tendencia creciente indica efectividad del plan preventivo.</span>
         </div>
-        <div class="kpi-card kpi-purple">
-          <div class="kpi-icon">🌿</div>
-          <div class="kpi-body">
-            <div class="kpi-value" data-target="444000" data-suffix=" kWh">0</div>
-            <div class="kpi-label">Generación Mensual</div>
-            <div class="kpi-trend up">Junio 2026</div>
-          </div>
+        <div class="kpi-card">
+          <span class="icon">🔧</span>
+          <span class="kpi-name">MTTR (Tiempo Medio de Reparación)</span>
+          <span class="kpi-value">↓ Tendencia</span>
+          <span class="kpi-desc">Reducción del tiempo de reparación: indica mejor disponibilidad de repuestos y procedimientos.</span>
         </div>
-      </div>
-
-      <div class="grid-2col" style="margin-top:1.5rem">
-        <div class="card">
-          <div class="card-header">
-            <h2 class="card-title">Plan de Mantenimiento SSFV</h2>
-          </div>
-          <div class="solar-plan">
-            <div class="sp-item sp-daily">
-              <div class="sp-freq">DIARIO</div>
-              <div class="sp-tasks">
-                <div>• Lectura producción (kWh) vía SCADA</div>
-                <div>• Revisión alarmas inversores</div>
-                <div>• Performance Ratio calculado</div>
-              </div>
-            </div>
-            <div class="sp-item sp-weekly">
-              <div class="sp-freq">SEMANAL</div>
-              <div class="sp-tasks">
-                <div>• Inspección visual paneles (suciedad, daños)</div>
-                <div>• Verificación conexiones string boxes</div>
-              </div>
-            </div>
-            <div class="sp-item sp-monthly">
-              <div class="sp-freq">MENSUAL</div>
-              <div class="sp-tasks">
-                <div>• Limpieza mecánica paneles fotovoltaicos</div>
-                <div>• Termografía strings y conexiones</div>
-                <div>• Revisión inversor (filtros, ventiladores)</div>
-                <div>• Verificación puesta a tierra paneles</div>
-              </div>
-            </div>
-            <div class="sp-item sp-biannual">
-              <div class="sp-freq">SEMESTRAL</div>
-              <div class="sp-tasks">
-                <div>• Prueba I-V curve tracing por string</div>
-                <div>• Electroluminiscencia (detección celdas falladas)</div>
-                <div>• Revisión estructuras y soportería</div>
-                <div>• Actualización firmware inversores</div>
-              </div>
-            </div>
-            <div class="sp-item sp-annual">
-              <div class="sp-freq">ANUAL</div>
-              <div class="sp-tasks">
-                <div>• Auditoría rendimiento Contratista SSFV</div>
-                <div>• Medición resistencia aislamiento strings (≥1 MΩ)</div>
-                <div>• Informe técnico PR anual</div>
-              </div>
-            </div>
-          </div>
+        <div class="kpi-card">
+          <span class="icon">📦</span>
+          <span class="kpi-name">Backlog de Órdenes</span>
+          <span class="kpi-value">≤ 3 semanas</span>
+          <span class="kpi-desc">Órdenes pendientes de programar. Un backlog descontrolado indica falta de planeación.</span>
         </div>
-
-        <div class="card">
-          <div class="card-header">
-            <h2 class="card-title">Generación Solar – Simulación Mensual</h2>
-          </div>
-          <div class="solar-chart-container">
-            <canvas id="solarChart" width="400" height="250"></canvas>
-          </div>
-          <div class="solar-legend">
-            <div class="sl-item"><div class="sl-dot sl-gen"></div>Generación Real (kWh)</div>
-            <div class="sl-item"><div class="sl-dot sl-target"></div>Meta Teórica (kWh)</div>
-          </div>
+        <div class="kpi-card">
+          <span class="icon">💰</span>
+          <span class="kpi-name">Ejecución Presupuestal</span>
+          <span class="kpi-value">90–100%</span>
+          <span class="kpi-desc">Porcentaje de ejecución del presupuesto de mantenimiento eléctrico vs. lo planeado.</span>
         </div>
       </div>
-    </section>
+    </div>
 
-    <!-- PROTECCIONES -->
-    <section class="section" id="section-protecciones">
-      <div class="section-header">
-        <div>
-          <h1 class="section-title">Sistema de Protecciones Eléctricas</h1>
-          <p class="section-subtitle">Coordinación de protecciones · PMR Ingeniería · 2017 · Validez vigente</p>
+    <div class="info-card">
+      <h2>🗃️ Gestión Visual: Tablero Kanban de Planeación</h2>
+      <p style="color:var(--muted);font-size:.85rem;margin-bottom:1rem;">Implementar en SAP o una herramienta visual (PowerBI, tablero físico) el flujo de las órdenes de trabajo para que el estado sea visible para todo el equipo.</p>
+      <div class="routine-grid">
+        <div class="routine-block" style="border-top:3px solid var(--muted);">
+          <h4>📥 Backlog General</h4>
+          <div class="routine-desc" style="padding:.5rem 0; font-size:.82rem;">Avisos y solicitudes recibidas pendientes de convertir en órdenes de trabajo. Aquí entra toda la demanda del área.</div>
+        </div>
+        <div class="routine-block" style="border-top:3px solid var(--warning);">
+          <h4>⏳ Esperando Recursos</h4>
+          <div class="routine-desc" style="padding:.5rem 0; font-size:.82rem;">Órdenes creadas pero en pausa porque el repuesto o el servicio está en proceso de compra. Seguimiento diario de Compras.</div>
+        </div>
+        <div class="routine-block" style="border-top:3px solid var(--accent);">
+          <h4>✅ Listo para Programar</h4>
+          <div class="routine-desc" style="padding:.5rem 0; font-size:.82rem;">Órdenes con materiales completos disponibles en almacén, esperando la ventana de tiempo operativa de Producción.</div>
+        </div>
+        <div class="routine-block" style="border-top:3px solid var(--success);">
+          <h4>🚀 En Ejecución</h4>
+          <div class="routine-desc" style="padding:.5rem 0; font-size:.82rem;">Órdenes entregadas al Supervisor Eléctrico para ejecución esta semana. Supervisadas por el Supervisor, no por el Coordinador.</div>
         </div>
       </div>
+    </div>
+  </section>
 
-      <div class="grid-2col">
-        <div class="card">
-          <div class="card-header">
-            <h2 class="card-title">Coordinación Media Tensión</h2>
-            <span class="card-badge">13.2 kV / 4.16 kV</span>
-          </div>
-          <div class="protection-coord">
-            <div class="pc-section-title">Fases – Fallas Trifásicas</div>
-            <div class="pc-table">
-              <div class="pc-header">
-                <span>Circuito</span><span>Tensión</span><span>Ic Falla Máx</span><span>t Disparo</span>
-              </div>
-              <div class="pc-row">
-                <span>Cargas 34.5 kV (HZ03A)</span><span>34,500 V</span><span>5,628 A</span><span>≥10 ms</span>
-              </div>
-              <div class="pc-row">
-                <span>Trafo 10 MVA (HZ03A)</span><span>34,500 V</span><span>5,628 A</span><span>≥10 ms</span>
-              </div>
-              <div class="pc-row pc-highlight">
-                <span>Trafos Hornos 1-2 (R03A34)</span><span>13,200 V</span><span>5,605 A</span><span>≥0.1 ms</span>
-              </div>
-              <div class="pc-row pc-highlight">
-                <span>Mol. Crudo (R01A34)</span><span>13,200 V</span><span>5,605 A</span><span>≥10 ms</span>
-              </div>
-              <div class="pc-row">
-                <span>Motor Mol. Crudo (K02A)</span><span>4,160 V</span><span>2,370 A</span><span>≥1 ms</span>
-              </div>
-              <div class="pc-row">
-                <span>Trafos Empaque (HZ06B)</span><span>13,200 V</span><span>6,908 A</span><span>≥1 ms</span>
-              </div>
-              <div class="pc-row">
-                <span>MC-B01 (L01B)</span><span>4,160 V</span><span>5,210 A</span><span>≥1 ms</span>
-              </div>
-              <div class="pc-row pc-critical">
-                <span>VH4 – Horno 4 (L03A)</span><span>4,160 V</span><span>10,200 A</span><span>≥1 ms</span>
-              </div>
-            </div>
+</main>
 
-            <div class="pc-section-title" style="margin-top:1rem">Tierra – Fallas a Tierra</div>
-            <div class="pc-table">
-              <div class="pc-header">
-                <span>Circuito</span><span>Tensión</span><span>Ic Falla Máx</span><span>t Disparo</span>
-              </div>
-              <div class="pc-row">
-                <span>Cargas 34.5 kV Tierra</span><span>34,500 V</span><span>8,006 A</span><span>≥0.1 ms</span>
-              </div>
-              <div class="pc-row pc-critical">
-                <span>Cargas Horno 4 (HZ03A)</span><span>34,500 V</span><span>10,844 A</span><span>≥0.01 ms</span>
-              </div>
-              <div class="pc-row pc-critical">
-                <span>VH4 Tierra (L03A)</span><span>4,160 V</span><span>10,769 A</span><span>≥0.1 ms</span>
-              </div>
-            </div>
-          </div>
-        </div>
+<footer>
+  © 2025 Cementos Tequendama S.A.S. &nbsp;·&nbsp; Plan de Entrenamiento — Coordinador de Planeación Eléctrica &nbsp;·&nbsp; <span id="savedIndicator">Progreso guardado automáticamente</span>
+</footer>
 
-        <div class="card">
-          <div class="card-header">
-            <h2 class="card-title">Coordinación Baja Tensión</h2>
-            <span class="card-badge">440 V</span>
-          </div>
-          <div class="protection-coord">
-            <div class="pc-section-title">Circuitos 440 V – Fases y Tierra</div>
-            <div class="pc-table">
-              <div class="pc-header">
-                <span>Circuito</span><span>Ic Falla Máx</span><span>t Mín</span>
-              </div>
-              <div class="pc-row pc-critical">
-                <span>Horno 4-A (L05A) Fases</span><span>32,885 A</span><span>100 ms</span>
-              </div>
-              <div class="pc-row">
-                <span>Torre y Horno (Q1)</span><span>32,885 A</span><span>100 ms</span>
-              </div>
-              <div class="pc-row">
-                <span>Inyección Carbón (Q1)</span><span>32,885 A</span><span>100 ms</span>
-              </div>
-              <div class="pc-row">
-                <span>Enfriador + Torre C (Q1)</span><span>32,885 A</span><span>100 ms</span>
-              </div>
-              <div class="pc-row pc-highlight">
-                <span>Horno 3 N1 (Trafo 1.5 MVA)</span><span>34,511 A</span><span>100 ms</span>
-              </div>
-              <div class="pc-row pc-highlight">
-                <span>Mol. Cemento (K03B)</span><span>34,511 A</span><span>100 ms</span>
-              </div>
-              <div class="pc-row">
-                <span>Empaque L1-L2 (K010B)</span><span>12,549 A</span><span>100 ms</span>
-              </div>
-              <div class="pc-row">
-                <span>Prehomogenización (K07A)</span><span>26,720 A</span><span>100 ms</span>
-              </div>
-              <div class="pc-row">
-                <span>THV6-THV7 (K07A)</span><span>9,590 A</span><span>100 ms</span>
-              </div>
-              <div class="pc-row">
-                <span>Hornos V1-V2 (K05A/K06A)</span><span>13,475 A</span><span>100 ms</span>
-              </div>
-              <div class="pc-row pc-highlight">
-                <span>Mol. Crudo (K03A)</span><span>34,511 A</span><span>100 ms</span>
-              </div>
-            </div>
+<div class="toast" id="toast">✓ Progreso guardado</div>
 
-            <div class="protection-note">
-              <div class="pn-icon">ℹ️</div>
-              <div>Estudio de coordinación selectiva realizado por <strong>PMR Ingeniería</strong> usando E-Coord software. Validez: 2017 – Revisión recomendada cada 5 años o ante cambios de red.</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+<script>
+  // ═══════════════════════════════════════════════════════════════════════
+  // LOGIN — SHA-256 PROTECTION
+  // Hash SHA-256 de 'Mantenimiento2026' (no se guarda la clave en texto plano)
+  // ═══════════════════════════════════════════════════════════════════════
+  const PASS_HASH = '8ef5f8007f8c656950b89a497aa7d51d455c74f822f2bc054a7f138000cd2e6e';
+  const SESSION_KEY = 'tq_auth_session';
 
-    <!-- KPIs -->
-    <section class="section" id="section-kpis">
-      <div class="section-header">
-        <div>
-          <h1 class="section-title">KPIs de Mantenimiento Eléctrico</h1>
-          <p class="section-subtitle">Indicadores clave de desempeño · Sistema SAP PM</p>
-        </div>
-      </div>
+  async function sha256(str) {
+    const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+    return [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2,'0')).join('');
+  }
 
-      <div class="kpi-grid">
-        <div class="kpi-card kpi-green">
-          <div class="kpi-icon">📈</div>
-          <div class="kpi-body">
-            <div class="kpi-value" data-target="98.7" data-suffix="%">0</div>
-            <div class="kpi-label">Disponibilidad Sistema</div>
-            <div class="kpi-trend up">Meta: ≥98%</div>
-          </div>
-        </div>
-        <div class="kpi-card kpi-blue">
-          <div class="kpi-icon">⏱️</div>
-          <div class="kpi-body">
-            <div class="kpi-value" data-target="720" data-suffix=" hrs">0</div>
-            <div class="kpi-label">MTBF Eléctrico</div>
-            <div class="kpi-trend up">Tiempo entre fallas</div>
-          </div>
-        </div>
-        <div class="kpi-card kpi-orange">
-          <div class="kpi-icon">🔧</div>
-          <div class="kpi-body">
-            <div class="kpi-value" data-target="2.4" data-suffix=" hrs">0</div>
-            <div class="kpi-label">MTTR Eléctrico</div>
-            <div class="kpi-trend down">Meta: &lt;4 hrs</div>
-          </div>
-        </div>
-        <div class="kpi-card kpi-purple">
-          <div class="kpi-icon">✅</div>
-          <div class="kpi-body">
-            <div class="kpi-value" data-target="94.2" data-suffix="%">0</div>
-            <div class="kpi-label">Cumplimiento Preventivo</div>
-            <div class="kpi-trend up">Meta: ≥90%</div>
-          </div>
-        </div>
-      </div>
+  function unlockApp() {
+    sessionStorage.setItem(SESSION_KEY, '1');
+    document.getElementById('loginOverlay').classList.add('hidden');
+    initApp();
+  }
 
-      <!-- SAP PM info -->
-      <div class="grid-2col" style="margin-top:1.5rem">
-        <div class="card">
-          <div class="card-header">
-            <h2 class="card-title">Gestión SAP PM</h2>
-            <span class="card-badge">IP10 / IW31</span>
-          </div>
-          <div class="sap-items">
-            <div class="sap-item">
-              <div class="sap-code">IP10</div>
-              <div class="sap-desc">
-                <div class="sap-name">Planes de Mantenimiento</div>
-                <div class="sap-detail">Creación y gestión de planes preventivos eléctricos</div>
-              </div>
-            </div>
-            <div class="sap-item">
-              <div class="sap-code">IW31</div>
-              <div class="sap-desc">
-                <div class="sap-name">Creación de Órdenes</div>
-                <div class="sap-detail">Órdenes de trabajo correctivo y preventivo</div>
-              </div>
-            </div>
-            <div class="sap-item">
-              <div class="sap-code">IW38</div>
-              <div class="sap-desc">
-                <div class="sap-name">Lista de Órdenes</div>
-                <div class="sap-detail">Gestión y seguimiento de órdenes pendientes</div>
-              </div>
-            </div>
-            <div class="sap-item">
-              <div class="sap-code">IW24</div>
-              <div class="sap-desc">
-                <div class="sap-name">Avisos de Avería</div>
-                <div class="sap-detail">Registro de fallos y solicitudes de mantenimiento</div>
-              </div>
-            </div>
-            <div class="sap-item">
-              <div class="sap-code">IP42</div>
-              <div class="sap-desc">
-                <div class="sap-name">Rutas de Inspección</div>
-                <div class="sap-detail">Rutas diarias/semanales para inspectores eléctricos</div>
-              </div>
-            </div>
-          </div>
-        </div>
+  async function attemptLogin() {
+    const input = document.getElementById('passInput');
+    const btn   = document.getElementById('loginBtn');
+    const err   = document.getElementById('loginError');
+    btn.disabled = true;
+    btn.textContent = 'Verificando...';
+    const hash = await sha256(input.value);
+    if (hash === PASS_HASH) {
+      unlockApp();
+    } else {
+      input.classList.add('error');
+      err.classList.add('show');
+      btn.disabled = false;
+      btn.textContent = 'Ingresar →';
+      input.value = '';
+      setTimeout(() => { input.classList.remove('error'); err.classList.remove('show'); }, 3000);
+    }
+  }
 
-        <div class="card">
-          <div class="card-header">
-            <h2 class="card-title">Evolución KPIs 2026</h2>
-          </div>
-          <div class="kpi-chart-container">
-            <canvas id="kpiChart" width="400" height="250"></canvas>
-          </div>
-        </div>
-      </div>
-    </section>
+  // Toggle password visibility
+  document.getElementById('togglePass').addEventListener('click', () => {
+    const inp = document.getElementById('passInput');
+    inp.type = inp.type === 'password' ? 'text' : 'password';
+  });
 
-    <!-- CONTRATOS -->
-    <section class="section" id="section-contratos">
-      <div class="section-header">
-        <div>
-          <h1 class="section-title">Contratos de Mantenimiento</h1>
-          <p class="section-subtitle">Proveedores especializados · Servicios externos</p>
-        </div>
-      </div>
+  // Login button click
+  document.getElementById('loginBtn').addEventListener('click', attemptLogin);
 
-      <div class="contracts-grid">
-        <div class="contract-card">
-          <div class="cc-header cc-vfd">
-            <div class="cc-icon">⚙️</div>
-            <div class="cc-title">Variadores de Frecuencia</div>
-          </div>
-          <div class="cc-body">
-            <div class="cc-scope">Alcance: Revisión, parametrización, actualización firmware y soporte de variadores críticos (Molienda, Clinker)</div>
-            <div class="cc-items">
-              <div class="cc-item">Diagnóstico remoto continuo</div>
-              <div class="cc-item">Mantenimiento preventivo semestral</div>
-              <div class="cc-item">Soporte correctivo 24/7</div>
-              <div class="cc-item">Repuestos garantizados (IGBT, tarjetas)</div>
-            </div>
-            <div class="cc-freq">Frecuencia: Semestral · Contrato anual</div>
-          </div>
-        </div>
+  // Enter key
+  document.getElementById('passInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') attemptLogin();
+  });
 
-        <div class="contract-card">
-          <div class="cc-header cc-motors">
-            <div class="cc-icon">🔌</div>
-            <div class="cc-title">Motores Eléctricos MT/BT</div>
-          </div>
-          <div class="cc-body">
-            <div class="cc-scope">Alcance: Rebobinado, balanceo, pruebas de aislamiento y certificación motores críticos</div>
-            <div class="cc-items">
-              <div class="cc-item">Rebobinado motores 4.16 kV</div>
-              <div class="cc-item">Balanceo dinámico rotores</div>
-              <div class="cc-item">Prueba Hipot post-rebobinado</div>
-              <div class="cc-item">Certificación NEMA / IEC</div>
-            </div>
-            <div class="cc-freq">Frecuencia: Según necesidad · Paro mayor</div>
-          </div>
-        </div>
+  // Auto-focus input
+  document.getElementById('passInput').focus();
 
-        <div class="contract-card">
-          <div class="cc-header cc-thermo">
-            <div class="cc-icon">🌡️</div>
-            <div class="cc-title">Termografía Infrarroja</div>
-          </div>
-          <div class="cc-body">
-            <div class="cc-scope">Alcance: Inspección termográfica completa subestación, CCMs y equipos de potencia</div>
-            <div class="cc-items">
-              <div class="cc-item">Informe técnico con imágenes IR</div>
-              <div class="cc-item">Clasificación NETA de anomalías</div>
-              <div class="cc-item">Recomendaciones priorizadas</div>
-              <div class="cc-item">Seguimiento correcciones</div>
-            </div>
-            <div class="cc-freq">Frecuencia: Semestral · Paros mayores</div>
-          </div>
-        </div>
+  // Check if already authenticated this session
+  if (sessionStorage.getItem(SESSION_KEY) === '1') {
+    unlockApp();
+  }
 
-        <div class="contract-card">
-          <div class="cc-header cc-solar">
-            <div class="cc-icon">☀️</div>
-            <div class="cc-title">Sistema Fotovoltaico SSFV</div>
-          </div>
-          <div class="cc-body">
-            <div class="cc-scope">Alcance: O&M completo parque solar 3.8 MW, monitoreo remoto y optimización</div>
-            <div class="cc-items">
-              <div class="cc-item">Limpieza mensual paneles</div>
-              <div class="cc-item">Monitoreo SCADA 24/7</div>
-              <div class="cc-item">Mantenimiento inversores</div>
-              <div class="cc-item">Informe mensual PR y generación</div>
-            </div>
-            <div class="cc-freq">Frecuencia: Mensual / Continuo</div>
-          </div>
-        </div>
+  // ═══════════════════════════════════════════════════════════════════════
+  // APP LOGIC — only runs after successful login
+  // ═══════════════════════════════════════════════════════════════════════
+  function initApp() {
+    // ── DATA ──────────────────────────────────────────────────────────────
+    const PHASES = {
+      phase1: ['act1-1','act1-2','act1-3','act1-4','act1-5'],
+      phase2: ['act2-1','act2-2','act2-3','act2-4','act2-5','act2-6','act2-7','act2-8'],
+      phase3: ['act3-1','act3-2','act3-3','act3-4','act3-5','act3-6'],
+      phase4: ['act4-1','act4-2','act4-3','act4-4'],
+    };
+    const STORAGE_KEY = 'tequendama_plan_90';
 
-        <div class="contract-card">
-          <div class="cc-header cc-elevator">
-            <div class="cc-icon">🏗️</div>
-            <div class="cc-title">Ascensor / Elevadores</div>
-          </div>
-          <div class="cc-body">
-            <div class="cc-scope">Alcance: Mantenimiento eléctrico y mecánico de ascensores y sistemas de elevación</div>
-            <div class="cc-items">
-              <div class="cc-item">Inspección mensual</div>
-              <div class="cc-item">Prueba de seguridad semestral</div>
-              <div class="cc-item">Certificación legal anual</div>
-            </div>
-            <div class="cc-freq">Frecuencia: Mensual + Semestral</div>
-          </div>
-        </div>
+    // ── LOAD STATE ────────────────────────────────────────────────────────
+    function loadState() {
+      try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; }
+      catch { return {}; }
+    }
+    function saveState(s) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(s));
+      showToast();
+    }
 
-        <div class="contract-card">
-          <div class="cc-header cc-scales">
-            <div class="cc-icon">⚖️</div>
-            <div class="cc-title">Básculas Camioneras</div>
-          </div>
-          <div class="cc-body">
-            <div class="cc-scope">Alcance: Calibración legal metrológica, celdas de carga e integración con sistema de facturación</div>
-            <div class="cc-items">
-              <div class="cc-item">Calibración legal ICONTEC</div>
-              <div class="cc-item">Mantenimiento celdas de carga</div>
-              <div class="cc-item">Integración SAP facturación</div>
-              <div class="cc-item">Certificado de calibración</div>
-            </div>
-            <div class="cc-freq">Frecuencia: Semestral (obligatoria)</div>
-          </div>
-        </div>
-      </div>
-    </section>
+    let state = loadState();
 
-    <!-- ========== SGC – PROCEDIMIENTOS, INSTRUCTIVOS Y FORMATOS ========== -->
-    <section class="section" id="section-sgc">
-      <div class="section-header">
-        <div>
-          <h1 class="section-title">Sistema de Gestión de Calidad</h1>
-          <p class="section-subtitle">Procedimientos · Instructivos · Formatos · Cementos Tequendama</p>
-        </div>
-        <div class="header-actions">
-          <input type="text" class="search-input" placeholder="Buscar documento..." oninput="filterDocs(this.value)" id="docSearch" />
-        </div>
-      </div>
+    Object.keys(PHASES).forEach(phaseId => {
+      PHASES[phaseId].forEach(actId => {
+        if (state[actId]) document.getElementById(actId)?.classList.add('done');
+      });
+    });
+    if (state.__notes__) document.getElementById('notesArea').value = state.__notes__;
 
-      <!-- Tabs SGC -->
-      <div class="asset-tabs" id="sgcTabs">
-        <button class="asset-tab active" onclick="filterDocType('all', this)">Todos</button>
-        <button class="asset-tab" onclick="filterDocType('proc', this)">Procedimientos PR.MT</button>
-        <button class="asset-tab" onclick="filterDocType('inst', this)">Instructivos IN.MT</button>
-        <button class="asset-tab" onclick="filterDocType('form', this)">Formatos FR.MT</button>
-      </div>
+    // ── TOGGLE ACTIVITY ───────────────────────────────────────────────────
+    window.toggleActivity = function(actId) {
+      const el = document.getElementById(actId);
+      if (!el) return;
+      el.classList.toggle('done');
+      state[actId] = el.classList.contains('done');
+      saveState(state);
+      updateAllProgress();
+    };
 
-      <!-- Document Cards Grid -->
-      <div class="sgc-docs-grid" id="sgcDocsGrid"></div>
+    // ── TOGGLE PHASE ──────────────────────────────────────────────────────
+    window.togglePhase = function(phaseId) {
+      document.getElementById(phaseId)?.classList.toggle('open');
+    };
 
-      <!-- Detail Modal -->
-      <div class="sgc-detail" id="sgcDetail" style="display:none">
-        <div class="sgc-detail-header">
-          <button class="sgc-back-btn" onclick="closeDocDetail()">← Volver</button>
-          <div class="sgc-detail-title" id="sgcDetailTitle"></div>
-          <span class="card-badge" id="sgcDetailBadge"></span>
-        </div>
-        <div class="sgc-detail-body" id="sgcDetailBody"></div>
-      </div>
+    document.getElementById('phase1')?.classList.add('open');
 
-      <!-- SGC Stats -->
-      <div class="sgc-stats" id="sgcStats">
-        <div class="sgc-stat">
-          <div class="sgs-value">4</div>
-          <div class="sgs-label">Procedimientos</div>
-          <div class="sgs-icon">📋</div>
-        </div>
-        <div class="sgc-stat">
-          <div class="sgs-value">5</div>
-          <div class="sgs-label">Instructivos</div>
-          <div class="sgs-icon">📖</div>
-        </div>
-        <div class="sgc-stat">
-          <div class="sgs-value">6</div>
-          <div class="sgs-label">Formatos</div>
-          <div class="sgs-icon">📝</div>
-        </div>
-        <div class="sgc-stat">
-          <div class="sgs-value">5</div>
-          <div class="sgs-label">Versiones Act.</div>
-          <div class="sgs-icon">✅</div>
-        </div>
-      </div>
+    // ── PROGRESS ──────────────────────────────────────────────────────────
+    function updateAllProgress() {
+      let globalDone = 0, globalTotal = 0;
+      Object.entries(PHASES).forEach(([phaseId, acts]) => {
+        const done  = acts.filter(id => document.getElementById(id)?.classList.contains('done')).length;
+        const total = acts.length;
+        const pct   = total ? Math.round(done / total * 100) : 0;
+        const pctEl = document.getElementById(`pct-${phaseId}`);
+        const barEl = document.getElementById(`bar-${phaseId}`);
+        if (pctEl) pctEl.textContent = pct + '%';
+        if (barEl) barEl.style.width = pct + '%';
+        const card = document.getElementById(phaseId);
+        if (card) card.classList.toggle('all-done', done === total && total > 0);
+        globalDone  += done;
+        globalTotal += total;
+      });
+      const globalPct = globalTotal ? Math.round(globalDone / globalTotal * 100) : 0;
+      document.getElementById('doneCount').textContent    = globalDone;
+      document.getElementById('pendingCount').textContent = globalTotal - globalDone;
+      document.getElementById('totalCount').textContent   = globalTotal;
+      document.getElementById('globalPct').textContent    = globalPct + '%';
+      document.getElementById('donutPct').textContent     = globalPct + '%';
+      const circumference = 251.2;
+      document.getElementById('donutFill').style.strokeDashoffset =
+        circumference - (globalPct / 100) * circumference;
+    }
+    updateAllProgress();
 
-      <!-- Procedure Flows -->
-      <div class="grid-2col" style="margin-top:1.5rem" id="sgcFlows">
+    // ── TAB NAVIGATION ────────────────────────────────────────────────────
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.section').forEach(s => s.classList.add('hidden'));
+        btn.classList.add('active');
+        const target = btn.dataset.target;
+        document.getElementById('section' + target.charAt(0).toUpperCase() + target.slice(1))?.classList.remove('hidden');
+      });
+    });
 
-        <!-- PR.MT.01 -->
-        <div class="card">
-          <div class="card-header">
-            <h2 class="card-title">PR.MT.01 · Procedimiento de Mantenimiento</h2>
-            <span class="card-badge badge-blue">v5 · 2020</span>
-          </div>
-          <div class="proc-flow">
-            <div class="pf-step pf-blue">
-              <div class="pf-num">1</div>
-              <div class="pf-content">
-                <div class="pf-title">Aviso / Solicitud en SAP</div>
-                <div class="pf-detail">Inspector / Operador crea aviso de avería (IW24) o solicitud en SAP</div>
-              </div>
-            </div>
-            <div class="pf-arrow">↓</div>
-            <div class="pf-step pf-orange">
-              <div class="pf-num">2</div>
-              <div class="pf-content">
-                <div class="pf-title">Generación Orden de Trabajo</div>
-                <div class="pf-detail">Coordinador crea OT en SAP (IW31). Asigna recursos, materiales y fecha</div>
-              </div>
-            </div>
-            <div class="pf-arrow">↓</div>
-            <div class="pf-step pf-yellow">
-              <div class="pf-num">3</div>
-              <div class="pf-content">
-                <div class="pf-title">Bloqueo LOTO del Equipo</div>
-                <div class="pf-detail">Técnico aplica bloqueo LOTO. Verificación permiso de trabajo. IN.TH.03</div>
-              </div>
-            </div>
-            <div class="pf-arrow">↓</div>
-            <div class="pf-step pf-green">
-              <div class="pf-num">4</div>
-              <div class="pf-content">
-                <div class="pf-title">Ejecución del Mantenimiento</div>
-                <div class="pf-detail">Eléctrico I/II / Instrumentista ejecuta según OT. Registro en notificación SAP</div>
-              </div>
-            </div>
-            <div class="pf-arrow">↓</div>
-            <div class="pf-step pf-cyan">
-              <div class="pf-num">5</div>
-              <div class="pf-content">
-                <div class="pf-title">Pruebas y Entrega</div>
-                <div class="pf-detail">Supervisor verifica y entrega equipo a operación. Desbloqueo LOTO</div>
-              </div>
-            </div>
-            <div class="pf-arrow">↓</div>
-            <div class="pf-step pf-purple">
-              <div class="pf-num">6</div>
-              <div class="pf-content">
-                <div class="pf-title">Cierre OT en SAP (IW38)</div>
-                <div class="pf-detail">Coordinador cierra OT con notificación, causas y acciones. Genera historial</div>
-              </div>
-            </div>
-          </div>
-        </div>
+    // ── NOTES AUTO-SAVE ───────────────────────────────────────────────────
+    let noteTimer;
+    document.getElementById('notesArea').addEventListener('input', e => {
+      clearTimeout(noteTimer);
+      noteTimer = setTimeout(() => { state.__notes__ = e.target.value; saveState(state); }, 800);
+    });
 
-        <!-- PR.MT.03 -->
-        <div class="card">
-          <div class="card-header">
-            <h2 class="card-title">PR.MT.03 · Cambios en Sistema de Control</h2>
-            <span class="card-badge badge-orange">v1 · 2021</span>
-          </div>
-          <div class="proc-flow">
-            <div class="pf-step pf-blue">
-              <div class="pf-num">1</div>
-              <div class="pf-content">
-                <div class="pf-title">Solicitud de Cambio</div>
-                <div class="pf-detail">Gerencia Producción / Mantenimiento / Calidad solicita vía mail o aviso SAP</div>
-              </div>
-            </div>
-            <div class="pf-arrow">↓</div>
-            <div class="pf-step pf-orange">
-              <div class="pf-num">2</div>
-              <div class="pf-content">
-                <div class="pf-title">Evaluación y Clasificación</div>
-                <div class="pf-detail">Jefe Automatización evalúa: Cambio Permanente / Temporal / Emergencia. Impacto: Bajo / Medio / Alto</div>
-              </div>
-            </div>
-            <div class="pf-arrow">↓</div>
-            <div class="pf-step pf-red">
-              <div class="pf-num">3</div>
-              <div class="pf-content">
-                <div class="pf-title">Verificación Backup PCS7</div>
-                <div class="pf-detail">Confirmar existencia copia mes anterior en Servidor A/B y disco externo</div>
-              </div>
-            </div>
-            <div class="pf-arrow">↓</div>
-            <div class="pf-step pf-yellow">
-              <div class="pf-num">4</div>
-              <div class="pf-content">
-                <div class="pf-title">Implementación Cambio PCS7/CEMAT</div>
-                <div class="pf-detail">Solo Jefe Automatización modifica lógica CFC. Inserta bloque texto: fecha + solicitante + FR.MT.09</div>
-              </div>
-            </div>
-            <div class="pf-arrow">↓</div>
-            <div class="pf-step pf-green">
-              <div class="pf-num">5</div>
-              <div class="pf-content">
-                <div class="pf-title">Verificación con Producción</div>
-                <div class="pf-detail">Producción / Solicitante verifica el cambio. Aprueba puesta en servicio</div>
-              </div>
-            </div>
-            <div class="pf-arrow">↓</div>
-            <div class="pf-step pf-purple">
-              <div class="pf-num">6</div>
-              <div class="pf-content">
-                <div class="pf-title">Cierre OT + FR.MT.09</div>
-                <div class="pf-detail">Adjuntar FR.MT.09 firmado al cierre SAP. Notificar a Gerencias vía mail</div>
-              </div>
-            </div>
-          </div>
-          <div class="proc-types">
-            <div class="pt-badge pt-perm">Permanente</div>
-            <div class="pt-badge pt-temp">Temporal</div>
-            <div class="pt-badge pt-emer">Emergencia</div>
-          </div>
-        </div>
-      </div>
+    // ── RESET ─────────────────────────────────────────────────────────────
+    document.getElementById('resetBtn').addEventListener('click', () => {
+      if (!confirm('¿Deseas reiniciar todo el progreso del plan? Esta acción no se puede deshacer.')) return;
+      localStorage.removeItem(STORAGE_KEY);
+      state = {};
+      document.querySelectorAll('.activity.done').forEach(el => el.classList.remove('done'));
+      document.querySelectorAll('.phase-card.all-done').forEach(el => el.classList.remove('all-done'));
+      document.getElementById('notesArea').value = '';
+      updateAllProgress();
+    });
 
-      <!-- PR.MT.04 Backups -->
-      <div class="card" style="margin-top:1.5rem">
-        <div class="card-header">
-          <h2 class="card-title">PR.MT.04 · Copias de Seguridad Sistema de Control PCS7 / PLC de Campo</h2>
-          <span class="card-badge badge-green">v1 · 2021</span>
-        </div>
-        <div class="backup-plan">
-          <div class="bp-item bp-monthly">
-            <div class="bp-freq">MENSUAL</div>
-            <div class="bp-content">
-              <div class="bp-title">Copia Programación PCS7 (Sistema Control Central)</div>
-              <div class="bp-detail">Destino: Unidad D Servidor A + Servidor B + Estación Ingeniería + Disco Externo (custodia automatización)</div>
-              <div class="bp-notify">📧 Notificación mail a: Gerencia Mantenimiento · Gerencia Producción · VP Operaciones · Operador Sala</div>
-            </div>
-          </div>
-          <div class="bp-item bp-trimestral">
-            <div class="bp-freq">TRIMESTRAL</div>
-            <div class="bp-content">
-              <div class="bp-title">Copia Bases de Datos Sistema Control</div>
-              <div class="bp-detail">Servidor B (respaldo) en primer lugar. Detener bases de datos previo a copia. Almacenar en disco externo.</div>
-              <div class="bp-notify">🔑 Llave armario cuarto servidores: Automatización + Gerencia Mantenimiento</div>
-            </div>
-          </div>
-          <div class="bp-item bp-annual">
-            <div class="bp-freq">ANUAL</div>
-            <div class="bp-content">
-              <div class="bp-title">Copia PLC de Campo + Estaciones de Trabajo</div>
-              <div class="bp-detail">Todos los controladores locales. Liderado por Automatización. Carpeta identificada por año.</div>
-              <div class="bp-detail" style="margin-top:4px">Software: PCS7 (Siemens STEP7) · CEMAT · CFC · Interlock / Bypass tracking</div>
-            </div>
-          </div>
-        </div>
-      </div>
+    // ── TOAST ─────────────────────────────────────────────────────────────
+    function showToast() {
+      const t = document.getElementById('toast');
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 2200);
+    }
 
-      <!-- Instructives -->
-      <div class="card" style="margin-top:1.5rem">
-        <div class="card-header">
-          <h2 class="card-title">Instructivos Técnicos IN.MT</h2>
-          <span class="card-badge">Eléctrico / Control</span>
-        </div>
-        <div class="instructives-grid">
-
-          <div class="inst-card inst-green">
-            <div class="inst-code">IN.MT.02</div>
-            <div class="inst-title">Verificación Sensores Temperatura – Termocuplas</div>
-            <div class="inst-meta">v5 · Jun 2021 · Instrumentación</div>
-            <div class="inst-body">
-              <div class="inst-scope">Calibrador proceso FLUKE 743B · Termocuplas J/K/T/E/N/B/R/S · RTD Pt100/Pt1000</div>
-              <div class="inst-steps">
-                <div class="is-step"><span class="is-n">1</span>Seleccionar tipo termocupla en calibrador (11 tipos aceptados)</div>
-                <div class="is-step"><span class="is-n">2</span>Verificar bloque isotérmico y compensación automática unión referencia</div>
-                <div class="is-step"><span class="is-n">3</span>Conexión 2, 3 o 4 hilos para RTD (4 hilos = mayor precisión)</div>
-                <div class="is-step"><span class="is-n">4</span>Inyección señal patrón y lectura en sistema control (PCS7/CEMAT)</div>
-                <div class="is-step"><span class="is-n">5</span>Registro en OT SAP y notificación de resultado</div>
-              </div>
-            </div>
-            <div class="inst-tags">
-              <span class="it-tag">Pt100</span><span class="it-tag">Termocupla K</span><span class="it-tag">FLUKE 743B</span><span class="it-tag">RTD</span>
-            </div>
-          </div>
-
-          <div class="inst-card inst-blue">
-            <div class="inst-code">IN.MT.04</div>
-            <div class="inst-title">Verificación Boquillas Empacadora 1</div>
-            <div class="inst-meta">v6 · Jun 2021 · Eléctrico / Instrumentación</div>
-            <div class="inst-body">
-              <div class="inst-scope">Empacadora HAVER · 8 boquillas · Celdas de carga · Motor 440VAC · Rotoexclusa</div>
-              <div class="inst-steps">
-                <div class="is-step"><span class="is-n">1</span>Aplicar LOTO (IN.TH.03). Verificación nivel material tolva</div>
-                <div class="is-step"><span class="is-n">2</span>Limpieza sillones, boquillas y turbinas por boquilla (Boq 1–8)</div>
-                <div class="is-step"><span class="is-n">3</span>Ajuste 4 láminas flexibles + junta flexible entre turbina y boquilla</div>
-                <div class="is-step"><span class="is-n">4</span>Verificación eléctrica: motores 440V, bornas, cableado control 24VDC</div>
-                <div class="is-step"><span class="is-n">5</span>Registro FR.MT.11 · Firma Coordinador Turno + Electricista asignado</div>
-              </div>
-            </div>
-            <div class="inst-tags">
-              <span class="it-tag">FR.MT.11</span><span class="it-tag">440 VAC</span><span class="it-tag">LOTO</span><span class="it-tag">Celda de carga</span>
-            </div>
-          </div>
-
-          <div class="inst-card inst-orange">
-            <div class="inst-code">IN.MT.05</div>
-            <div class="inst-title">Manipulación Damper Aire Terciario</div>
-            <div class="inst-meta">v1 · Ene 2017 · Instrumentación / Automatización</div>
-            <div class="inst-body">
-              <div class="inst-scope">Sistema de aire terciario Horno · Actuador eléctrico Damper · PCS7</div>
-              <div class="inst-steps">
-                <div class="is-step"><span class="is-n">1</span>Coordinar con operación parada del damper desde sala control</div>
-                <div class="is-step"><span class="is-n">2</span>Verificar posición del damper y señal de retroalimentación</div>
-                <div class="is-step"><span class="is-n">3</span>Intervención mecánica / eléctrica según necesidad</div>
-                <div class="is-step"><span class="is-n">4</span>Prueba de apertura/cierre desde CEMAT y confirmación en campo</div>
-              </div>
-            </div>
-            <div class="inst-tags">
-              <span class="it-tag">Horno</span><span class="it-tag">Actuador</span><span class="it-tag">PCS7</span><span class="it-tag">CEMAT</span>
-            </div>
-          </div>
-
-          <div class="inst-card inst-purple">
-            <div class="inst-code">IN.MT.06</div>
-            <div class="inst-title">Verificación Sistema Dosificación de Ceniza</div>
-            <div class="inst-meta">v1 · Ago 2022 · Eléctrico / Instrumentación</div>
-            <div class="inst-body">
-              <div class="inst-scope">Alimentador gravimétrico PESAPACK · Variador · Celdas de carga · 440VAC · FR.MT.14</div>
-              <div class="inst-steps">
-                <div class="is-step"><span class="is-n">1</span>Limpieza estructura, celdas de carga y sinfón</div>
-                <div class="is-step"><span class="is-n">2</span>Verificación junta flexible superior y descarga sinfón</div>
-                <div class="is-step"><span class="is-n">3</span>Revisión eléctrica: motoreductor, variador, guardamotor, contactor</div>
-                <div class="is-step"><span class="is-n">4</span>Verificación cableado 440VAC potencia y 24VDC control</div>
-                <div class="is-step"><span class="is-n">5</span>Registro en FR.MT.14 y cierre OT SAP</div>
-              </div>
-            </div>
-            <div class="inst-tags">
-              <span class="it-tag">FR.MT.14</span><span class="it-tag">PESAPACK</span><span class="it-tag">Variador</span><span class="it-tag">Ceniza</span>
-            </div>
-          </div>
-
-          <div class="inst-card inst-cyan">
-            <div class="inst-code">IN.MT.07</div>
-            <div class="inst-title">Prueba de los 10 Segundos – Empacadora HAVER (Sacos 50 kg)</div>
-            <div class="inst-meta">v1 · Sep 2024 · Eléctrico · Director Mantenimiento: Óscar Corredor</div>
-            <div class="inst-body">
-              <div class="inst-scope">Empacadora HAVER · Báscula certificada · FR.MT.15 · 6 pruebas por verificación</div>
-              <div class="inst-steps">
-                <div class="is-step"><span class="is-n">1</span>Verificar disponibilidad empacadora + báscula certificada + personal apoyo</div>
-                <div class="is-step"><span class="is-n">2</span>Tolva con nivel de material suficiente · Equipos limpios</div>
-                <div class="is-step"><span class="is-n">3</span>Registrar: N° lote, boquilla usada, tipo cemento, tiempo 10 seg, N° saco</div>
-                <div class="is-step"><span class="is-n">4</span>6 pruebas dobles por sesión (Prueba 1 a 6) · Verificar CUMPLE S/N</div>
-                <div class="is-step"><span class="is-n">5</span>Firmas: Coordinador Producción + Operador Empaque + Supervisor Eléctrico</div>
-              </div>
-            </div>
-            <div class="inst-tags">
-              <span class="it-tag">FR.MT.15</span><span class="it-tag">50 kg</span><span class="it-tag">HAVER</span><span class="it-tag">Báscula</span>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- Formatos Registry -->
-      <div class="card" style="margin-top:1.5rem">
-        <div class="card-header">
-          <h2 class="card-title">Registro de Formatos SGC – FR.MT</h2>
-          <span class="card-badge badge-green">Vigentes</span>
-        </div>
-        <div class="formats-table-wrapper">
-          <table class="assets-table">
-            <thead>
-              <tr>
-                <th>Código</th>
-                <th>Nombre del Formato</th>
-                <th>Versión</th>
-                <th>Fecha</th>
-                <th>Responsable Diligenciar</th>
-                <th>Procedimiento Asociado</th>
-                <th>Estado</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="tag-cell">FR.MT.08</td>
-                <td>Verificación Sensores de Temperatura</td>
-                <td style="font-family:JetBrains Mono,monospace;color:#60a5fa">v1</td>
-                <td style="color:#94a3b8">2021</td>
-                <td style="color:#94a3b8">Instrumentista</td>
-                <td><span class="category-chip cat-control">IN.MT.02</span></td>
-                <td><span class="status-chip s-op">✓ Vigente</span></td>
-              </tr>
-              <tr>
-                <td class="tag-cell">FR.MT.09</td>
-                <td>Solicitud de Cambios Sistema de Control / PLC / Sala Central</td>
-                <td style="font-family:JetBrains Mono,monospace;color:#60a5fa">v4</td>
-                <td style="color:#94a3b8">Jun 2019</td>
-                <td style="color:#94a3b8">Jefe Automatización</td>
-                <td><span class="category-chip cat-control">PR.MT.03</span></td>
-                <td><span class="status-chip s-op">✓ Vigente</span></td>
-              </tr>
-              <tr>
-                <td class="tag-cell">FR.MT.10</td>
-                <td>Verificación Cintas Dosificadoras (INTECONT PLUS / TERSUS)</td>
-                <td style="font-family:JetBrains Mono,monospace;color:#60a5fa">v3</td>
-                <td style="color:#94a3b8">Feb 2016</td>
-                <td style="color:#94a3b8">Instrumentista / Electricista</td>
-                <td><span class="category-chip cat-control">PR.MT.02</span></td>
-                <td><span class="status-chip s-op">✓ Vigente</span></td>
-              </tr>
-              <tr>
-                <td class="tag-cell">FR.MT.11</td>
-                <td>Verificación Boquillas Empacadora (8 boquillas · Eléct/Mecánica)</td>
-                <td style="font-family:JetBrains Mono,monospace;color:#60a5fa">v2</td>
-                <td style="color:#94a3b8">Mar 2017</td>
-                <td style="color:#94a3b8">Electricista / Instrumentista</td>
-                <td><span class="category-chip cat-control">IN.MT.04</span></td>
-                <td><span class="status-chip s-op">✓ Vigente</span></td>
-              </tr>
-              <tr>
-                <td class="tag-cell">FR.MT.14</td>
-                <td>Verificación Sistema Dosificación de Ceniza (PESAPACK)</td>
-                <td style="font-family:JetBrains Mono,monospace;color:#60a5fa">v1</td>
-                <td style="color:#94a3b8">Jul 2022</td>
-                <td style="color:#94a3b8">Electricista / Instrumentista</td>
-                <td><span class="category-chip cat-control">IN.MT.06</span></td>
-                <td><span class="status-chip s-op">✓ Vigente</span></td>
-              </tr>
-              <tr>
-                <td class="tag-cell">FR.MT.15</td>
-                <td>Prueba de 10 Segundos – Empacadora HAVER (6 pruebas · 50 kg)</td>
-                <td style="font-family:JetBrains Mono,monospace;color:#60a5fa">v1</td>
-                <td style="color:#94a3b8">Sep 2024</td>
-                <td style="color:#94a3b8">Supervisor Eléctrico + Coord. Producción</td>
-                <td><span class="category-chip cat-control">IN.MT.07</span></td>
-                <td><span class="status-chip s-op">✓ Vigente</span></td>
-              </tr>
-              <tr>
-                <td class="tag-cell">FR.MT.14 (DOC)</td>
-                <td>Formato Reporte de Falla (RCA – Causa Raíz)</td>
-                <td style="font-family:JetBrains Mono,monospace;color:#60a5fa">v1</td>
-                <td style="color:#94a3b8">2024</td>
-                <td style="color:#94a3b8">Inspector Eléctrico / Técnico</td>
-                <td><span class="category-chip cat-control">PR.MT.01</span></td>
-                <td><span class="status-chip s-op">✓ Vigente</span></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- Reporte de Falla card -->
-      <div class="card" style="margin-top:1.5rem">
-        <div class="card-header">
-          <h2 class="card-title">FR.MT.14 · Estructura Reporte de Falla (RCA)</h2>
-          <span class="card-badge badge-red">Análisis Causa Raíz</span>
-        </div>
-        <div class="rca-layout">
-          <div class="rca-section">
-            <div class="rca-step rca-red">
-              <div class="rca-icon">🔴</div>
-              <div class="rca-title">PROBLEMA</div>
-              <div class="rca-items">
-                <div>Nombre de la falla presentada</div>
-                <div>Fecha de elaboración</div>
-                <div>Proceso / Equipo afectado</div>
-                <div>Descripción del problema</div>
-              </div>
-            </div>
-            <div class="rca-step rca-orange">
-              <div class="rca-icon">📋</div>
-              <div class="rca-title">SECUENCIA</div>
-              <div class="rca-items">
-                <div>Eventos cronológicos ordenados</div>
-                <div>Solución acción inmediata</div>
-                <div>Hallazgos (cómo se encontró el equipo)</div>
-              </div>
-            </div>
-            <div class="rca-step rca-yellow">
-              <div class="rca-icon">🔬</div>
-              <div class="rca-title">ANÁLISIS</div>
-              <div class="rca-items">
-                <div>Registro fotográfico</div>
-                <div>Mediciones realizadas (Megger, termografía)</div>
-                <div>Posible causa del problema</div>
-              </div>
-            </div>
-            <div class="rca-step rca-green">
-              <div class="rca-icon">✅</div>
-              <div class="rca-title">PLAN ACCIÓN</div>
-              <div class="rca-items">
-                <div>Conclusiones y recomendaciones</div>
-                <div>Actividades con responsable + fecha</div>
-                <div>Seguimiento semanas (s1–s4) por mes</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Matriz de documentos por área -->
-      <div class="card" style="margin-top:1.5rem">
-        <div class="card-header">
-          <h2 class="card-title">Matriz de Aplicabilidad SGC por Área</h2>
-          <span class="card-badge">Cobertura documentos</span>
-        </div>
-        <div class="applicability-matrix">
-          <div class="am-header">
-            <span>Documento</span>
-            <span>Prehomog.</span>
-            <span>Mol. Crudo</span>
-            <span>Horno</span>
-            <span>Mol. Cemento</span>
-            <span>Empaque</span>
-            <span>Control</span>
-          </div>
-          <div class="am-row">
-            <span class="am-doc">PR.MT.01 · Mant. General</span>
-            <span class="am-yes">✓</span><span class="am-yes">✓</span><span class="am-yes">✓</span><span class="am-yes">✓</span><span class="am-yes">✓</span><span class="am-yes">✓</span>
-          </div>
-          <div class="am-row">
-            <span class="am-doc">PR.MT.02 · Bandas Dosificadoras</span>
-            <span class="am-yes">✓</span><span class="am-yes">✓</span><span class="am-no">—</span><span class="am-yes">✓</span><span class="am-no">—</span><span class="am-no">—</span>
-          </div>
-          <div class="am-row">
-            <span class="am-doc">PR.MT.03 · Cambios S. Control</span>
-            <span class="am-yes">✓</span><span class="am-yes">✓</span><span class="am-yes">✓</span><span class="am-yes">✓</span><span class="am-yes">✓</span><span class="am-yes">✓</span>
-          </div>
-          <div class="am-row">
-            <span class="am-doc">PR.MT.04 · Backups PCS7</span>
-            <span class="am-no">—</span><span class="am-no">—</span><span class="am-no">—</span><span class="am-no">—</span><span class="am-no">—</span><span class="am-yes">✓</span>
-          </div>
-          <div class="am-row">
-            <span class="am-doc">IN.MT.02 · Termocuplas</span>
-            <span class="am-no">—</span><span class="am-yes">✓</span><span class="am-yes">✓</span><span class="am-yes">✓</span><span class="am-no">—</span><span class="am-yes">✓</span>
-          </div>
-          <div class="am-row">
-            <span class="am-doc">IN.MT.04 · Boquillas Empacadora</span>
-            <span class="am-no">—</span><span class="am-no">—</span><span class="am-no">—</span><span class="am-no">—</span><span class="am-yes">✓</span><span class="am-no">—</span>
-          </div>
-          <div class="am-row">
-            <span class="am-doc">IN.MT.05 · Damper Aire Terciario</span>
-            <span class="am-no">—</span><span class="am-no">—</span><span class="am-yes">✓</span><span class="am-no">—</span><span class="am-no">—</span><span class="am-yes">✓</span>
-          </div>
-          <div class="am-row">
-            <span class="am-doc">IN.MT.06 · Dosif. Ceniza</span>
-            <span class="am-no">—</span><span class="am-no">—</span><span class="am-yes">✓</span><span class="am-no">—</span><span class="am-no">—</span><span class="am-yes">✓</span>
-          </div>
-          <div class="am-row">
-            <span class="am-doc">IN.MT.07 · Prueba 10 seg Empacadora</span>
-            <span class="am-no">—</span><span class="am-no">—</span><span class="am-no">—</span><span class="am-no">—</span><span class="am-yes">✓</span><span class="am-no">—</span>
-          </div>
-        </div>
-      </div>
-
-    </section>
-    <!-- SEGURIDAD -->
-    <section class="section" id="section-seguridad">
-      <div class="section-header">
-        <div>
-          <h1 class="section-title">Seguridad Eléctrica</h1>
-          <p class="section-subtitle">RETIE · LOTO · Permisos de trabajo eléctrico</p>
-        </div>
-      </div>
-
-      <div class="grid-2col">
-        <div class="card">
-          <div class="card-header">
-            <h2 class="card-title">🦺 Procedimiento LOTO</h2>
-            <span class="card-badge badge-red">OBLIGATORIO</span>
-          </div>
-          <div class="loto-steps">
-            <div class="loto-step">
-              <div class="ls-number">1</div>
-              <div class="ls-content">
-                <div class="ls-title">Notificación</div>
-                <div class="ls-desc">Informar a operadores y supervisor de la intervención a realizar</div>
-              </div>
-            </div>
-            <div class="loto-step">
-              <div class="ls-number">2</div>
-              <div class="ls-content">
-                <div class="ls-title">Identificación de Fuentes</div>
-                <div class="ls-desc">Identificar TODAS las fuentes de energía (eléctrica, hidráulica, neumática, gravitacional)</div>
-              </div>
-            </div>
-            <div class="loto-step">
-              <div class="ls-number">3</div>
-              <div class="ls-content">
-                <div class="ls-title">Aislamiento y Bloqueo</div>
-                <div class="ls-desc">Abrir interruptores, reconectadores y colocar candado personal LOTO</div>
-              </div>
-            </div>
-            <div class="loto-step">
-              <div class="ls-number">4</div>
-              <div class="ls-content">
-                <div class="ls-title">Energización de Prueba</div>
-                <div class="ls-desc">Verificar ausencia de tensión con multímetro calibrado en todos los conductores</div>
-              </div>
-            </div>
-            <div class="loto-step">
-              <div class="ls-number">5</div>
-              <div class="ls-content">
-                <div class="ls-title">Puesta a Tierra</div>
-                <div class="ls-desc">Instalar tierras temporales de cortocircuito en barras o circuitos intervenidos</div>
-              </div>
-            </div>
-            <div class="loto-step">
-              <div class="ls-number">6</div>
-              <div class="ls-content">
-                <div class="ls-title">Señalización</div>
-                <div class="ls-desc">Colocar tarjetas PELIGRO - NO ENERGIZAR en todos los puntos de aislamiento</div>
-              </div>
-            </div>
-            <div class="loto-step loto-final">
-              <div class="ls-number">7</div>
-              <div class="ls-content">
-                <div class="ls-title">Inicio de Trabajos</div>
-                <div class="ls-desc">Confirmar condición segura y autorizar inicio de trabajos eléctricos</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-header">
-            <h2 class="card-title">📋 Requisitos RETIE Colombia</h2>
-          </div>
-          <div class="retie-items">
-            <div class="retie-item retie-critical">
-              <div class="ri-icon">⚠️</div>
-              <div class="ri-content">
-                <div class="ri-title">Certificación de Conformidad</div>
-                <div class="ri-desc">Todos los equipos eléctricos instalados deben tener certificado RETIE vigente</div>
-              </div>
-            </div>
-            <div class="retie-item">
-              <div class="ri-icon">📝</div>
-              <div class="ri-content">
-                <div class="ri-title">Ingeniero Certificado</div>
-                <div class="ri-desc">Interventoría y diseños firmados por Ing. Eléctrico con matrícula COPNIA vigente</div>
-              </div>
-            </div>
-            <div class="retie-item">
-              <div class="ri-icon">🔍</div>
-              <div class="ri-content">
-                <div class="ri-title">Inspección Periódica</div>
-                <div class="ri-desc">Instalaciones AT: cada 5 años. BT industrial: cada 3 años. Certificado RETIE vigente</div>
-              </div>
-            </div>
-            <div class="retie-item">
-              <div class="ri-icon">🦺</div>
-              <div class="ri-content">
-                <div class="ri-title">EPP Dieléctrico</div>
-                <div class="ri-desc">Guantes clase 2 (17kV), casco dieléctrico, ropa ignífuga Cat 2, botas dieléctricas</div>
-              </div>
-            </div>
-            <div class="retie-item">
-              <div class="ri-icon">📏</div>
-              <div class="ri-content">
-                <div class="ri-title">Distancias de Seguridad</div>
-                <div class="ri-desc">34.5 kV: 1.8 m · 13.2 kV: 1.2 m · 4.16 kV: 0.9 m · 440 V: 0.3 m</div>
-              </div>
-            </div>
-            <div class="retie-item">
-              <div class="ri-icon">🏥</div>
-              <div class="ri-content">
-                <div class="ri-title">Plan de Emergencia Eléctrico</div>
-                <div class="ri-desc">Protocolo de atención arco eléctrico · Extintores CO2 · Botiquín con quemaduras</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <script src="motors_embedded.js"></script>
-  <script src="app.js"></script>
+    // ── START DATE ────────────────────────────────────────────────────────
+    state.__startDate__ = 'miércoles, 17 de junio de 2026';
+    document.getElementById('startDisplay').textContent = state.__startDate__;
+  } // end initApp
+</script>
 </body>
 </html>
