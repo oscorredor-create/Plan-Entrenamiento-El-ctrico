@@ -7,28 +7,28 @@
   <meta name="description" content="Seguimiento del plan de entrenamiento y desarrollo del Coordinador de Planeación Eléctrica — Cementos Tequendama." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg:          #0d0f14;
-      --surface:     #13161e;
-      --surface2:    #1a1e29;
-      --border:      #252a38;
-      --text:        #e8eaf0;
-      --muted:       #6b7280;
-      --accent:      #3b82f6;
-      --accent2:     #60a5fa;
-      --success:     #22c55e;
-      --warning:     #f59e0b;
-      --danger:      #ef4444;
-      --p1:          #6366f1; /* Indigo – Fase 1 */
-      --p2:          #3b82f6; /* Blue  – Fase 2 */
-      --p3:          #0ea5e9; /* Sky   – Fase 3 */
-      --p4:          #22c55e; /* Green – Fase 4 */
-      --gold:        #f59e0b;
+      --bg:          #F4F6F9;
+      --surface:     #FFFFFF;
+      --surface2:    #F8FAFC;
+      --border:      #E2E8F0;
+      --text:        #121824;
+      --muted:       #64748B;
+      --accent:      #E30613;
+      --accent2:     #b8050e;
+      --success:     #16a34a;
+      --warning:     #d97706;
+      --danger:      #dc2626;
+      --p1:          #E30613;
+      --p2:          #b8050e;
+      --p3:          #ff4d4d;
+      --p4:          #ff8080;
+      --gold:        #d97706;
       --radius:      14px;
       --radius-sm:   8px;
-      --shadow:      0 8px 32px rgba(0,0,0,.45);
+      --shadow:      0 8px 32px rgba(0,0,0,.08);
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -38,7 +38,7 @@
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: 'Inter', sans-serif;
+      font-family: 'Montserrat', sans-serif;
       font-size: 15px;
       line-height: 1.65;
       min-height: 100vh;
@@ -49,7 +49,7 @@
       content: '';
       position: fixed; inset: 0;
       background:
-        radial-gradient(ellipse 80% 50% at 10% 20%, rgba(99,102,241,.12) 0%, transparent 60%),
+        radial-gradient(ellipse 80% 50% at 10% 20%, rgba(227,6,19,.12) 0%, transparent 60%),
         radial-gradient(ellipse 60% 50% at 90% 80%, rgba(34,197,94,.07) 0%, transparent 60%);
       pointer-events: none;
       z-index: 0;
@@ -59,7 +59,7 @@
     header {
       position: relative;
       z-index: 10;
-      background: linear-gradient(135deg, #0d0f14 0%, #141824 100%);
+      background: #FFFFFF;
       border-bottom: 1px solid var(--border);
       padding: 0 clamp(1rem, 4vw, 3rem);
     }
@@ -85,9 +85,9 @@
       display: inline-flex;
       align-items: center;
       gap: .5rem;
-      background: rgba(239,68,68,.12);
-      border: 1px solid rgba(239,68,68,.3);
-      color: #f87171;
+      background: rgba(227,6,19,.12);
+      border: 1px solid rgba(227,6,19,.3);
+      color: #E30613;
       font-size: .72rem;
       font-weight: 700;
       letter-spacing: .12em;
@@ -114,7 +114,7 @@
       font-weight: 800;
       line-height: 1.2;
       letter-spacing: -.02em;
-      background: linear-gradient(135deg, #e8eaf0 30%, #93c5fd 100%);
+      background: linear-gradient(135deg, #121824 30%, #E30613 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -151,9 +151,9 @@
 
     .reset-btn {
       margin-left: auto;
-      background: rgba(239,68,68,.1);
-      border: 1px solid rgba(239,68,68,.3);
-      color: #f87171;
+      background: rgba(227,6,19,.1);
+      border: 1px solid rgba(227,6,19,.3);
+      color: #E30613;
       font-size: .78rem;
       font-weight: 600;
       padding: .35rem .9rem;
@@ -162,7 +162,7 @@
       transition: background .2s, transform .15s;
     }
 
-    .reset-btn:hover { background: rgba(239,68,68,.2); transform: scale(1.04); }
+    .reset-btn:hover { background: rgba(227,6,19,.2); transform: scale(1.04); }
 
     /* ── GLOBAL PROGRESS ─────────────────────────────────────────────── */
     .global-progress {
@@ -297,7 +297,7 @@
       transition: border-color .25s;
     }
 
-    .phase-card:hover { border-color: rgba(59,130,246,.35); }
+    .phase-card:hover { border-color: rgba(227,6,19,.35); }
 
     .phase-header {
       display: grid;
@@ -460,6 +460,121 @@
     }
 
     .phase-card.all-done .complete-banner { display: flex; }
+
+    /* ── MODAL GUÍA ──────────────────────────────────────────────────── */
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 10000;
+      background: rgba(18, 24, 36, 0.7);
+      backdrop-filter: blur(4px);
+      display: flex; align-items: center; justify-content: center;
+      padding: 1.5rem;
+      opacity: 1; transition: opacity 0.3s;
+    }
+    .modal-overlay.hidden {
+      opacity: 0; pointer-events: none;
+    }
+    .modal-content {
+      background: #FFFFFF;
+      border-radius: 16px;
+      width: 100%; max-width: 680px;
+      max-height: 85vh;
+      overflow-y: auto;
+      padding: 2.5rem;
+      position: relative;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    }
+    .modal-close {
+      position: absolute; top: 1.5rem; right: 1.5rem;
+      background: none; border: none; font-size: 1.5rem;
+      color: var(--muted); cursor: pointer;
+      transition: color 0.2s;
+    }
+    .modal-close:hover { color: var(--danger); }
+    .modal-content h2 { color: var(--text); font-weight: 800; font-size: 1.5rem; margin-bottom: 0.2rem;}
+    .modal-subtitle { color: var(--muted); font-size: .9rem; margin-bottom: 2rem; }
+    
+    .guide-phase {
+      background: var(--surface2);
+      border-left: 4px solid var(--accent);
+      padding: 1.25rem 1.5rem;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 1.25rem;
+    }
+    .guide-phase h3 {
+      font-size: 1.05rem; font-weight: 700; color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+    .guide-phase p {
+      font-size: .9rem; color: #334155; line-height: 1.5;
+    }
+    .guide-phase strong { color: var(--text); }
+    
+    .guide-btn {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-size: .85rem; font-weight: 600;
+      padding: .45rem 1.1rem;
+      border-radius: 99px;
+      cursor: pointer;
+      transition: all .2s;
+      display: flex; align-items: center; gap: .4rem;
+    }
+    .guide-btn:hover { background: #E2E8F0; transform: scale(1.02); }
+    .header-actions {
+      display: flex; gap: .75rem; align-items: center; margin-left: auto;
+    }
+
+    /* ── EVIDENCE SECTION ────────────────────────────────────────────── */
+    .activity-evidence {
+      margin-top: .75rem;
+      cursor: auto;
+    }
+    .evidence-wrapper {
+      display: flex;
+      gap: 0.5rem;
+    }
+    .evidence-input {
+      flex: 1;
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 6px;
+      padding: .45rem .75rem;
+      font-size: .8rem;
+      font-family: 'Montserrat', sans-serif;
+      color: #121824;
+      transition: all .2s;
+    }
+    .evidence-input:focus {
+      border-color: #E30613;
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(227,6,19,.15);
+    }
+    .upload-btn {
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      border-radius: 6px;
+      padding: 0 .8rem;
+      cursor: pointer;
+      font-size: .8rem;
+      font-weight: 600;
+      color: #64748B;
+      transition: all .2s;
+      white-space: nowrap;
+    }
+    .upload-btn:hover:not(:disabled) {
+      background: #E2E8F0;
+      color: #121824;
+    }
+    .upload-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    .activity.done .evidence-input {
+      background: rgba(34,197,94,.03);
+      border-color: rgba(34,197,94,.2);
+      color: #16a34a;
+    }
 
     /* ── ROUTINE SECTION ─────────────────────────────────────────────── */
     .info-card {
@@ -627,7 +742,7 @@
       padding: 1rem 1.25rem;
       width: 100%;
       color: var(--text);
-      font-family: 'Inter', sans-serif;
+      font-family: 'Montserrat', sans-serif;
       font-size: .85rem;
       resize: vertical;
       min-height: 120px;
@@ -679,15 +794,15 @@
     /* ── LOGIN OVERLAY ───────────────────────────────────────────────── */
     #loginOverlay {
       position: fixed; inset: 0; z-index: 9999;
-      background: radial-gradient(ellipse 100% 100% at 50% 0%, #1a1e2e 0%, #0d0f14 100%);
+      background: radial-gradient(ellipse 100% 100% at 50% 0%, #FFFFFF 0%, #F4F6F9 100%);
       display: flex; align-items: center; justify-content: center;
       padding: 1.5rem;
     }
     #loginOverlay.hidden { display: none; }
 
     .login-box {
-      background: #13161e;
-      border: 1px solid #252a38;
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
       border-radius: 20px;
       padding: 3rem 2.5rem 2.5rem;
       width: 100%; max-width: 420px;
@@ -702,16 +817,16 @@
 
     .login-logo {
       width: 64px; height: 64px; border-radius: 16px;
-      background: linear-gradient(135deg, #6366f1 0%, #3b82f6 100%);
+      background: linear-gradient(135deg, #ff4d4d 0%, #E30613 100%);
       display: flex; align-items: center; justify-content: center;
       font-size: 2rem;
-      box-shadow: 0 8px 32px rgba(99,102,241,.4);
+      box-shadow: 0 8px 32px rgba(227,6,19,.4);
     }
 
     .login-box h2 {
       font-size: 1.25rem; font-weight: 800;
       text-align: center; line-height: 1.3;
-      background: linear-gradient(135deg,#e8eaf0 30%,#93c5fd 100%);
+      background: linear-gradient(135deg, #121824 30%, #E30613 100%);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     }
 
@@ -724,20 +839,20 @@
     }
     .login-field input {
       width: 100%;
-      background: #1a1e29;
-      border: 1.5px solid #252a38;
+      background: #F8FAFC;
+      border: 1.5px solid #E2E8F0;
       border-radius: 10px;
       padding: .9rem 3rem .9rem 1.1rem;
-      color: #e8eaf0;
+      color: #121824;
       font-size: 1rem;
-      font-family: 'Inter', sans-serif;
+      font-family: 'Montserrat', sans-serif;
       outline: none;
       transition: border-color .2s, box-shadow .2s;
       letter-spacing: .05em;
     }
     .login-field input:focus {
-      border-color: #3b82f6;
-      box-shadow: 0 0 0 3px rgba(59,130,246,.2);
+      border-color: #E30613;
+      box-shadow: 0 0 0 3px rgba(227,6,19,.2);
     }
     .login-field input.error {
       border-color: #ef4444;
@@ -759,16 +874,16 @@
       line-height: 1; padding: 0;
       transition: color .2s;
     }
-    .toggle-pass:hover { color: #93c5fd; }
+    .toggle-pass:hover { color: #ff4d4d; }
 
     .login-btn {
       width: 100%;
-      background: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
+      background: linear-gradient(135deg, #E30613 0%, #b8050e 100%);
       border: none; border-radius: 10px;
       color: #fff; font-size: 1rem; font-weight: 700;
       padding: .9rem; cursor: pointer;
       transition: opacity .2s, transform .15s;
-      box-shadow: 0 4px 20px rgba(59,130,246,.4);
+      box-shadow: 0 4px 20px rgba(227,6,19,.4);
     }
     .login-btn:hover { opacity: .9; transform: translateY(-1px); }
     .login-btn:active { transform: translateY(0); }
@@ -795,6 +910,7 @@
   <!-- ── FIREBASE SDK ──────────────────────────────────────────────────── -->
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-storage-compat.js"></script>
 </head>
 <body>
 
@@ -821,6 +937,37 @@
   </div>
 </div>
 
+<!-- ── MODAL GUÍA ────────────────────────────────────────────────────── -->
+<div class="modal-overlay hidden" id="guideModalOverlay">
+  <div class="modal-content">
+    <button class="modal-close" onclick="document.getElementById('guideModalOverlay').classList.add('hidden')">✖</button>
+    <h2>📘 Guía de Expectativas</h2>
+    <p class="modal-subtitle">Rol: Coordinador de Planeación Eléctrica</p>
+    
+    <div class="guide-sections">
+      <div class="guide-phase">
+        <h3>Fase 1: Descompresión y Entrega (Días 1 - 15)</h3>
+        <p><strong>¿Qué se espera?</strong> Asegurar una transición limpia. Entregar tu rol operativo (Supervisor Eléctrico) documentando pendientes y formalizando el acta. Alinearte con el Director de Mantenimiento sobre tus nuevos objetivos estratégicos y conocer las normativas corporativas.<br/><strong>Evidencia sugerida:</strong> Actas firmadas y constancia de revisión documental.</p>
+      </div>
+      
+      <div class="guide-phase">
+        <h3>Fase 2: Inmersión y Diagnóstico (Días 16 - 45)</h3>
+        <p><strong>¿Qué se espera?</strong> Desarrollar una mentalidad analítica. Evaluar el estado actual de los KPIs eléctricos, mapear los procesos críticos con Abastecimiento y analizar el backlog de mantenimiento preventivo. Se busca que desarrolles criterio para proponer mejoras rápidas e inmediatas (Quick Wins).<br/><strong>Evidencia sugerida:</strong> Análisis de indicadores y listado de oportunidades (Quick Wins) identificadas.</p>
+      </div>
+
+      <div class="guide-phase">
+        <h3>Fase 3: Planeación Estratégica y Ejecución (Días 46 - 75)</h3>
+        <p><strong>¿Qué se espera?</strong> Pasar a la acción estructurada. Proponer optimizaciones reales (rutas y presupuesto) e implementar exitosamente al menos uno de los Quick Wins del diagnóstico. Participar de forma proactiva en grandes mantenimientos (como paradas de planta).<br/><strong>Evidencia sugerida:</strong> Propuesta de presupuesto/rutas y resultados tangibles del Quick Win implementado.</p>
+      </div>
+
+      <div class="guide-phase">
+        <h3>Fase 4: Consolidación y Entrega de Resultados (Días 76 - 90)</h3>
+        <p><strong>¿Qué se espera?</strong> Demostrar autonomía técnica y liderazgo. Sustentar formalmente los resultados obtenidos en tus primeros 90 días y dejar radicado el plan de trabajo a mediano plazo (6 meses). Cerrar con una evaluación final aprobatoria por parte de la Dirección.<br/><strong>Evidencia sugerida:</strong> Presentación de resultados y Plan de Trabajo estructurado a 6 meses.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- HEADER -->
 <header>
   <div class="header-inner">
@@ -830,7 +977,10 @@
         <h1 style="margin-top:.65rem;">Plan de Entrenamiento y Desarrollo<br/>a 90 Días</h1>
         <p class="subtitle">Coordinador de Planeación Eléctrica · Vicepresidencia de Operaciones</p>
       </div>
-      <button class="reset-btn" id="resetBtn" title="Reiniciar todo el progreso">↺ Reiniciar</button>
+      <div class="header-actions">
+        <button class="guide-btn" onclick="document.getElementById('guideModalOverlay').classList.remove('hidden')">📘 Ver Guía</button>
+        <button class="reset-btn" id="resetBtn" title="Reiniciar todo el progreso">↺ Reiniciar</button>
+      </div>
     </div>
 
     <div class="header-meta">
@@ -1554,6 +1704,108 @@
     };
     const LOCAL_KEY = 'tequendama_plan_90';
 
+    // ── INJECT EVIDENCE INPUTS ────────────────────────────────────────────
+    document.querySelectorAll('.activity').forEach(act => {
+      const actId = act.id;
+      const content = act.querySelector('.activity-content');
+      
+      const evidenceDiv = document.createElement('div');
+      evidenceDiv.className = 'activity-evidence';
+      evidenceDiv.onclick = e => e.stopPropagation(); 
+      
+      const wrapper = document.createElement('div');
+      wrapper.className = 'evidence-wrapper';
+      
+      const evidenceInput = document.createElement('input');
+      evidenceInput.type = 'text';
+      evidenceInput.className = 'evidence-input';
+      evidenceInput.placeholder = '🔗 Pega un enlace o sube un archivo...';
+      evidenceInput.id = `evidence-${actId}`;
+      
+      const fileInput = document.createElement('input');
+      fileInput.type = 'file';
+      fileInput.style.display = 'none';
+      
+      const uploadBtn = document.createElement('button');
+      uploadBtn.className = 'upload-btn';
+      uploadBtn.innerHTML = '📁 Subir';
+      uploadBtn.title = 'Subir evidencia';
+      
+      uploadBtn.onclick = () => fileInput.click();
+      
+      fileInput.onchange = async (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        
+        uploadBtn.innerHTML = '⏳...';
+        uploadBtn.disabled = true;
+        
+        // Si estamos ejecutando desde archivo local (file://) o Firebase no está configurado:
+        if (!USE_FIREBASE || window.location.protocol === 'file:') {
+          if (file.size > 1.5 * 1024 * 1024) {
+            alert("Estás en modo local (file://). Para subir archivos pesados necesitas Firebase Storage configurado.");
+            uploadBtn.innerHTML = '📁 Subir';
+            uploadBtn.disabled = false;
+            fileInput.value = '';
+            return;
+          }
+          
+          // Simulamos una subida local de 1 segundo para no mostrar el código base64 gigante
+          setTimeout(() => {
+            evidenceInput.value = `[Modo Prueba] Archivo: ${file.name}`; 
+            evidenceInput.dispatchEvent(new Event('change'));
+            uploadBtn.innerHTML = '📁 Subir';
+            uploadBtn.disabled = false;
+            fileInput.value = '';
+            alert("Simulación exitosa: Como estás en versión local sin servidor, simulamos la subida. Cuando conectes a Firebase, aquí aparecerá un enlace web real y corto.");
+          }, 1000);
+          return;
+        }
+        
+        // Subida normal a Firebase Storage (cuando estemos en un servidor http/https)
+        try {
+          const storageRef = firebase.storage().ref(`evidencias/${actId}/${Date.now()}_${file.name}`);
+          
+          // Agregamos un timeout manual para que no se quede pensando infinito si falla la red
+          const uploadTask = storageRef.put(file);
+          const timeoutPromise = new Promise((_, reject) => setTimeout(() => reject(new Error('Timeout')), 15000));
+          
+          const snapshot = await Promise.race([uploadTask, timeoutPromise]);
+          const downloadURL = await snapshot.ref.getDownloadURL();
+          
+          evidenceInput.value = downloadURL;
+          evidenceInput.dispatchEvent(new Event('change'));
+        } catch (error) {
+          console.error("Error subiendo archivo:", error);
+          if (error.message === 'Timeout') {
+            alert("La subida tardó demasiado. Verifica tu conexión a internet o la configuración de Firebase.");
+          } else {
+            alert("Hubo un error al subir el archivo. Verifica los permisos (CORS/Reglas) de Firebase Storage.");
+          }
+        } finally {
+          uploadBtn.innerHTML = '📁 Subir';
+          uploadBtn.disabled = false;
+          fileInput.value = '';
+        }
+      };
+      
+      evidenceInput.addEventListener('change', e => {
+        const val = e.target.value;
+        if (USE_FIREBASE) {
+          planRef.child(`${actId}_evidence`).set(val);
+        } else {
+          localSave(`${actId}_evidence`, val);
+        }
+        showToast();
+      });
+      
+      wrapper.appendChild(evidenceInput);
+      wrapper.appendChild(uploadBtn);
+      wrapper.appendChild(fileInput);
+      evidenceDiv.appendChild(wrapper);
+      content.appendChild(evidenceDiv);
+    });
+
     // ── STATE HELPERS ─────────────────────────────────────────────────────
     function applyStateToUI(state) {
       Object.keys(PHASES).forEach(phaseId => {
@@ -1561,6 +1813,11 @@
           const el = document.getElementById(actId);
           if (!el) return;
           el.classList.toggle('done', !!state[actId]);
+          
+          const evInput = document.getElementById(`evidence-${actId}`);
+          if (evInput) {
+            evInput.value = state[`${actId}_evidence`] || '';
+          }
         });
       });
       const notes = document.getElementById('notesArea');
