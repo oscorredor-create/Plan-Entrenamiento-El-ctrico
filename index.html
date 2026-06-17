@@ -550,6 +550,31 @@
       outline: none;
       box-shadow: 0 0 0 2px rgba(227,6,19,.15);
     }
+    .phase-card.done .evidence-input {
+      background: #F0FDF4;
+      color: #166534;
+      border-color: #BBF7D0;
+    }
+    .evidence-display {
+      display: flex; align-items: center; gap: 0.5rem;
+      flex: 1;
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      border-radius: 6px;
+      padding: 0.45rem 0.8rem;
+    }
+    .phase-card.done .evidence-display {
+      background: #F0FDF4; border-color: #BBF7D0;
+    }
+    .evidence-link {
+      font-size: 0.85rem; color: var(--accent); font-weight: 600;
+      text-decoration: none; flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .evidence-link:hover { text-decoration: underline; }
+    .evidence-clear {
+      background: none; border: none; color: var(--muted); font-size: 0.9rem; cursor: pointer; padding: 0 0.2rem;
+    }
+    .evidence-clear:hover { color: var(--danger); }
     .upload-btn {
       background: #F8FAFC;
       border: 1px solid #E2E8F0;
@@ -1722,6 +1747,19 @@
       evidenceInput.placeholder = '🔗 Pega un enlace o sube un archivo...';
       evidenceInput.id = `evidence-${actId}`;
       
+      const displayDiv = document.createElement('div');
+      displayDiv.className = 'evidence-display hidden';
+      displayDiv.innerHTML = `
+        <a href="#" target="_blank" class="evidence-link" id="link-${actId}">📄 Ver Archivo Adjunto</a>
+        <button type="button" class="evidence-clear" id="clear-${actId}" title="Eliminar archivo">✖</button>
+      `;
+      
+      displayDiv.querySelector('.evidence-clear').onclick = (e) => {
+        e.stopPropagation();
+        evidenceInput.value = '';
+        evidenceInput.dispatchEvent(new Event('change'));
+      };
+      
       const fileInput = document.createElement('input');
       fileInput.type = 'file';
       fileInput.style.display = 'none';
@@ -1799,6 +1837,7 @@
         showToast();
       });
       
+      wrapper.appendChild(displayDiv);
       wrapper.appendChild(evidenceInput);
       wrapper.appendChild(uploadBtn);
       wrapper.appendChild(fileInput);
@@ -1816,7 +1855,25 @@
           
           const evInput = document.getElementById(`evidence-${actId}`);
           if (evInput) {
-            evInput.value = state[`${actId}_evidence`] || '';
+            const val = state[`${actId}_evidence`] || '';
+            const displayDiv = evInput.parentElement.querySelector('.evidence-display');
+            const linkA = document.getElementById(`link-${actId}`);
+            const uploadBtn = evInput.parentElement.querySelector('.upload-btn');
+            
+            if (val.startsWith('http') || val.startsWith('https')) {
+              evInput.classList.add('hidden');
+              if(uploadBtn) uploadBtn.classList.add('hidden');
+              if(displayDiv) {
+                 displayDiv.classList.remove('hidden');
+                 linkA.href = val;
+                 linkA.innerHTML = val.includes('firebasestorage') ? '📄 Ver Archivo Adjunto' : '🔗 Ver Enlace Adjunto';
+              }
+            } else {
+              evInput.classList.remove('hidden');
+              if(uploadBtn) uploadBtn.classList.remove('hidden');
+              if(displayDiv) displayDiv.classList.add('hidden');
+              evInput.value = val;
+            }
           }
         });
       });
