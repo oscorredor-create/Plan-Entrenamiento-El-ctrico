@@ -169,72 +169,102 @@
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 1.5rem 2rem;
+      padding: 1.25rem 1.75rem;
       display: grid;
       grid-template-columns: 1fr auto;
+      grid-template-rows: auto auto;
       align-items: center;
-      gap: 1.5rem;
+      gap: 1rem 1.5rem;
       position: relative;
       z-index: 10;
       max-width: 1200px;
       margin: 1.5rem auto 0;
     }
 
-    .global-stats {
-      display: flex;
-      gap: 2rem;
-      flex-wrap: wrap;
-    }
-
-    .stat {
+    /* ── Phase mini bars ── */
+    .phase-mini-col {
       display: flex;
       flex-direction: column;
-      gap: .15rem;
+      gap: .55rem;
     }
-
-    .stat-label {
+    .phase-mini-col h4 {
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 0 0 .15rem;
+    }
+    .phase-mini-row {
+      display: flex;
+      align-items: center;
+      gap: .55rem;
+    }
+    .phase-mini-label {
       font-size: .72rem;
       font-weight: 600;
-      letter-spacing: .08em;
+      white-space: nowrap;
+      min-width: 56px;
+      color: var(--text);
+    }
+    .phase-mini-bar {
+      flex: 1;
+      height: 7px;
+      background: var(--border);
+      border-radius: 99px;
+      overflow: hidden;
+      min-width: 80px;
+    }
+    .phase-mini-fill {
+      height: 100%;
+      border-radius: 99px;
+      width: 0%;
+      transition: width .7s cubic-bezier(.4,0,.2,1);
+    }
+    .phase-mini-pct {
+      font-size: .7rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      min-width: 30px;
+      text-align: right;
+    }
+
+    /* ── Donut totalizer ── */
+    .donut-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .4rem;
+      padding: 0 .75rem;
+      border-left: 1px solid var(--border);
+    }
+    .donut-col-title {
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .1em;
       text-transform: uppercase;
       color: var(--muted);
     }
-
-    .stat-value {
-      font-size: 2rem;
-      font-weight: 800;
-      line-height: 1;
-      font-family: 'JetBrains Mono', monospace;
-    }
-
-    .stat-value.accent  { color: var(--accent2); }
-    .stat-value.success { color: var(--success); }
-    .stat-value.gold    { color: var(--gold); }
-
     .donut-wrap {
       position: relative;
-      width: 100px; height: 100px;
+      width: 90px; height: 90px;
       flex-shrink: 0;
     }
-
     .donut-wrap svg { transform: rotate(-90deg); }
-
     .donut-bg   { stroke: var(--border); stroke-width: 8; fill: none; }
     .donut-fill { stroke: url(#donutGrad); stroke-width: 8; fill: none;
                   stroke-linecap: round;
                   stroke-dasharray: 251.2;
                   stroke-dashoffset: 251.2;
                   transition: stroke-dashoffset .8s cubic-bezier(.4,0,.2,1); }
-
     .donut-label {
       position: absolute; inset: 0;
       display: flex; flex-direction: column;
       align-items: center; justify-content: center;
       pointer-events: none;
     }
-
     .donut-pct {
-      font-size: 1.5rem;
+      font-size: 1.3rem;
       font-weight: 800;
       font-family: 'JetBrains Mono', monospace;
       line-height: 1;
@@ -243,8 +273,61 @@
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
+    .donut-sub { font-size: .58rem; color: var(--muted); font-weight: 600; letter-spacing: .05em; }
+    .donut-counts {
+      display: flex;
+      gap: .9rem;
+      font-size: .72rem;
+    }
+    .donut-counts span { display: flex; flex-direction: column; align-items: center; gap: .05rem; }
+    .donut-counts strong { font-family: 'JetBrains Mono', monospace; font-size: .95rem; }
+    .donut-counts em { font-style: normal; font-size: .62rem; color: var(--muted); letter-spacing: .05em; text-transform: uppercase; }
 
-    .donut-sub { font-size: .6rem; color: var(--muted); font-weight: 600; letter-spacing: .05em; }
+    /* ── Org chart ── */
+    .orgchart-col {
+      grid-column: 1 / -1;
+      grid-row: 2;
+      border-top: 1px solid var(--border);
+      padding-top: .85rem;
+      overflow-x: auto;
+    }
+    .orgchart-col-title {
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: .5rem;
+      display: block;
+    }
+
+    /* ── legacy stat ── */
+    .global-stats {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .stat {
+      display: flex;
+      flex-direction: column;
+      gap: .15rem;
+    }
+    .stat-label {
+      font-size: .72rem;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .stat-value {
+      font-size: 2rem;
+      font-weight: 800;
+      line-height: 1;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .stat-value.accent  { color: var(--accent2); }
+    .stat-value.success { color: var(--success); }
+    .stat-value.gold    { color: var(--gold); }
 
     /* ── LAYOUT ──────────────────────────────────────────────────────── */
     main {
@@ -424,6 +507,23 @@
       line-height: 1.5;
     }
 
+    .act-date {
+      display: inline-flex;
+      align-items: center;
+      gap: .3rem;
+      background: rgba(99,102,241,.1);
+      border: 1px solid rgba(99,102,241,.25);
+      color: #818cf8;
+      font-size: .7rem;
+      font-weight: 700;
+      padding: .15rem .55rem;
+      border-radius: 99px;
+      margin-right: .4rem;
+      white-space: nowrap;
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: .02em;
+    }
+
     .activity-tag {
       display: inline-flex;
       align-items: center;
@@ -444,6 +544,124 @@
     .tag-shadow { background: rgba(14,165,233,.15);  color: #7dd3fc; border: 1px solid rgba(14,165,233,.3); }
     .tag-eval   { background: rgba(34,197,94,.15);   color: #86efac; border: 1px solid rgba(34,197,94,.3); }
     .tag-acta   { background: rgba(239,68,68,.15);   color: #fca5a5; border: 1px solid rgba(239,68,68,.3); }
+
+    /* ── RESPONSIBLE BAR ─────────────────────────────────────────────── */
+    .activity-responsible {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      margin-top: .55rem;
+      flex-wrap: wrap;
+    }
+
+    .resp-label {
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      color: var(--muted);
+      flex-shrink: 0;
+    }
+
+    .resp-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .3rem;
+      font-size: .73rem;
+      font-weight: 600;
+      padding: .2rem .65rem;
+      border-radius: 99px;
+      letter-spacing: .02em;
+    }
+
+    /* Autogestionable — verde */
+    .resp-self {
+      background: rgba(34,197,94,.12);
+      color: #16a34a;
+      border: 1px solid rgba(34,197,94,.3);
+    }
+
+    /* Mentor / Director */
+    .resp-mentor {
+      background: rgba(99,102,241,.14);
+      color: #818cf8;
+      border: 1px solid rgba(99,102,241,.3);
+    }
+
+    /* RRHH / Talento Humano */
+    .resp-rrhh {
+      background: rgba(236,72,153,.13);
+      color: #f472b6;
+      border: 1px solid rgba(236,72,153,.28);
+    }
+
+    /* SST / HSQ */
+    .resp-sst {
+      background: rgba(239,68,68,.12);
+      color: #f87171;
+      border: 1px solid rgba(239,68,68,.28);
+    }
+
+    /* SAP / Sistemas */
+    .resp-sap {
+      background: rgba(245,158,11,.13);
+      color: #f59e0b;
+      border: 1px solid rgba(245,158,11,.28);
+    }
+
+    /* Área interactuante (Producción, Compras, etc.) */
+    .resp-area {
+      background: rgba(14,165,233,.12);
+      color: #38bdf8;
+      border: 1px solid rgba(14,165,233,.28);
+    }
+
+    /* ── SHADOWING OUTPUT BLOCK ───────────────────────────────── */
+    .shadowing-output {
+      margin-top: .7rem;
+      background: linear-gradient(135deg, rgba(14,165,233,.06) 0%, rgba(99,102,241,.06) 100%);
+      border: 1px solid rgba(14,165,233,.22);
+      border-radius: var(--radius-sm);
+      padding: .65rem .9rem;
+      cursor: auto;
+    }
+
+    .shadowing-output-title {
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: #38bdf8;
+      margin-bottom: .45rem;
+      display: flex;
+      align-items: center;
+      gap: .35rem;
+    }
+
+    .shadowing-output-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: .3rem;
+    }
+
+    .shadowing-output-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: .5rem;
+      font-size: .8rem;
+      color: var(--text);
+      line-height: 1.45;
+    }
+
+    .shadowing-output-list li .out-icon {
+      flex-shrink: 0;
+      font-size: .85rem;
+      margin-top: .05rem;
+    }
+
+    .shadowing-output-list li strong { color: var(--text); }
+    .shadowing-output-list li em { color: var(--muted); font-size: .76rem; }
 
     .complete-banner {
       display: none;
@@ -1000,7 +1218,7 @@
       <div>
         <div class="badge-company">🏭 Cementos Tequendama S.A.S.</div>
         <h1 style="margin-top:.65rem;">Plan de Entrenamiento y Desarrollo<br/>a 90 Días</h1>
-        <p class="subtitle">Coordinador de Planeación Eléctrica · Vicepresidencia de Operaciones</p>
+        <p class="subtitle">Coordinador de Planeación Eléctrica · Dirección de Mantenimiento</p>
       </div>
       <div class="header-actions">
         <button class="guide-btn" onclick="document.getElementById('guideModalOverlay').classList.remove('hidden')">📘 Ver Guía</button>
@@ -1016,43 +1234,202 @@
       <div class="meta-chip">🔄 <span id="syncBadge" style="color:#f59e0b;">Conectando...</span></div>
     </div>
 
-    <!-- Global progress inside header -->
+    <!-- Global progress dashboard -->
     <div class="global-progress">
-      <div class="global-stats">
-        <div class="stat">
-          <span class="stat-label">Completado</span>
-          <span class="stat-value success" id="doneCount">0</span>
+
+      <!-- Col 1: Phase progress bars -->
+      <div class="phase-mini-col">
+        <h4>⚡ Avance por Fase</h4>
+        <div class="phase-mini-row">
+          <span class="phase-mini-label" style="color:#818cf8">Fase 1</span>
+          <div class="phase-mini-bar"><div class="phase-mini-fill" id="mini-bar-phase1" style="background:linear-gradient(90deg,#6366f1,#818cf8)"></div></div>
+          <span class="phase-mini-pct" id="mini-pct-phase1" style="color:#818cf8">0%</span>
         </div>
-        <div class="stat">
-          <span class="stat-label">Pendiente</span>
-          <span class="stat-value accent" id="pendingCount">0</span>
+        <div class="phase-mini-row">
+          <span class="phase-mini-label" style="color:#f59e0b">Fase 2</span>
+          <div class="phase-mini-bar"><div class="phase-mini-fill" id="mini-bar-phase2" style="background:linear-gradient(90deg,#f59e0b,#fbbf24)"></div></div>
+          <span class="phase-mini-pct" id="mini-pct-phase2" style="color:#f59e0b">0%</span>
         </div>
-        <div class="stat">
-          <span class="stat-label">Total</span>
-          <span class="stat-value" id="totalCount">0</span>
+        <div class="phase-mini-row">
+          <span class="phase-mini-label" style="color:#0ea5e9">Fase 3</span>
+          <div class="phase-mini-bar"><div class="phase-mini-fill" id="mini-bar-phase3" style="background:linear-gradient(90deg,#0ea5e9,#38bdf8)"></div></div>
+          <span class="phase-mini-pct" id="mini-pct-phase3" style="color:#0ea5e9">0%</span>
         </div>
-        <div class="stat">
-          <span class="stat-label">Avance</span>
-          <span class="stat-value gold" id="globalPct">0%</span>
+        <div class="phase-mini-row">
+          <span class="phase-mini-label" style="color:#22c55e">Fase 4</span>
+          <div class="phase-mini-bar"><div class="phase-mini-fill" id="mini-bar-phase4" style="background:linear-gradient(90deg,#22c55e,#4ade80)"></div></div>
+          <span class="phase-mini-pct" id="mini-pct-phase4" style="color:#22c55e">0%</span>
         </div>
       </div>
 
-      <div class="donut-wrap">
-        <svg width="100" height="100" viewBox="0 0 100 100">
-          <defs>
-            <linearGradient id="donutGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#3b82f6"/>
-              <stop offset="100%" stop-color="#22c55e"/>
-            </linearGradient>
-          </defs>
-          <circle class="donut-bg" cx="50" cy="50" r="40" />
-          <circle class="donut-fill" id="donutFill" cx="50" cy="50" r="40" />
-        </svg>
-        <div class="donut-label">
-          <span class="donut-pct" id="donutPct">0%</span>
-          <span class="donut-sub">AVANCE</span>
+      <!-- Col 2: Donut totalizer -->
+      <div class="donut-col">
+        <span class="donut-col-title">📋 Cumplimiento</span>
+        <div class="donut-wrap">
+          <svg width="90" height="90" viewBox="0 0 100 100">
+            <defs>
+              <linearGradient id="donutGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#3b82f6"/>
+                <stop offset="100%" stop-color="#22c55e"/>
+              </linearGradient>
+            </defs>
+            <circle class="donut-bg" cx="50" cy="50" r="40" />
+            <circle class="donut-fill" id="donutFill" cx="50" cy="50" r="40" />
+          </svg>
+          <div class="donut-label">
+            <span class="donut-pct" id="donutPct">0%</span>
+            <span class="donut-sub">TOTAL</span>
+          </div>
+        </div>
+        <div class="donut-counts">
+          <span><strong class="success" id="doneCount">0</strong><em>Hechas</em></span>
+          <span><strong class="accent" id="pendingCount">0</strong><em>Pend.</em></span>
+          <span><strong id="totalCount">0</strong><em>Total</em></span>
         </div>
       </div>
+
+      <!-- Org chart: full-width SVG -->
+      <div class="orgchart-col">
+        <span class="orgchart-col-title">🏢 Organigrama — Dirección de Mantenimiento</span>
+        <svg viewBox="0 0 660 205" xmlns="http://www.w3.org/2000/svg"
+             style="width:100%;min-width:580px;max-height:205px;display:block;">
+          <style>
+            .ot  { font-family:Inter,'Segoe UI',sans-serif; font-size:6.5px; text-anchor:middle; dominant-baseline:middle; fill:#475569; }
+            .otb { font-family:Inter,'Segoe UI',sans-serif; font-size:6.5px; text-anchor:middle; dominant-baseline:middle; fill:#818cf8; font-weight:700; }
+            .otr { font-family:Inter,'Segoe UI',sans-serif; font-size:6px;  text-anchor:middle; dominant-baseline:middle; fill:#E30613; font-weight:700; }
+            .cn  { fill:none; stroke:#cbd5e1; stroke-width:0.8; }
+            .br  { fill:rgba(227,6,19,.07);  stroke:rgba(227,6,19,.5);  stroke-width:1;   }
+            .bn  { fill:rgba(14,165,233,.06); stroke:rgba(14,165,233,.3); stroke-width:0.8; }
+            .bh  { fill:rgba(99,102,241,.15); stroke:#818cf8;            stroke-width:1.5; }
+            .bc  { fill:none;                 stroke:#cbd5e1;             stroke-width:0.7; }
+            .bhs { fill:rgba(99,102,241,.07); stroke:rgba(99,102,241,.3); stroke-width:0.7; }
+          </style>
+
+          <!-- ROOT -->
+          <rect class="br" x="267" y="3" width="126" height="20" rx="3"/>
+          <text x="330" y="10" class="otr">Director de</text>
+          <text x="330" y="18" class="otr">Mantenimiento</text>
+
+          <!-- Root down -->
+          <line class="cn" x1="330" y1="23" x2="330" y2="34"/>
+          <!-- L2 horizontal bar -->
+          <line class="cn" x1="47" y1="34" x2="614" y2="34"/>
+          <!-- L2 verticals -->
+          <line class="cn" x1="47"  y1="34" x2="47"  y2="42"/>
+          <line class="cn" x1="156" y1="34" x2="156" y2="42"/>
+          <line class="cn" x1="263" y1="34" x2="263" y2="42"/>
+          <line class="cn" x1="371" y1="34" x2="371" y2="38"/>
+          <line class="cn" x1="479" y1="34" x2="479" y2="42"/>
+          <line class="cn" x1="614" y1="34" x2="614" y2="42"/>
+
+          <!-- L2-0: Coord. Automatización -->
+          <rect class="bn" x="2"   y="42" width="90" height="20" rx="3"/>
+          <text x="47" y="49" class="ot">Coordinador de</text>
+          <text x="47" y="57" class="ot">Automatización</text>
+
+          <!-- L2-1: Coord. Plan. Mec. Cemento -->
+          <rect class="bn" x="111" y="42" width="90" height="28" rx="3"/>
+          <text x="156" y="49" class="ot">Coord. Planeación</text>
+          <text x="156" y="57" class="ot">Mecánica</text>
+          <text x="156" y="65" class="ot">Cemento</text>
+
+          <!-- L2-2: Coord. Plan. Mec. Clinker -->
+          <rect class="bn" x="218" y="42" width="90" height="28" rx="3"/>
+          <text x="263" y="49" class="ot">Coord. Planeación</text>
+          <text x="263" y="57" class="ot">Mecánica</text>
+          <text x="263" y="65" class="ot">Clinker</text>
+
+          <!-- L2-3: Coord. Plan. Eléctrica (HIGHLIGHTED) -->
+          <rect class="bh"  x="326" y="38" width="90" height="30" rx="3"/>
+          <text x="371" y="47" class="otb">★ Coord. de</text>
+          <text x="371" y="55" class="otb">Planeación</text>
+          <text x="371" y="63" class="otb">Eléctrica</text>
+
+          <!-- L2-4: Coord. Confiabilidad -->
+          <rect class="bn" x="434" y="42" width="90" height="20" rx="3"/>
+          <text x="479" y="49" class="ot">Coordinador de</text>
+          <text x="479" y="57" class="ot">Confiabilidad</text>
+
+          <!-- L2-5: Coord. Equipo Móvil -->
+          <rect class="bn" x="569" y="42" width="90" height="20" rx="3"/>
+          <text x="614" y="49" class="ot">Coordinador de</text>
+          <text x="614" y="57" class="ot">Equipo Móvil</text>
+
+          <!-- ===== CHILDREN OF CEMENTO ===== -->
+          <line class="cn" x1="156" y1="70" x2="156" y2="80"/>
+          <!-- horiz entre los dos hijos -->
+          <line class="cn" x1="120" y1="80" x2="192" y2="80"/>
+          <line class="cn" x1="120" y1="80" x2="120" y2="88"/>
+          <line class="cn" x1="192" y1="80" x2="192" y2="88"/>
+          <rect class="bc" x="75"  y="88" width="90" height="14" rx="2"/>
+          <text x="120" y="96" class="ot">Proyectista (1)</text>
+          <rect class="bc" x="147" y="88" width="90" height="14" rx="2"/>
+          <text x="192" y="96" class="ot">Herramentero (1)</text>
+
+          <!-- ===== CHILDREN OF CLINKER ===== -->
+          <line class="cn" x1="263" y1="70" x2="263" y2="80"/>
+          <rect class="bn" x="218" y="80" width="90" height="14" rx="2"/>
+          <text x="263" y="88" class="ot" font-weight="600">Supervisor Mecánico</text>
+          <!-- Supervisor children stacked -->
+          <line class="cn" x1="263" y1="94" x2="263" y2="102"/>
+          <rect class="bc" x="218" y="102" width="90" height="12" rx="2"/>
+          <text x="263" y="109" class="ot">Mecánicos I (11)</text>
+          <line class="cn" x1="263" y1="114" x2="263" y2="122"/>
+          <rect class="bc" x="218" y="122" width="90" height="12" rx="2"/>
+          <text x="263" y="129" class="ot">Mecánicos II (10)</text>
+          <line class="cn" x1="263" y1="134" x2="263" y2="142"/>
+          <rect class="bc" x="218" y="142" width="90" height="14" rx="2"/>
+          <text x="263" y="147" class="ot">Mecánico II (1)</text>
+          <text x="263" y="154" class="ot">Colectores</text>
+          <line class="cn" x1="263" y1="156" x2="263" y2="164"/>
+          <rect class="bc" x="218" y="164" width="90" height="14" rx="2"/>
+          <text x="263" y="169" class="ot">Auxiliar Mant.</text>
+          <text x="263" y="176" class="ot">(4) Colectores</text>
+
+          <!-- ===== CHILDREN OF ELÉCTRICA ===== -->
+          <line class="cn" x1="371" y1="68" x2="371" y2="80"/>
+          <rect class="bhs" x="326" y="80" width="90" height="14" rx="2"/>
+          <text x="371" y="88" class="otb" font-size="6px">Supervisor Eléctrico</text>
+          <line class="cn" x1="371" y1="94" x2="371" y2="102"/>
+          <rect class="bc" x="326" y="102" width="90" height="12" rx="2"/>
+          <text x="371" y="109" class="otb" font-size="6px">Instrumentistas (2)</text>
+          <line class="cn" x1="371" y1="114" x2="371" y2="122"/>
+          <rect class="bc" x="326" y="122" width="90" height="12" rx="2"/>
+          <text x="371" y="129" class="otb" font-size="6px">Eléctricos I (6)</text>
+          <line class="cn" x1="371" y1="134" x2="371" y2="142"/>
+          <rect class="bc" x="326" y="142" width="90" height="12" rx="2"/>
+          <text x="371" y="149" class="otb" font-size="6px">Eléctricos II (2)</text>
+
+          <!-- ===== CHILDREN OF CONFIABILIDAD ===== -->
+          <line class="cn" x1="479" y1="62" x2="479" y2="80"/>
+          <rect class="bc" x="434" y="80" width="90" height="12" rx="2"/>
+          <text x="479" y="87" class="ot">Inspector Eléctrico</text>
+          <line class="cn" x1="479" y1="92" x2="479" y2="100"/>
+          <rect class="bc" x="434" y="100" width="90" height="12" rx="2"/>
+          <text x="479" y="107" class="ot">Inspector Mecánico</text>
+          <line class="cn" x1="479" y1="112" x2="479" y2="120"/>
+          <rect class="bc" x="434" y="120" width="90" height="12" rx="2"/>
+          <text x="479" y="127" class="ot">Lubricador</text>
+          <line class="cn" x1="479" y1="132" x2="479" y2="140"/>
+          <rect class="bc" x="434" y="140" width="90" height="16" rx="2"/>
+          <text x="479" y="146" class="ot">Asistente de</text>
+          <text x="479" y="154" class="ot">Mantenimiento</text>
+
+          <!-- ===== CHILDREN OF EQUIPO MÓVIL ===== -->
+          <line class="cn" x1="614" y1="62" x2="614" y2="80"/>
+          <rect class="bc" x="569" y="80" width="90" height="12" rx="2"/>
+          <text x="614" y="87" class="ot">Mec. Automotriz</text>
+          <line class="cn" x1="614" y1="92" x2="614" y2="100"/>
+          <rect class="bc" x="569" y="100" width="90" height="16" rx="2"/>
+          <text x="614" y="106" class="ot">Mec. Equipo</text>
+          <text x="614" y="114" class="ot">Móvil Planta</text>
+          <line class="cn" x1="614" y1="116" x2="614" y2="124"/>
+          <rect class="bc" x="569" y="124" width="90" height="16" rx="2"/>
+          <text x="614" y="130" class="ot">Mec. Equipo</text>
+          <text x="614" y="138" class="ot">Móvil Mina</text>
+        </svg>
+      </div>
+
     </div>
   </div>
 </header>
@@ -1077,13 +1454,55 @@
   <!-- ═══════════════════════════════════════════════════ PLAN TAB -->
   <section class="section" id="sectionPlan">
 
+    <!-- BLOQUE DE OBJETIVOS DEL PROGRAMA (tomado del Plan Sala de Control) -->
+    <div class="info-card" style="background:linear-gradient(135deg,#fff 0%,#fef2f2 100%); border-color:rgba(227,6,19,.2);">
+      <h2 style="color:var(--accent);">🎯 Objetivos del Programa de Entrenamiento</h2>
+      <div class="routine-grid" style="margin-top:.75rem;">
+        <div class="routine-block" style="border-left:3px solid var(--accent);">
+          <h4>🏆 Objetivo General</h4>
+          <div class="routine-desc" style="padding:.5rem 0; font-size:.85rem;">
+            Garantizar la aplicación de los requerimientos de formación y capacitación para el Coordinador de Planeación Eléctrica, asegurando que supervise, planifique y gestione las actividades del área eléctrica mediante el seguimiento y análisis de indicadores de gestión, procesos críticos y herramientas sistémicas.
+          </div>
+        </div>
+        <div class="routine-block" style="border-left:3px solid #3b82f6;">
+          <h4>📋 Objetivos Específicos</h4>
+          <div class="routine-desc" style="padding:.5rem 0; font-size:.85rem;">
+            • Generar habilidades técnicas y estratégicas en planeación de mantenimiento eléctrico.<br/>
+            • Orientar y alinear al Coordinador con los procesos de la Dirección de Mantenimiento.<br/>
+            • Garantizar la comunicación transversal entre áreas (Producción, Confiabilidad, Compras).<br/>
+            • Asegurar el dominio de las herramientas SAP (módulo PM) para la gestión de O.T.<br/>
+            • Fomentar liderazgo con foco en planeación, no en ejecución operativa.
+          </div>
+        </div>
+        <div class="routine-block" style="border-left:3px solid var(--success);">
+          <h4>📊 Meta del Programa</h4>
+          <div class="routine-desc" style="padding:.5rem 0; font-size:.85rem;">
+            Cumplir con el <strong style="color:var(--success); font-size:1.1rem;">≥ 95%</strong> de las actividades programadas, tanto planeadas como ejecutadas, dentro del período de 90 días.
+          </div>
+          <div class="routine-desc" style="padding:.3rem 0; font-size:.8rem; color:var(--muted);">
+            <strong>Alcance:</strong> Dirigido al Coordinador de Planeación Eléctrica en proceso de transición desde el rol de Supervisor Eléctrico.
+          </div>
+        </div>
+        <div class="routine-block" style="border-left:3px solid var(--gold);">
+          <h4>📦 Recursos Asignados</h4>
+          <div class="routine-desc" style="padding:.5rem 0; font-size:.85rem;">
+            La organización asigna los recursos necesarios de los cuales se dispone de:
+            <br/>• <strong>Humanos:</strong> Director de Mantenimiento (Mentor), RRHH, pares de Confiabilidad y Planeación Mecánica.
+            <br/>• <strong>Tecnológicos:</strong> SAP PM, herramientas de análisis (PowerBI, Excel), acceso a sistemas de información.
+            <br/>• <strong>Infraestructura:</strong> Planta Tequendama, Planta Morteros y Oficinas Bogotá.
+          </div>
+        </div>
+      </div>
+    </div>
+
+
     <!-- FASE 1 -->
     <div class="phase-card" id="phase1" data-phase="1">
       <div class="phase-header" onclick="togglePhase('phase1')">
         <div class="phase-icon" style="background:rgba(99,102,241,.15); color:#818cf8;">🧭</div>
         <div class="phase-meta">
           <span class="phase-name" style="color:#818cf8;">Fase 1: Descompresión y Entrega</span>
-          <span class="phase-days">Días 1 – 15 &nbsp;·&nbsp; Cierre del rol anterior, entrega formal y alineación</span>
+          <span class="phase-days">15 jul – 29 jul 2026 &nbsp;·&nbsp; Días 1 – 15 &nbsp;·&nbsp; Cierre del rol anterior, entrega formal y alineación</span>
         </div>
         <div class="phase-progress-wrap">
           <span class="phase-pct-label" id="pct-phase1" style="color:#818cf8;">0%</span>
@@ -1098,7 +1517,12 @@
           <div class="check-box"><span class="check-icon">✓</span></div>
           <div class="activity-content">
             <div class="activity-title">Reunión de alineación formal con el Director de Mantenimiento (Mentor)</div>
-            <div class="activity-detail">Días 1-3. Definir objetivos, acordar expectativas y métricas de éxito para el nuevo rol de Coordinador de Planeación Eléctrica.</div>
+            <div class="activity-detail"><span class="act-date">📅 15–17 jul 2026 &nbsp;·&nbsp; 3 días</span> Definir objetivos, acordar expectativas y métricas de éxito para el nuevo rol de Coordinador de Planeación Eléctrica.</div>
+            <div class="activity-responsible">
+              <span class="resp-label">Responsable:</span>
+              <span class="resp-self">👤 Manuel Rodríguez <em style="font-weight:400;opacity:.8">(coordina)</em></span>
+              <span class="resp-mentor">🎯 Director de Mantenimiento <em style="font-weight:400;opacity:.8">(lidera / valida)</em></span>
+            </div>
             <span class="activity-tag tag-mentor">👤 Mentor</span>
           </div>
         </div>
@@ -1107,7 +1531,12 @@
           <div class="check-box"><span class="check-icon">✓</span></div>
           <div class="activity-content">
             <div class="activity-title">Entrega oficial del cargo de Supervisor Eléctrico</div>
-            <div class="activity-detail">Días 4-10. Incluye: bitácoras, estado de herramientas, matriz de personal y trabajos pendientes.</div>
+            <div class="activity-detail"><span class="act-date">📅 18–24 jul 2026 &nbsp;·&nbsp; 7 días</span> Incluye: bitácoras, estado de herramientas, matriz de personal y trabajos pendientes.</div>
+            <div class="activity-responsible">
+              <span class="resp-label">Responsable:</span>
+              <span class="resp-self">✍️ Manuel Rodríguez <em style="font-weight:400;opacity:.8">(autogestionable)</em></span>
+              <span class="resp-mentor">🎯 Director de Mantenimiento <em style="font-weight:400;opacity:.8">(recibe y firma)</em></span>
+            </div>
             <span class="activity-tag tag-acta">📄 Acta Formal</span>
           </div>
         </div>
@@ -1116,7 +1545,13 @@
           <div class="check-box"><span class="check-icon">✓</span></div>
           <div class="activity-content">
             <div class="activity-title">Firma del Acta de Entrega</div>
-            <div class="activity-detail">Cierre psicológico y formal del rol operativo. Documento firmado por el coordinador saliente, el Director de Mantenimiento y RRHH.</div>
+            <div class="activity-detail"><span class="act-date">📅 24 jul 2026 &nbsp;·&nbsp; 1 día</span> Cierre psicológico y formal del rol operativo. Documento firmado por el coordinador saliente, el Director de Mantenimiento y RRHH.</div>
+            <div class="activity-responsible">
+              <span class="resp-label">Responsable:</span>
+              <span class="resp-self">✍️ Manuel Rodríguez <em style="font-weight:400;opacity:.8">(autogestionable)</em></span>
+              <span class="resp-mentor">🎯 Director de Mantenimiento</span>
+              <span class="resp-rrhh">💼 RRHH <em style="font-weight:400;opacity:.8">(firma y archiva)</em></span>
+            </div>
             <span class="activity-tag tag-acta">📄 Acta Formal</span>
           </div>
         </div>
@@ -1125,7 +1560,12 @@
           <div class="check-box"><span class="check-icon">✓</span></div>
           <div class="activity-content">
             <div class="activity-title">Revisión documental del nuevo cargo</div>
-            <div class="activity-detail">Días 11-15. Perfil del cargo, Carta Descriptiva, Manuales de procedimiento, Matriz SG-SST y Políticas de la compañía. Apoyo de RRHH con la matriz de inducción corporativa.</div>
+            <div class="activity-detail"><span class="act-date">📅 25–29 jul 2026 &nbsp;·&nbsp; 5 días</span> Perfil del cargo, Carta Descriptiva, Manuales de procedimiento, Matriz SG-SST y Políticas de la compañía. Apoyo de RRHH con la matriz de inducción corporativa.</div>
+            <div class="activity-responsible">
+              <span class="resp-label">Responsable:</span>
+              <span class="resp-self">📖 Manuel Rodríguez <em style="font-weight:400;opacity:.8">(autogestionable)</em></span>
+              <span class="resp-rrhh">💼 RRHH <em style="font-weight:400;opacity:.8">(facilita documentos)</em></span>
+            </div>
             <span class="activity-tag tag-rrhh">💼 RRHH</span>
           </div>
         </div>
@@ -1134,8 +1574,28 @@
           <div class="check-box"><span class="check-icon">✓</span></div>
           <div class="activity-content">
             <div class="activity-title">Inducción a áreas interactuantes (Ciclo corporativo)</div>
-            <div class="activity-detail">Reuniones con: Producción, Control de Calidad, Gestión Ambiental, Compras, Almacén, SIG, Nómina, Selección y Desarrollo.</div>
+            <div class="activity-detail"><span class="act-date">📅 25–29 jul 2026 &nbsp;·&nbsp; 5 días</span> Reuniones con: Producción, Control de Calidad, Gestión Ambiental, Compras, Almacén, SIG, Nómina, Selección y Desarrollo.</div>
+            <div class="activity-responsible">
+              <span class="resp-label">Responsable:</span>
+              <span class="resp-self">🗓️ Manuel Rodríguez <em style="font-weight:400;opacity:.8">(agenda y asiste)</em></span>
+              <span class="resp-rrhh">💼 RRHH <em style="font-weight:400;opacity:.8">(coordina agenda)</em></span>
+              <span class="resp-area">🏭 Líderes de cada área <em style="font-weight:400;opacity:.8">(exponen)</em></span>
+            </div>
             <span class="activity-tag tag-rrhh">💼 RRHH</span>
+          </div>
+        </div>
+
+        <div class="activity" id="act1-6" onclick="toggleActivity('act1-6')">
+          <div class="check-box"><span class="check-icon">✓</span></div>
+          <div class="activity-content">
+            <div class="activity-title">Revisión formal de la Matriz SG-SST, EPP y Políticas de Seguridad del cargo</div>
+            <div class="activity-detail"><span class="act-date">📅 25–29 jul 2026 &nbsp;·&nbsp; 5 días</span> Con Inspector HSQ: revisión de la Matriz de Responsabilidades SG-SST, entrega y verificación de EPP específico para el cargo (calzado dieléctrico, casco, gafas, guantes arco eléctrico), divulgación de ATS y permisos de trabajo para labores de alto riesgo eléctrico.</div>
+            <div class="activity-responsible">
+              <span class="resp-label">Responsable:</span>
+              <span class="resp-self">🦺 Manuel Rodríguez <em style="font-weight:400;opacity:.8">(recibe y firma)</em></span>
+              <span class="resp-sst">🛡️ Inspector HSQ <em style="font-weight:400;opacity:.8">(lidera la sesión)</em></span>
+            </div>
+            <span class="activity-tag tag-rrhh">🦺 SST / HSQ</span>
           </div>
         </div>
 
@@ -1149,7 +1609,7 @@
         <div class="phase-icon" style="background:rgba(59,130,246,.15); color:#60a5fa;">⚡</div>
         <div class="phase-meta">
           <span class="phase-name" style="color:#60a5fa;">Fase 2: Inmersión, SAP y Roles Cruzados</span>
-          <span class="phase-days">Días 16 – 45 &nbsp;·&nbsp; Herramientas de gestión e impacto sistémico de la planeación</span>
+          <span class="phase-days">30 jul – 28 ago 2026 &nbsp;·&nbsp; Días 16 – 45 &nbsp;·&nbsp; Herramientas de gestión e impacto sistémico de la planeación</span>
         </div>
         <div class="phase-progress-wrap">
           <span class="phase-pct-label" id="pct-phase2" style="color:#60a5fa;">0%</span>
@@ -1164,7 +1624,12 @@
           <div class="check-box"><span class="check-icon">✓</span></div>
           <div class="activity-content">
             <div class="activity-title">Capacitación SAP: Ciclo completo de Avisos y Órdenes de Trabajo</div>
-            <div class="activity-detail">Semana 3. Flujo: Aviso → Orden de Trabajo → Reserva de Repuestos → SolPed → Entrada de Servicios. Manejo de módulos PM (Plant Maintenance).</div>
+            <div class="activity-detail"><span class="act-date">📅 30 jul – 5 ago 2026 &nbsp;·&nbsp; 1 semana</span> Flujo: Aviso → Orden de Trabajo → Reserva de Repuestos → SolPed → Entrada de Servicios. Manejo de módulos PM (Plant Maintenance).</div>
+            <div class="activity-responsible">
+              <span class="resp-label">Responsable:</span>
+              <span class="resp-self">🖥️ Manuel Rodríguez <em style="font-weight:400;opacity:.8">(asiste y practica)</em></span>
+              <span class="resp-area">🔬 Coordinador de Confiabilidad <em style="font-weight:400;opacity:.8">(instructor SAP — módulo PM)</em></span>
+            </div>
             <span class="activity-tag tag-sap">🖥️ SAP</span>
           </div>
         </div>
@@ -1173,7 +1638,12 @@
           <div class="check-box"><span class="check-icon">✓</span></div>
           <div class="activity-content">
             <div class="activity-title">SAP: Gestión de Solicitudes de Pedido (SolPed) y Órdenes de Compra</div>
-            <div class="activity-detail">Creación y liberación de SolPeds, cuadros comparativos de servicios, entrada de servicios ejecutados por contratistas y seguimiento de pendientes con Compras.</div>
+            <div class="activity-detail"><span class="act-date">📅 6–12 ago 2026 &nbsp;·&nbsp; 1 semana</span> Creación y liberación de SolPeds, cuadros comparativos de servicios, entrada de servicios ejecutados por contratistas y seguimiento de pendientes con Compras.</div>
+            <div class="activity-responsible">
+              <span class="resp-label">Responsable:</span>
+              <span class="resp-self">✍️ Manuel Rodríguez <em style="font-weight:400;opacity:.8">(autogestionable)</em></span>
+              <span class="resp-area">📦 Coordinador de Planeación y Almacén <em style="font-weight:400;opacity:.8">(instructor — flujo compras)</em></span>
+            </div>
             <span class="activity-tag tag-sap">🖥️ SAP</span>
           </div>
         </div>
@@ -1182,7 +1652,21 @@
           <div class="check-box"><span class="check-icon">✓</span></div>
           <div class="activity-content">
             <div class="activity-title">Shadowing: Coordinación de Planeación Mecánica (Cemento y Clinker) — 3 días</div>
-            <div class="activity-detail">Entender cómo sus pares coordinan paradas de planta conjuntas, agrupan órdenes, manejan el backlog y administran sus recursos. Identificar mejores prácticas aplicables al área eléctrica.</div>
+            <div class="activity-detail"><span class="act-date">📅 13–15 ago 2026 &nbsp;·&nbsp; 3 días</span> Entender cómo sus pares coordinan paradas de planta conjuntas, agrupan órdenes, manejan el backlog y administran sus recursos. Identificar mejores prácticas aplicables al área eléctrica.</div>
+            <div class="activity-responsible">
+              <span class="resp-label">Responsable:</span>
+              <span class="resp-self">🔭 Manuel Rodríguez <em style="font-weight:400;opacity:.8">(observa y produce entregables)</em></span>
+              <span class="resp-area">⚙️ Coordinadores Planeación Mecánica <em style="font-weight:400;opacity:.8">(exponen su proceso)</em></span>
+            </div>
+            <div class="shadowing-output" onclick="event.stopPropagation()">
+              <div class="shadowing-output-title">🎒 ¿Qué debe producir Manuel durante estos 3 días?</div>
+              <ul class="shadowing-output-list">
+                <li><span class="out-icon">📝</span><div><strong>Resumen escrito (1 página por día):</strong> ¿Cómo organiza el Coordinador su backlog? ¿Qué criterios usa para priorizar órdenes? ¿Cómo negocia ventanas con Producción?</div></li>
+                <li><span class="out-icon">💡</span><div><strong>Lista de Quick Wins:</strong> Al menos 3 prácticas del área mecánica que podría replicar directamente en el área eléctrica.</div></li>
+                <li><span class="out-icon">❓</span><div><strong>Repositorio de preguntas clave:</strong> Mínimo 5 preguntas que resolverá con el Director de Mantenimiento en la reunión semanal de mentoría. <em>(Ej: ¿Cómo se gestiona el backlog crítico vs. deferido?)</em></div></li>
+                <li><span class="out-icon">📊</span><div><strong>Cuadro comparativo:</strong> Diferencias entre la dinámica de planeación mecánica y la eléctrica (tiempos, tipos de órdenes, recursos, lead times).</div></li>
+              </ul>
+            </div>
             <span class="activity-tag tag-shadow">🔭 Shadowing</span>
           </div>
         </div>
@@ -1191,7 +1675,21 @@
           <div class="check-box"><span class="check-icon">✓</span></div>
           <div class="activity-content">
             <div class="activity-title">Shadowing: Coordinación de Confiabilidad — 3 días</div>
-            <div class="activity-detail">Entender cómo los análisis de vibraciones, termografías, inspecciones eléctricas y ACR (Análisis de Causa Raíz) se traducen en órdenes preventivas y predictivas que el Coordinador debe planear y programar.</div>
+            <div class="activity-detail"><span class="act-date">📅 18–20 ago 2026 &nbsp;·&nbsp; 3 días</span> Entender cómo los análisis de vibraciones, termografías, inspecciones eléctricas y ACR (Análisis de Causa Raíz) se traducen en órdenes preventivas y predictivas que el Coordinador debe planear y programar.</div>
+            <div class="activity-responsible">
+              <span class="resp-label">Responsable:</span>
+              <span class="resp-self">🔭 Manuel Rodríguez <em style="font-weight:400;opacity:.8">(observa y produce entregables)</em></span>
+              <span class="resp-area">🔬 Coordinador de Confiabilidad <em style="font-weight:400;opacity:.8">(expone su metodología)</em></span>
+            </div>
+            <div class="shadowing-output" onclick="event.stopPropagation()">
+              <div class="shadowing-output-title">🎒 ¿Qué debe producir Manuel durante estos 3 días?</div>
+              <ul class="shadowing-output-list">
+                <li><span class="out-icon">🗺️</span><div><strong>Mapa de equipos críticos eléctricos:</strong> Diagrama con los activos que tienen plan predictivo activo (vibración, termografía, análisis de aceite) y los que aún no lo tienen.</div></li>
+                <li><span class="out-icon">📝</span><div><strong>Resumen de metodología ACR:</strong> ¿Cómo se activa un ACR en Cementos Tequendama? ¿Qué formatos se usan? ¿Cómo impacta el resultado en el plan preventivo?</div></li>
+                <li><span class="out-icon">❓</span><div><strong>Repositorio de preguntas técnicas:</strong> Mínimo 5 preguntas sobre cómo convertir hallazgos de Confiabilidad en órdenes de trabajo planeadas. <em>(Ej: ¿Con qué anticipación se programa una intervención por vibración elevada?)</em></div></li>
+                <li><span class="out-icon">📅</span><div><strong>Calendario de rutinas predictivas:</strong> Listado de las frecuencias de inspección de equipos eléctricos críticos para integrarlo a su plan de planeación mensual.</div></li>
+              </ul>
+            </div>
             <span class="activity-tag tag-shadow">🔭 Shadowing</span>
           </div>
         </div>
@@ -1200,7 +1698,21 @@
           <div class="check-box"><span class="check-icon">✓</span></div>
           <div class="activity-content">
             <div class="activity-title">Shadowing: Gerencia de Producción / Control de Calidad — 2 días</div>
-            <div class="activity-detail">Entender los horarios de operación (turnos), las ventanas de tiempo disponibles para mantenimientos planeados y el impacto de los paros eléctricos en la disponibilidad y calidad del producto.</div>
+            <div class="activity-detail"><span class="act-date">📅 21–22 ago 2026 &nbsp;·&nbsp; 2 días</span> Entender los horarios de operación (turnos), las ventanas de tiempo disponibles para mantenimientos planeados y el impacto de los paros eléctricos en la disponibilidad y calidad del producto.</div>
+            <div class="activity-responsible">
+              <span class="resp-label">Responsable:</span>
+              <span class="resp-self">🔭 Manuel Rodríguez <em style="font-weight:400;opacity:.8">(observa y produce entregables)</em></span>
+              <span class="resp-area">🏭 Gerente de Producción <em style="font-weight:400;opacity:.8">(expone dinámica operativa)</em></span>
+            </div>
+            <div class="shadowing-output" onclick="event.stopPropagation()">
+              <div class="shadowing-output-title">🎒 ¿Qué debe producir Manuel durante estos 2 días?</div>
+              <ul class="shadowing-output-list">
+                <li><span class="out-icon">🗓️</span><div><strong>Mapa de ventanas de mantenimiento:</strong> Diagrama semanal con las ventanas disponibles por turno para intervención eléctrica planeada, según la dinámica de Producción.</div></li>
+                <li><span class="out-icon">📝</span><div><strong>Resumen de impacto eléctrico:</strong> Lista de los paros eléctricos que históricamente más han afectado la disponibilidad de planta y la calidad del clinker/cemento.</div></li>
+                <li><span class="out-icon">❓</span><div><strong>Repositorio de preguntas operativas:</strong> Mínimo 5 preguntas sobre cómo coordinar el congelamiento del programa con Producción sin generar conflictos. <em>(Ej: ¿Cuál es el tiempo mínimo de aviso para una intervención de alto voltaje?)</em></div></li>
+                <li><span class="out-icon">🤝</span><div><strong>Protocolo de comunicación borrador:</strong> Propuesta inicial de cómo y cuándo se comunicará el programa semanal eléctrico al área de Producción.</div></li>
+              </ul>
+            </div>
             <span class="activity-tag tag-shadow">🔭 Shadowing</span>
           </div>
         </div>
@@ -1209,7 +1721,21 @@
           <div class="check-box"><span class="check-icon">✓</span></div>
           <div class="activity-content">
             <div class="activity-title">Shadowing: Cadena de Abastecimiento (Compras y Almacén) — 2 días</div>
-            <div class="activity-detail">Entender los lead times de repuestos críticos, el proceso de creación de nuevos códigos de materiales, el manejo de stock de seguridad y el ciclo de compras de servicios técnicos.</div>
+            <div class="activity-detail"><span class="act-date">📅 25–26 ago 2026 &nbsp;·&nbsp; 2 días</span> Entender los lead times de repuestos críticos, el proceso de creación de nuevos códigos de materiales, el manejo de stock de seguridad y el ciclo de compras de servicios técnicos.</div>
+            <div class="activity-responsible">
+              <span class="resp-label">Responsable:</span>
+              <span class="resp-self">🔭 Manuel Rodríguez <em style="font-weight:400;opacity:.8">(observa y produce entregables)</em></span>
+              <span class="resp-area">🛒 Líder de Cadena de Abastecimiento <em style="font-weight:400;opacity:.8">(expone el proceso completo)</em></span>
+            </div>
+            <div class="shadowing-output" onclick="event.stopPropagation()">
+              <div class="shadowing-output-title">🎒 ¿Qué debe producir Manuel durante estos 2 días?</div>
+              <ul class="shadowing-output-list">
+                <li><span class="out-icon">📆</span><div><strong>Mapa de lead times:</strong> Tabla con los lead times reales de los repuestos eléctricos críticos (transformadores, variadores, protecciones), para incorporarlos al plan de planeación con la anticipación correcta.</div></li>
+                <li><span class="out-icon">📝</span><div><strong>Flujo del ciclo de compras:</strong> Diagrama del proceso desde que se crea la SolPed hasta que el repuesto llega al almacén, con los puntos de aprobación y tiempos estimados en cada etapa.</div></li>
+                <li><span class="out-icon">❓</span><div><strong>Repositorio de preguntas logísticas:</strong> Mínimo 5 preguntas sobre cómo gestionar repuestos críticos de larga espera. <em>(Ej: ¿Qué mecanismo existe para hacer seguimiento a una SolPed liberada sin respuesta del proveedor?)</em></div></li>
+                <li><span class="out-icon">📦</span><div><strong>Lista de materiales sin código SAP:</strong> Repuestos eléctricos identificados que aún no tienen código en SAP y que deberían crearse para mejorar la trazabilidad del backlog.</div></li>
+              </ul>
+            </div>
             <span class="activity-tag tag-shadow">🔭 Shadowing</span>
           </div>
         </div>
@@ -1218,7 +1744,12 @@
           <div class="check-box"><span class="check-icon">✓</span></div>
           <div class="activity-content">
             <div class="activity-title">Sesión de Coaching #1 con RRHH: Delegación Efectiva</div>
-            <div class="activity-detail">Taller enfocado en "Delegación Efectiva y cómo evitar la microgestión". Definición de su nueva zona de actuación vs. la del Supervisor Eléctrico. Construcción de la Matriz RACI personalizada.</div>
+            <div class="activity-detail"><span class="act-date">📅 27 ago 2026 &nbsp;·&nbsp; 1 día (taller)</span> Taller enfocado en “Delegación Efectiva y cómo evitar la microgestión”. Definición de su nueva zona de actuación vs. la del Supervisor Eléctrico. Construcción de la Matriz RACI personalizada.</div>
+            <div class="activity-responsible">
+              <span class="resp-label">Responsable:</span>
+              <span class="resp-self">💬 Manuel Rodríguez <em style="font-weight:400;opacity:.8">(participa activamente)</em></span>
+              <span class="resp-rrhh">💼 RRHH — Selección y Desarrollo <em style="font-weight:400;opacity:.8">(facilita el taller)</em></span>
+            </div>
             <span class="activity-tag tag-rrhh">💼 RRHH</span>
           </div>
         </div>
@@ -1227,9 +1758,40 @@
           <div class="check-box"><span class="check-icon">✓</span></div>
           <div class="activity-content">
             <div class="activity-title">Shadowing: Planta Morteros Tequendama y Oficinas Bogotá — 2 días</div>
-            <div class="activity-detail">Visita a la planta de Morteros Tequendama para entender las diferencias operativas, equipos eléctricos específicos y dinámica de mantenimiento en esa sede. Día en las Oficinas de Bogotá para conocer la estructura corporativa, el área de Compras central, Planeación Financiera y Talento Humano, afianzando las relaciones con los aliados administrativos que impactan directamente su gestión como Coordinador.</div>
+            <div class="activity-detail"><span class="act-date">📅 28 ago 2026 &nbsp;·&nbsp; 2 días</span> Visita a la planta de Morteros Tequendama para entender las diferencias operativas, equipos eléctricos específicos y dinámica de mantenimiento en esa sede. Día en las Oficinas de Bogotá para conocer la estructura corporativa, el área de Compras central, Planeación Financiera y Talento Humano, afianzando las relaciones con los aliados administrativos que impactan directamente su gestión como Coordinador.</div>
+            <div class="activity-responsible">
+              <span class="resp-label">Responsable:</span>
+              <span class="resp-self">🔭 Manuel Rodríguez <em style="font-weight:400;opacity:.8">(asiste y produce entregables)</em></span>
+              <span class="resp-rrhh">💼 RRHH <em style="font-weight:400;opacity:.8">(coordina agenda)</em></span>
+              <span class="resp-area">🏭 Líderes de cada sede <em style="font-weight:400;opacity:.8">(exponen)</em></span>
+            </div>
+            <div class="shadowing-output" onclick="event.stopPropagation()">
+              <div class="shadowing-output-title">🎒 ¿Qué debe producir Manuel en estas 2 visitas?</div>
+              <ul class="shadowing-output-list">
+                <li><span class="out-icon">🏭</span><div><strong>Ficha comparativa Morteros vs. Planta Principal:</strong> Diferencias en equipos eléctricos, recursos de mantenimiento, dinámica de paros y dependencias entre sedes para el plan eléctrico.</div></li>
+                <li><span class="out-icon">📈</span><div><strong>Mapa de aliados clave en Bogotá:</strong> Directorio con nombre, cargo y rol de cada contacto en Compras Central, Planeación Financiera y RRHH que impacta directamente su gestión.</div></li>
+                <li><span class="out-icon">❓</span><div><strong>Preguntas para Planeación Financiera:</strong> Mínimo 3 preguntas sobre el proceso de presupuesto de mantenimiento eléctrico y cómo se hace el seguimiento mensual a la ejecución. <em>(Ej: ¿Cómo se radica un gasto no presupuestado por falla crítica?)</em></div></li>
+                <li><span class="out-icon">📝</span><div><strong>Nota de relaciones:</strong> Resumen de los compromisos adquiridos con cada área en Bogotá (frecuencia de reporte, canales de comunicación, personas de contacto directo).</div></li>
+              </ul>
+            </div>
             <span class="activity-tag tag-shadow">🔭 Shadowing</span>
             <span class="activity-tag tag-rrhh" style="margin-left:.3rem;">🏢 Multisede</span>
+          </div>
+        </div>
+
+        <div class="activity" id="act2-9" onclick="toggleActivity('act2-9')">
+          <div class="check-box"><span class="check-icon">✓</span></div>
+          <div class="activity-content">
+            <div class="activity-title">Capacitación técnica: Equipos eléctricos críticos — Fichas Técnicas y Capacidades</div>
+            <div class="activity-detail"><span class="act-date">📅 1–26 sep 2026 &nbsp;·&nbsp; 16 días</span> Revisión de fichas técnicas de los equipos eléctricos críticos de planta (transformadores, centros de control de motores, variadores de frecuencia, protecciones eléctricas). Incluye: identificación de equipos en campo, rangos de operación de variables eléctricas, señales análogas y digitales de proceso, y criterios de diagnóstico de fallas.</div>
+            <div class="activity-responsible">
+              <span class="resp-label">Responsable:</span>
+              <span class="resp-self">⚡ Manuel Rodríguez <em style="font-weight:400;opacity:.8">(asiste y practica)</em></span>
+              <span class="resp-mentor">🎯 Director de Mantenimiento <em style="font-weight:400;opacity:.8">(instructor)</em></span>
+              <span class="resp-area">🔬 Coordinador de Confiabilidad <em style="font-weight:400;opacity:.8">(co-instructor)</em></span>
+            </div>
+            <span class="activity-tag tag-mentor">⚡ Técnica Eléctrica</span>
+            <span class="activity-tag tag-sap" style="margin-left:.3rem;">📋 Fichas Técnicas</span>
           </div>
         </div>
 
@@ -1243,7 +1805,7 @@
         <div class="phase-icon" style="background:rgba(14,165,233,.15); color:#38bdf8;">🛠️</div>
         <div class="phase-meta">
           <span class="phase-name" style="color:#38bdf8;">Fase 3: Práctica Asistida</span>
-          <span class="phase-days">Días 46 – 75 &nbsp;·&nbsp; Ejecutar la planeación con supervisión y corrección en tiempo real</span>
+          <span class="phase-days">29 ago – 27 sep 2026 &nbsp;·&nbsp; Días 46 – 75 &nbsp;·&nbsp; Ejecutar la planeación con supervisión y corrección en tiempo real</span>
         </div>
         <div class="phase-progress-wrap">
           <span class="phase-pct-label" id="pct-phase3" style="color:#38bdf8;">0%</span>
@@ -1258,7 +1820,11 @@
           <div class="check-box"><span class="check-icon">✓</span></div>
           <div class="activity-content">
             <div class="activity-title">Implementación formal de la Rutina Diaria y Semanal</div>
-            <div class="activity-detail">Instaurar el "Día en la Vida": revisión de novedades, depuración de avisos SAP, reunión de coordinación y emisión del programa semanal. (Ver pestaña "Día / Semana en la Vida").</div>
+            <div class="activity-detail"><span class="act-date">📅 29 ago – 27 sep 2026 &nbsp;·&nbsp; 30 días (rutina continua)</span> Instaurar el “Día en la Vida”: revisión de novedades, depuración de avisos SAP, reunión de coordinación y emisión del programa semanal. (Ver pestaña “Día / Semana en la Vida”).</div>
+            <div class="activity-responsible">
+              <span class="resp-label">Responsable:</span>
+              <span class="resp-self">🗓️ Manuel Rodríguez <em style="font-weight:400;opacity:.8">(autogestionable — implementa y sostiene)</em></span>
+            </div>
             <span class="activity-tag tag-eval">🗓️ Rutina</span>
           </div>
         </div>
@@ -1267,7 +1833,12 @@
           <div class="check-box"><span class="check-icon">✓</span></div>
           <div class="activity-content">
             <div class="activity-title">Reunión Semanal de Mentoría #1 con el Director de Mantenimiento</div>
-            <div class="activity-detail">Encuentro de 45 min (cada viernes). Revisión del Backlog, calidad de las O.T. programadas, análisis de cumplimiento de la semana anterior y resolución de dudas.</div>
+            <div class="activity-detail"><span class="act-date">📅 5 sep 2026 &nbsp;·&nbsp; 45 min (1ª sesión)</span> Encuentro de 45 min (cada viernes). Revisión del Backlog, calidad de las O.T. programadas, análisis de cumplimiento de la semana anterior y resolución de dudas.</div>
+            <div class="activity-responsible">
+              <span class="resp-label">Responsable:</span>
+              <span class="resp-self">📋 Manuel Rodríguez <em style="font-weight:400;opacity:.8">(prepara agenda y métricas)</em></span>
+              <span class="resp-mentor">🎯 Director de Mantenimiento <em style="font-weight:400;opacity:.8">(retroalimenta)</em></span>
+            </div>
             <span class="activity-tag tag-mentor">👤 Mentor</span>
           </div>
         </div>
@@ -1276,7 +1847,12 @@
           <div class="check-box"><span class="check-icon">✓</span></div>
           <div class="activity-content">
             <div class="activity-title">Reunión Semanal de Mentoría #2 con el Director de Mantenimiento</div>
-            <div class="activity-detail">Segunda sesión de seguimiento. Revisión de métricas incipientes: ¿Cuántas órdenes se programaron? ¿Cuántas se ejecutaron? ¿Cuántas emergencias hubo vs. la semana anterior?</div>
+            <div class="activity-detail"><span class="act-date">📅 12 sep 2026 &nbsp;·&nbsp; 45 min (2ª sesión)</span> Segunda sesión de seguimiento. Revisión de métricas incipientes: ¿Cuántas órdenes se programaron? ¿Cuántas se ejecutaron? ¿Cuántas emergencias hubo vs. la semana anterior?</div>
+            <div class="activity-responsible">
+              <span class="resp-label">Responsable:</span>
+              <span class="resp-self">📊 Manuel Rodríguez <em style="font-weight:400;opacity:.8">(presenta indicadores)</em></span>
+              <span class="resp-mentor">🎯 Director de Mantenimiento <em style="font-weight:400;opacity:.8">(retroalimenta)</em></span>
+            </div>
             <span class="activity-tag tag-mentor">👤 Mentor</span>
           </div>
         </div>
@@ -1286,6 +1862,12 @@
           <div class="activity-content">
             <div class="activity-title">Primera reunión de programación con Producción liderada por el Coordinador</div>
             <div class="activity-detail">El Coordinador lidera (con acompañamiento del Director) la reunión semanal de "congelamiento" del programa de mantenimiento eléctrico con el área de Producción.</div>
+            <div class="activity-responsible">
+              <span class="resp-label">Responsable:</span>
+              <span class="resp-self">🎤 Manuel Rodríguez <em style="font-weight:400;opacity:.8">(lidera la reunión)</em></span>
+              <span class="resp-mentor">🎯 Director de Mantenimiento <em style="font-weight:400;opacity:.8">(acompañamiento, no interviene)</em></span>
+              <span class="resp-area">🏭 Gerente de Producción <em style="font-weight:400;opacity:.8">(valida ventanas)</em></span>
+            </div>
             <span class="activity-tag tag-eval">📋 Liderazgo</span>
           </div>
         </div>
@@ -1294,7 +1876,12 @@
           <div class="check-box"><span class="check-icon">✓</span></div>
           <div class="activity-content">
             <div class="activity-title">Sesión de Coaching #2 con RRHH: Comunicación Asertiva e Influencia</div>
-            <div class="activity-detail">Cómo negociar ventanas de parada con Producción, exigir resultados a proveedores y contratistas, y comunicarse eficazmente con pares de otros procesos sin autoridad formal sobre ellos.</div>
+            <div class="activity-detail"><span class="act-date">📅 24 sep 2026 &nbsp;·&nbsp; 1 día (taller)</span> Cómo negociar ventanas de parada con Producción, exigir resultados a proveedores y contratistas, y comunicarse eficazmente con pares de otros procesos sin autoridad formal sobre ellos.</div>
+            <div class="activity-responsible">
+              <span class="resp-label">Responsable:</span>
+              <span class="resp-self">💬 Manuel Rodríguez <em style="font-weight:400;opacity:.8">(participa activamente)</em></span>
+              <span class="resp-rrhh">💼 RRHH — Selección y Desarrollo <em style="font-weight:400;opacity:.8">(facilita el taller)</em></span>
+            </div>
             <span class="activity-tag tag-rrhh">💼 RRHH</span>
           </div>
         </div>
@@ -1303,7 +1890,12 @@
           <div class="check-box"><span class="check-icon">✓</span></div>
           <div class="activity-content">
             <div class="activity-title">Primer cierre mensual de indicadores</div>
-            <div class="activity-detail">Análisis conjunto (Coordinador + Director) del primer mes completo de operación en el nuevo rol: MTBF, MTTR, cumplimiento del programa, % de emergencias vs. preventivo, ejecución presupuestal.</div>
+            <div class="activity-detail"><span class="act-date">📅 26 sep 2026 &nbsp;·&nbsp; 1 sesión (2 h aprox.)</span> Análisis conjunto (Coordinador + Director) del primer mes completo de operación en el nuevo rol: MTBF, MTTR, cumplimiento del programa, % de emergencias vs. preventivo, ejecución presupuestal.</div>
+            <div class="activity-responsible">
+              <span class="resp-label">Responsable:</span>
+              <span class="resp-self">📊 Manuel Rodríguez <em style="font-weight:400;opacity:.8">(consolida y presenta)</em></span>
+              <span class="resp-mentor">🎯 Director de Mantenimiento <em style="font-weight:400;opacity:.8">(analiza y valida)</em></span>
+            </div>
             <span class="activity-tag tag-eval">📊 KPIs</span>
           </div>
         </div>
@@ -1318,7 +1910,7 @@
         <div class="phase-icon" style="background:rgba(34,197,94,.15); color:#4ade80;">🚀</div>
         <div class="phase-meta">
           <span class="phase-name" style="color:#4ade80;">Fase 4: Vuelo Solo y Consolidación</span>
-          <span class="phase-days">Días 76 – 90 &nbsp;·&nbsp; Empoderamiento total y evaluación final</span>
+          <span class="phase-days">28 sep – 12 oct 2026 &nbsp;·&nbsp; Días 76 – 90 &nbsp;·&nbsp; Empoderamiento total y evaluación final</span>
         </div>
         <div class="phase-progress-wrap">
           <span class="phase-pct-label" id="pct-phase4" style="color:#4ade80;">0%</span>
@@ -1333,7 +1925,12 @@
           <div class="check-box"><span class="check-icon">✓</span></div>
           <div class="activity-content">
             <div class="activity-title">Liderazgo autónomo de la reunión semanal de programación interáreas</div>
-            <div class="activity-detail">El Coordinador dirige de forma independiente (sin acompañamiento del Director) la reunión de programación con Producción, Confiabilidad y Planeación Mecánica.</div>
+            <div class="activity-detail"><span class="act-date">📅 28 sep – 9 oct 2026 &nbsp;·&nbsp; 10 días (rutina autónoma)</span> El Coordinador dirige de forma independiente (sin acompañamiento del Director) la reunión de programación con Producción, Confiabilidad y Planeación Mecánica.</div>
+            <div class="activity-responsible">
+              <span class="resp-label">Responsable:</span>
+              <span class="resp-self">🎤 Manuel Rodríguez <em style="font-weight:400;opacity:.8">(lidera de forma autónoma)</em></span>
+              <span class="resp-area">🏭 Producción · Confiabilidad · Planeación Mecánica <em style="font-weight:400;opacity:.8">(participan)</em></span>
+            </div>
             <span class="activity-tag tag-eval">📋 Liderazgo</span>
           </div>
         </div>
@@ -1342,7 +1939,12 @@
           <div class="check-box"><span class="check-icon">✓</span></div>
           <div class="activity-content">
             <div class="activity-title">Propuesta de mejora al Plan de Mantenimiento Preventivo</div>
-            <div class="activity-detail">Basado en los análisis de los primeros 75 días (frecuencias de falla, lead times de repuestos, resultados de Confiabilidad), el Coordinador propone ajustes a las frecuencias y alcances de las rutinas preventivas.</div>
+            <div class="activity-detail"><span class="act-date">📅 1–7 oct 2026 &nbsp;·&nbsp; 1 semana (elaboración)</span> Basado en los análisis de los primeros 75 días (frecuencias de falla, lead times de repuestos, resultados de Confiabilidad), el Coordinador propone ajustes a las frecuencias y alcances de las rutinas preventivas.</div>
+            <div class="activity-responsible">
+              <span class="resp-label">Responsable:</span>
+              <span class="resp-self">💡 Manuel Rodríguez <em style="font-weight:400;opacity:.8">(elabora y presenta la propuesta)</em></span>
+              <span class="resp-mentor">🎯 Director de Mantenimiento <em style="font-weight:400;opacity:.8">(revisa y aprueba)</em></span>
+            </div>
             <span class="activity-tag tag-eval">💡 Mejora</span>
           </div>
         </div>
@@ -1351,7 +1953,12 @@
           <div class="check-box"><span class="check-icon">✓</span></div>
           <div class="activity-content">
             <div class="activity-title">Actualización de listas de materiales (BOM) y stock crítico</div>
-            <div class="activity-detail">Revisión y actualización en SAP de los materiales de reserva en almacén para equipos críticos, basada en la experiencia del período de entrenamiento.</div>
+            <div class="activity-detail"><span class="act-date">📅 5–10 oct 2026 &nbsp;·&nbsp; 1 semana (actualización SAP)</span> Revisión y actualización en SAP de los materiales de reserva en almacén para equipos críticos, basada en la experiencia del período de entrenamiento.</div>
+            <div class="activity-responsible">
+              <span class="resp-label">Responsable:</span>
+              <span class="resp-self">🖥️ Manuel Rodríguez <em style="font-weight:400;opacity:.8">(autogestionable — actualiza en SAP)</em></span>
+              <span class="resp-area">📦 Coordinador de Almacén <em style="font-weight:400;opacity:.8">(valida stock físico)</em></span>
+            </div>
             <span class="activity-tag tag-sap">🖥️ SAP</span>
           </div>
         </div>
@@ -1360,7 +1967,13 @@
           <div class="check-box"><span class="check-icon">✓</span></div>
           <div class="activity-content">
             <div class="activity-title">Evaluación final del programa (Día 90)</div>
-            <div class="activity-detail">Sesión formal con el Director de Mantenimiento y RRHH. Revisión del cumplimiento de la matriz de habilidades técnicas y de liderazgo. Retroalimentación 360°. Definición de PDI (Plan de Desarrollo Individual) para el siguiente período.</div>
+            <div class="activity-detail"><span class="act-date">📅 12 oct 2026 &nbsp;·&nbsp; 1 sesión formal (Día 90)</span> Sesión formal con el Director de Mantenimiento y RRHH. Revisión del cumplimiento de la matriz de habilidades técnicas y de liderazgo. Retroalimentación 360°. Definición de PDI (Plan de Desarrollo Individual) para el siguiente período.</div>
+            <div class="activity-responsible">
+              <span class="resp-label">Responsable:</span>
+              <span class="resp-self">🏆 Manuel Rodríguez <em style="font-weight:400;opacity:.8">(sustenta resultados)</em></span>
+              <span class="resp-mentor">🎯 Director de Mantenimiento <em style="font-weight:400;opacity:.8">(evalúa y certifica)</em></span>
+              <span class="resp-rrhh">💼 RRHH <em style="font-weight:400;opacity:.8">(documenta y archiva)</em></span>
+            </div>
             <span class="activity-tag tag-eval">🏆 Evaluación</span>
             <span class="activity-tag tag-mentor" style="margin-left:.3rem;">👤 Mentor</span>
             <span class="activity-tag tag-rrhh"   style="margin-left:.3rem;">💼 RRHH</span>
@@ -1609,6 +2222,89 @@
         </div>
       </div>
     </div>
+
+    <!-- SECCIÓN: METAS Y CRITERIOS DE CAPACITACIÓN (ref. Plan Sala de Control CETESA) -->
+    <div class="info-card" style="background:linear-gradient(135deg,#fff 0%,#f0fdf4 100%); border-color:rgba(34,197,94,.2);">
+      <h2>📋 Criterios y Niveles de Capacitación del Período</h2>
+      <p style="color:var(--muted);font-size:.85rem;margin-bottom:1rem;">Cada actividad del plan de entrenamiento es evaluada bajo los siguientes criterios de necesidad y competencia, alineados con el formato corporativo de entrenamiento al cargo (Ref. FR.TH.29).</p>
+      <div class="routine-grid">
+        <div class="routine-block" style="border-left:3px solid var(--success);">
+          <h4>✅ Nivel 0 — No Necesario</h4>
+          <div class="routine-desc" style="padding:.4rem 0; font-size:.83rem;">El colaborador ya conoce el tema o tiene experiencia previa suficiente. No requiere formación adicional en este ítem. Se documenta como competencia validada.</div>
+        </div>
+        <div class="routine-block" style="border-left:3px solid var(--accent);">
+          <h4>🔴 Nivel 1 — Necesario</h4>
+          <div class="routine-desc" style="padding:.4rem 0; font-size:.83rem;">El colaborador no reconoce el tema o requiere refuerzo. Es obligatorio completar la actividad de capacitación asignada y evidenciar el aprendizaje.</div>
+        </div>
+        <div class="routine-block" style="border-left:3px solid var(--gold);">
+          <h4>🎯 Meta de Cumplimiento</h4>
+          <div class="routine-desc" style="padding:.4rem 0; font-size:.83rem;">Lograr el <strong style="color:var(--success);font-size:1.05rem;">≥ 95%</strong> de actividades completadas dentro de los 90 días. Las actividades con <em>Nivel 1</em> son prioritarias y no pueden quedar pendientes al cierre del programa.</div>
+        </div>
+        <div class="routine-block" style="border-left:3px solid #818cf8;">
+          <h4>📝 Evaluación Final (Día 90)</h4>
+          <div class="routine-desc" style="padding:.4rem 0; font-size:.83rem;">Sesión formal de certificación con Director de Mantenimiento y RRHH. Revisión de todas las actividades, firmas de conformidad, retroalimentación 360° y definición del PDI (Plan de Desarrollo Individual) para el siguiente período.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECCIÓN: ÁREAS INTERACTUANTES (ref. Formato FR.TH.29 Coor. Planeación Eléctrica) -->
+    <div class="info-card">
+      <h2>🤝 Áreas Interactuantes — Ciclo de Inducción</h2>
+      <p style="color:var(--muted);font-size:.85rem;margin-bottom:1rem;">El Coordinador debe conocer la estructura, rol y procedimientos principales de cada área con la que interactúa. Estas reuniones se coordinan con apoyo de Talento Humano.</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th style="text-align:left;">Área</th>
+              <th style="text-align:left;">Temas Clave a Tratar</th>
+              <th>Responsable</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Producción</strong></td>
+              <td>Proceso productivo general · Ventanas de mantenimiento · Relación con Mantenimiento</td>
+              <td style="text-align:center;">Gerente de Producción</td>
+            </tr>
+            <tr>
+              <td><strong>Confiabilidad</strong></td>
+              <td>Análisis predictivos (vibración, termografía) · ACR · Impacto en plan preventivo</td>
+              <td style="text-align:center;">Coordinador de Confiabilidad</td>
+            </tr>
+            <tr>
+              <td><strong>Compras y Almacén</strong></td>
+              <td>Lead times de repuestos · Creación de códigos SAP · Stock de seguridad · Ciclo de compras</td>
+              <td style="text-align:center;">Director Cadena de Abastecimiento</td>
+            </tr>
+            <tr>
+              <td><strong>Control de Calidad</strong></td>
+              <td>Impacto de paros eléctricos en calidad del producto · Plan de mantenimiento laboratorio</td>
+              <td style="text-align:center;">Coordinador Control de Calidad</td>
+            </tr>
+            <tr>
+              <td><strong>SIG y Mejora Continua</strong></td>
+              <td>Gestión del cambio · Indicadores · Auditorías · Caracterización del proceso · Normas ISO</td>
+              <td style="text-align:center;">Coordinador SIG</td>
+            </tr>
+            <tr>
+              <td><strong>Planeación Financiera</strong></td>
+              <td>Provisiones · Presupuesto de mantenimiento · Cierre de costos · Control de ejecución</td>
+              <td style="text-align:center;">Planeador Financiero</td>
+            </tr>
+            <tr>
+              <td><strong>RRHH — Selección y Desarrollo</strong></td>
+              <td>Proceso de capacitación · Manejo de procesos disciplinarios · Programa de desarrollo</td>
+              <td style="text-align:center;">Coordinador de Selección y Desarrollo</td>
+            </tr>
+            <tr>
+              <td><strong>Gestión Ambiental</strong></td>
+              <td>Plan interno manejo de residuos · Matriz de riesgos · Generalidades ambientales</td>
+              <td style="text-align:center;">Coordinador Gestión Ambiental</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </section>
 
 </main>
@@ -1722,8 +2418,8 @@
 
     // ── DATA ──────────────────────────────────────────────────────────────
     const PHASES = {
-      phase1: ['act1-1','act1-2','act1-3','act1-4','act1-5'],
-      phase2: ['act2-1','act2-2','act2-3','act2-4','act2-5','act2-6','act2-7','act2-8'],
+      phase1: ['act1-1','act1-2','act1-3','act1-4','act1-5','act1-6'],
+      phase2: ['act2-1','act2-2','act2-3','act2-4','act2-5','act2-6','act2-7','act2-8','act2-9'],
       phase3: ['act3-1','act3-2','act3-3','act3-4','act3-5','act3-6'],
       phase4: ['act4-1','act4-2','act4-3','act4-4'],
     };
@@ -1933,10 +2629,16 @@
         const done  = acts.filter(id => document.getElementById(id)?.classList.contains('done')).length;
         const total = acts.length;
         const pct   = total ? Math.round(done / total * 100) : 0;
+        // update phase-card internal bar
         const pctEl = document.getElementById(`pct-${phaseId}`);
         const barEl = document.getElementById(`bar-${phaseId}`);
         if (pctEl) pctEl.textContent = pct + '%';
         if (barEl) barEl.style.width = pct + '%';
+        // update mini phase bars in the dashboard
+        const miniPct = document.getElementById(`mini-pct-${phaseId}`);
+        const miniBar = document.getElementById(`mini-bar-${phaseId}`);
+        if (miniPct) miniPct.textContent = pct + '%';
+        if (miniBar) miniBar.style.width = pct + '%';
         const card = document.getElementById(phaseId);
         if (card) card.classList.toggle('all-done', done === total && total > 0);
         globalDone  += done;
@@ -1946,7 +2648,6 @@
       document.getElementById('doneCount').textContent    = globalDone;
       document.getElementById('pendingCount').textContent = globalTotal - globalDone;
       document.getElementById('totalCount').textContent   = globalTotal;
-      document.getElementById('globalPct').textContent    = globalPct + '%';
       document.getElementById('donutPct').textContent     = globalPct + '%';
       const circumference = 251.2;
       document.getElementById('donutFill').style.strokeDashoffset =
@@ -1982,7 +2683,7 @@
     document.getElementById('resetBtn').addEventListener('click', () => {
       if (!confirm('¿Deseas reiniciar TODO el progreso? Esta acción afecta a todos los usuarios y no se puede deshacer.')) return;
       if (USE_FIREBASE) {
-        planRef.set({ __startDate__: 'miércoles, 17 de junio de 2026' });
+        planRef.set({ __startDate__: 'miércoles, 15 de julio de 2026' });
       } else {
         localStorage.removeItem(LOCAL_KEY);
         document.querySelectorAll('.activity.done').forEach(el => el.classList.remove('done'));
@@ -2000,8 +2701,8 @@
     }
 
     // ── START DATE ────────────────────────────────────────────────────────
-    document.getElementById('startDisplay').textContent = 'miércoles, 17 de junio de 2026';
-    if (USE_FIREBASE) planRef.child('__startDate__').set('miércoles, 17 de junio de 2026');
+    document.getElementById('startDisplay').textContent = 'miércoles, 15 de julio de 2026';
+    if (USE_FIREBASE) planRef.child('__startDate__').set('miércoles, 15 de julio de 2026');
 
   } // end initApp
 </script>
